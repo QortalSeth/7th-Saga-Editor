@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EquipmentEditor">
+   <children>
+      <HBox layoutX="248.0" layoutY="52.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="20.0" tabMaxWidth="50.0" HBox.hgrow="NEVER">
+              <tabs>
+                <Tab fx:id="itemTab" closable="false" onSelectionChanged="#saveTab" text="Items">
+                  <content>
+                    <AnchorPane>
+                           <children>
+                              <GridPane hgap="5.0" layoutX="15.0" maxHeight="-Infinity" maxWidth="-Infinity" vgap="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+                                  <ColumnConstraints hgrow="SOMETIMES" />
+                                    <ColumnConstraints hgrow="SOMETIMES" />
+                                    <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                  <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
+                                  <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
+                                    <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
+                                  <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label focusTraversable="false" text="Targeting:" textOverrun="CLIP" GridPane.rowIndex="1" />
+                                    <Label focusTraversable="false" text="Uses:" textOverrun="CLIP" GridPane.rowIndex="2" />
+                                    <Label focusTraversable="false" text="Cost:" textOverrun="CLIP" GridPane.rowIndex="3" />
+                                    <Label focusTraversable="false" text="Sell Ratio:" textOverrun="CLIP" GridPane.rowIndex="4" />
+                                    <HBox GridPane.halignment="LEFT">
+                                       <children>
+                                          <ComboBox fx:id="itemsC" onAction="#setSelectedItem" />
+                                          <VBox>
+                                             <children>
+                                                <Button fx:id="itemUp" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#decrementItem" prefHeight="13.0" prefWidth="20.0">
+                                                   <graphic>
+                                                      <ImageView fitHeight="6.0" fitWidth="10.0">
+                                                         <image>
+                                                            <Image url="@../images/Triangle.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button fx:id="itemDown" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#incrementItem" prefHeight="13.0" prefWidth="20.0">
+                                                   <graphic>
+                                                      <ImageView fitHeight="6.0" fitWidth="10.0" rotate="180.0">
+                                                         <image>
+                                                            <Image url="@../images/Triangle.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <ComboBox fx:id="targetC" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="usesC" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="itemCostT" maxHeight="-Infinity" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <ComboBox fx:id="sellRatioC" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="DtargetT" editable="false" prefWidth="120.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <TextField fx:id="DusesT" editable="false" prefWidth="120.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="DitemCostT" editable="false" prefWidth="120.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <TextField fx:id="DsellRatioT" editable="false" prefWidth="120.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="weaponTab" closable="false" onSelectionChanged="#saveTab" text="Weapons">
+                  <content>
+                    <AnchorPane>
+                           <children>
+                              <GridPane hgap="5.0" vgap="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
+                                  <ColumnConstraints hgrow="NEVER" />
+                                    <ColumnConstraints hgrow="NEVER" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <HBox GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                                       <children>
+                                          <ComboBox fx:id="weaponsC" onAction="#setSelectedWeapon" />
+                                          <VBox>
+                                             <children>
+                                                <Button fx:id="weaponUp" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#decrementWeapon" prefHeight="13.0" prefWidth="20.0">
+                                                   <graphic>
+                                                      <ImageView fitHeight="6.0" fitWidth="10.0">
+                                                         <image>
+                                                            <Image url="@../images/Triangle.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button fx:id="weaponDown" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#incrementWeapon" prefHeight="13.0" prefWidth="20.0">
+                                                   <graphic>
+                                                      <ImageView fitHeight="6.0" fitWidth="10.0" rotate="180.0">
+                                                         <image>
+                                                            <Image url="@../images/Triangle.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <Label text="Power:" GridPane.rowIndex="2" />
+                                    <Label text="Cost:" GridPane.rowIndex="3" />
+                                    <Label text="Discount:" GridPane.rowIndex="4" />
+                                    <Label text="Weapons" underline="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                                    <Label text="Sort by Character" underline="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                                    <ComboBox fx:id="weaponSortC" onAction="#sortWeapons" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="weaponPowerT" onKeyTyped="#removeNonNumbers" prefWidth="75.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="weaponCostT" onKeyTyped="#removeNonNumbers" prefWidth="75.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="weaponDiscountT" onKeyTyped="#removeNonNumbers" prefWidth="75.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="DweaponPowerT" editable="false" prefWidth="75.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="DweaponCostT" editable="false" prefWidth="75.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <TextField fx:id="DweaponDiscountT" editable="false" prefWidth="75.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab fx:id="armorTab" closable="false" onSelectionChanged="#saveTab" text="Armors">
+                    <content>
+                      <AnchorPane>
+                           <children>
+                              <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <GridPane hgap="5.0" layoutX="10.0" layoutY="10.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                                       <children>
+                                          <ComboBox fx:id="armorsC" onAction="#setSelectedArmor" />
+                                          <VBox>
+                                             <children>
+                                                <Button fx:id="armorUp" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#decrementArmor" prefHeight="13.0" prefWidth="20.0">
+                                                   <graphic>
+                                                      <ImageView fitHeight="6.0" fitWidth="10.0">
+                                                         <image>
+                                                            <Image url="@../images/Triangle.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button fx:id="armorDown" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#incrementArmor" prefHeight="13.0" prefWidth="20.0">
+                                                   <graphic>
+                                                      <ImageView fitHeight="6.0" fitWidth="10.0" rotate="180.0">
+                                                         <image>
+                                                            <Image url="@../images/Triangle.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <Label focusTraversable="false" text="Guard:" GridPane.rowIndex="2" />
+                                    <Label focusTraversable="false" text="Cost:" GridPane.rowIndex="3" />
+                                    <Label focusTraversable="false" text="Fire Defense:" GridPane.rowIndex="8" />
+                                    <Label focusTraversable="false" text="??? Defense:" GridPane.rowIndex="7" />
+                                    <Label focusTraversable="false" text="??? Defense:" GridPane.rowIndex="6" />
+                                    <Label focusTraversable="false" text="Laser Defense:" GridPane.rowIndex="5" />
+                                    <Label focusTraversable="false" text="Vacuum Defense:" GridPane.rowIndex="10" />
+                                    <Label focusTraversable="false" text="Ice Defense:" GridPane.rowIndex="9" />
+                                    <Label focusTraversable="false" text="Debuff Defense:" GridPane.rowIndex="11" />
+                                    <ComboBox fx:id="armorSortC" onAction="#sortArmors" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <TextField fx:id="armorPowerT" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="armorCostT" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="armorDiscountT" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="laserResT" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <TextField fx:id="unknown1ResT" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <TextField fx:id="unknown2ResT" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <TextField fx:id="fireResT" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                    <TextField fx:id="iceResT" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                    <TextField fx:id="vacuumResT" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                    <TextField fx:id="debuffResT" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                    <TextField fx:id="DarmorPowerT" editable="false" focusTraversable="false" prefWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="DarmorCostT" editable="false" focusTraversable="false" prefWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <TextField fx:id="DlaserResT" editable="false" focusTraversable="false" prefWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                    <TextField fx:id="Dunknown1ResT" editable="false" focusTraversable="false" prefWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                    <TextField fx:id="Dunknown2ResT" editable="false" focusTraversable="false" prefWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                    <TextField fx:id="DfireResT" editable="false" focusTraversable="false" prefWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                    <TextField fx:id="DiceResT" editable="false" focusTraversable="false" prefWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                    <TextField fx:id="DvacuumResT" editable="false" focusTraversable="false" prefWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                                    <TextField fx:id="DdebuffResT" editable="false" focusTraversable="false" prefWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                                    <TextField fx:id="DarmorDiscountT" editable="false" focusTraversable="false" prefWidth="60.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <ComboBox fx:id="accessoriesC" onAction="#setSelectedArmor" />
+                                          <VBox>
+                                             <children>
+                                                <Button fx:id="accessoryUp" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#decrementAccessory" prefHeight="13.0" prefWidth="20.0">
+                                                   <graphic>
+                                                      <ImageView fitHeight="6.0" fitWidth="10.0">
+                                                         <image>
+                                                            <Image url="@../images/Triangle.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button fx:id="accessoryDown" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#incrementAccessory" prefHeight="13.0" prefWidth="20.0">
+                                                   <graphic>
+                                                      <ImageView fitHeight="6.0" fitWidth="10.0" rotate="180.0">
+                                                         <image>
+                                                            <Image url="@../images/Triangle.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <Label text="Armors" underline="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                                    <Label text="Accessories" underline="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                                    <Label text="Sort by Character" underline="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                                    <Label focusTraversable="false" text="Discount:" GridPane.rowIndex="4" />
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
+                                    <ColumnConstraints hgrow="SOMETIMES" />
+                                    <ColumnConstraints hgrow="SOMETIMES" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <padding>
+                                    <Insets bottom="2.0" />
+                                 </padding>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+            <GridPane hgap="5.0" HBox.hgrow="NEVER">
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints vgrow="NEVER" />
+                  <RowConstraints prefHeight="30.0" vgrow="NEVER" />
+                  <RowConstraints prefHeight="30.0" vgrow="NEVER" />
+                <RowConstraints prefHeight="30.0" vgrow="NEVER" />
+                  <RowConstraints prefHeight="30.0" vgrow="NEVER" />
+                  <RowConstraints prefHeight="30.0" vgrow="NEVER" />
+                <RowConstraints prefHeight="30.0" vgrow="NEVER" />
+                  <RowConstraints prefHeight="30.0" vgrow="NEVER" />
+              </rowConstraints>
+               <children>
+                  <Label text="Allowed Users" underline="true" />
+                  <CheckBox fx:id="kamilCH" mnemonicParsing="false" text="Kamil" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="olvanCH" mnemonicParsing="false" text="Olvan" GridPane.rowIndex="2" />
+                  <CheckBox fx:id="esunaCH" mnemonicParsing="false" text="Esuna" GridPane.rowIndex="3" />
+                  <CheckBox fx:id="wilmeCH" mnemonicParsing="false" text="Wilme" GridPane.rowIndex="4" />
+                  <CheckBox fx:id="luxCH" mnemonicParsing="false" text="Lux" GridPane.rowIndex="5" />
+                  <CheckBox fx:id="valsuCH" mnemonicParsing="false" text="Valsu" GridPane.rowIndex="6" />
+                  <CheckBox fx:id="lejesCH" mnemonicParsing="false" text="Lejes" GridPane.rowIndex="7" />
+                  <CheckBox fx:id="DKamilCH" disable="true" mnemonicParsing="false" text="Kamil" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="DOlvanCH" disable="true" mnemonicParsing="false" text="Olvan" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <CheckBox fx:id="DEsunaCH" disable="true" mnemonicParsing="false" text="Esuna" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <CheckBox fx:id="DWilmeCH" disable="true" mnemonicParsing="false" text="Wilme" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <CheckBox fx:id="DLuxCH" disable="true" mnemonicParsing="false" text="Lux" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <CheckBox fx:id="DValsuCH" disable="true" mnemonicParsing="false" text="Valsu" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <CheckBox fx:id="DLejesCH" disable="true" mnemonicParsing="false" text="Lejes" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label text="Default Users" underline="true" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" />
+   </padding>
+</AnchorPane>
