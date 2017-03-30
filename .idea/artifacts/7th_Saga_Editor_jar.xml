@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="7th-Saga-Editor:jar">
+    <output-path>$PROJECT_DIR$/../artifacts/7th_Saga_Editor_jar</output-path>
+    <root id="archive" name="7th-Saga-Editor.jar">
+      <element id="module-output" name="7th-Saga-Editor" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libraries/expr.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libraries/poi-ooxml-3.13-20150929.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libraries/dom4j-1.6.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libraries/xmlbeans-2.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libraries/poi-3.13-20150929.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libraries/poi-ooxml-schemas-3.13-20150929.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

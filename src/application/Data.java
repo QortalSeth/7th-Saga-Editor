@@ -73,9 +73,9 @@ public class Data implements Serializable
 	{
 	    // use buffering
 	    InputStream inputFile = new BufferedInputStream(Main.class.getResourceAsStream("models/defaultModels.data"));
-	    File defaultData = new File(Main.class.getResource("models/defaultModels.data").toURI());
-	    System.out.println("File Path from disk: " + defaultData.getAbsolutePath());
-	    try (ObjectInputStream input = new ObjectInputStream(inputFile);)
+	   // File defaultData = new File(Main.class.getResource("models/defaultModels.data").toURI());
+	   // System.out.println("File Path from disk: " + defaultData.getAbsolutePath());
+	    try (ObjectInputStream input = new ObjectInputStream(inputFile))
 	    {
 		// deserialize the List
 		Data d = (Data) input.readObject();
@@ -113,9 +113,9 @@ public class Data implements Serializable
 		Experience.getValuesFromROM();
 	    }
 	}
-	catch (ClassNotFoundException | IOException | URISyntaxException e)
+	catch (ClassNotFoundException | IOException e)
 	{
 	    e.printStackTrace();
 	}
     }
-};
+}
