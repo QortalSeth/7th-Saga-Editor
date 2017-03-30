@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="expr">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Libraries/expr.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
