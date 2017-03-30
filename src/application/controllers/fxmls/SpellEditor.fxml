@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.SpellEditor">
+   <children>
+      <VBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox>
+               <children>
+                  <ComboBox fx:id="spellsC" onAction="#setSelectedSpell">
+                     <VBox.margin>
+                        <Insets bottom="100.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <VBox>
+                     <children>
+                        <Button fx:id="spellUp" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#spellDecrement" prefHeight="13.0" prefWidth="20.0">
+                           <graphic>
+                              <ImageView fitHeight="6.0" fitWidth="10.0">
+                                 <image>
+                                    <Image url="@../images/Triangle.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="spellDown" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#spellIncrement" prefHeight="13.0" prefWidth="20.0">
+                           <graphic>
+                              <ImageView fitHeight="6.0" fitWidth="10.0" rotate="180.0">
+                                 <image>
+                                    <Image url="@../images/Triangle.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" />
+                <ColumnConstraints fillWidth="false" hgrow="NEVER" />
+                  <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="10.0" />
+                  <ColumnConstraints fillWidth="false" hgrow="NEVER" />
+                  <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Spell Data" underline="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                  <Label text="Default Spell Data" underline="true" GridPane.columnIndex="3" GridPane.halignment="LEFT" />
+                  <Label focusTraversable="false" text="Power:" textOverrun="CLIP" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label focusTraversable="false" prefHeight="0.0" prefWidth="72.0" text="Targeting:" textOverrun="CLIP" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label focusTraversable="false" text="MP Cost:" textOverrun="CLIP" GridPane.rowIndex="3">
+                     <padding>
+                        <Insets right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label focusTraversable="false" text="Domain:" textOverrun="CLIP" GridPane.rowIndex="4">
+                     <padding>
+                        <Insets right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label focusTraversable="false" text="Element:" textOverrun="CLIP" GridPane.rowIndex="5">
+                     <padding>
+                        <Insets right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label focusTraversable="false" text="Unknown 1:" textOverrun="CLIP" GridPane.rowIndex="6">
+                     <padding>
+                        <Insets right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label focusTraversable="false" text="Unknown 2:" textOverrun="CLIP" GridPane.rowIndex="7">
+                     <padding>
+                        <Insets right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="powerT" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="targetingC" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="costT" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="domainC" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="elementC" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="unknown1T" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="6" />
+                  <TextField fx:id="unknown2T" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="60.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="7" />
+                  <TextField fx:id="defaultPowerT" editable="false" focusTraversable="false" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="defaultTargetingT" editable="false" focusTraversable="false" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="defaultCostT" editable="false" focusTraversable="false" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <TextField fx:id="defaultDomainT" editable="false" focusTraversable="false" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <TextField fx:id="defaultElementT" editable="false" focusTraversable="false" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <TextField fx:id="defaultUnknown1T" editable="false" focusTraversable="false" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <TextField fx:id="defaultUnknown2T" editable="false" focusTraversable="false" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

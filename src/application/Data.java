@@ -1,52 +1,30 @@
 package application;
+import application.controllers.MainMenu;
+import application.models.AbstractItem;
+import application.models.Experience;
+import application.models.lists.*;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import controllers.MainMenu;
-import models.AbstractItem;
-import models.Experience;
-import models.lists.AbstractItems;
-import models.lists.Apprentices;
-import models.lists.Armors;
-import models.lists.Characters;
-import models.lists.DropTables;
-import models.lists.Items;
-import models.lists.Lists;
-import models.lists.ModelsList;
-import models.lists.Monsters;
-import models.lists.Shops;
-import models.lists.Spells;
-import models.lists.Weapons;
-
 public class Data implements Serializable
 {
 
-    private int				DgoldPerLevel;
+    private int				            DgoldPerLevel;
     private AbstractItems<AbstractItem>	abstractItems;
-    private Apprentices			apprentices;
-    private Armors			armors;
-    private Characters			characters;
-    private DropTables			dropTables;
-    private Items			items;
-    private Monsters			monsters;
-    private Shops			shops;
-    private Spells			spells;
-    private Weapons			weapons;
-    private List<Integer>		marginalExperience;
-    private List<Integer>		totalExperience;
+    private Apprentices		         	apprentices;
+    private Armors			            armors;
+    private Characters		         	characters;
+    private DropTables		         	dropTables;
+    private Items			            items;
+    private Monsters		         	monsters;
+    private Shops		            	shops;
+    private Spells			            spells;
+    private Weapons			            weapons;
+    private List<Integer>	         	marginalExperience;
+    private List<Integer>	         	totalExperience;
 
     public Data()
     {
@@ -72,7 +50,7 @@ public class Data implements Serializable
 
 	try
 	{
-	    File defaultData = new File(MainMenu.class.getResource("images/defaultModels.data").toURI());
+	    File defaultData = new File(Main.class.getResource("models/defaultModels.data").toURI());
 	    System.out.println("file path to disk: " + defaultData.getAbsolutePath());
 	    OutputStream file = new FileOutputStream(defaultData);
 	    OutputStream buffer = new BufferedOutputStream(file);
@@ -94,15 +72,15 @@ public class Data implements Serializable
 	try
 	{
 	    // use buffering
-	    InputStream inputFile = new BufferedInputStream(MainMenu.class.getResourceAsStream("images/defaultModels.data"));
-	    File defaultData = new File(MainMenu.class.getResource("images/defaultModels.data").toURI());
+	    InputStream inputFile = new BufferedInputStream(Main.class.getResourceAsStream("models/defaultModels.data"));
+	    File defaultData = new File(Main.class.getResource("models/defaultModels.data").toURI());
 	    System.out.println("File Path from disk: " + defaultData.getAbsolutePath());
 	    try (ObjectInputStream input = new ObjectInputStream(inputFile);)
 	    {
 		// deserialize the List
 		Data d = (Data) input.readObject();
 
-		// make new models list
+		// make new application.models list
 		d.abstractItems.setModels(new ModelsList<>());
 		d.apprentices.setModels(new ModelsList<>());
 		d.armors.setModels(new ModelsList<>());
@@ -116,7 +94,7 @@ public class Data implements Serializable
 		d.armors.addEmptyModel(d.armors.getDModels());
 		d.weapons.addEmptyModel(d.weapons.getDModels());
 
-		// fill models with new data
+		// fill application.models with new data
 		Lists.setAbstractItems(d.abstractItems);
 		d.apprentices.setDgoldPerLevel(d.DgoldPerLevel);
 		Lists.setApprentices(d.apprentices);

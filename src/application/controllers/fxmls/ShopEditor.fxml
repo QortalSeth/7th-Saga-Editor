@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ShopEditor">
+   <children>
+      <VBox layoutX="63.0" layoutY="47.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox>
+               <children>
+                  <ComboBox fx:id="shopsC" onAction="#setSelectedShop" />
+                  <VBox>
+                     <children>
+                        <Button fx:id="shopUp" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#characterDecrement" prefHeight="13.0" prefWidth="20.0">
+                           <graphic>
+                              <ImageView fitHeight="6.0" fitWidth="10.0">
+                                 <image>
+                                    <Image url="@../images/Triangle.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="shopDown" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#characterIncrement" prefHeight="13.0" prefWidth="20.0">
+                           <graphic>
+                              <ImageView fitHeight="6.0" fitWidth="10.0" rotate="180.0">
+                                 <image>
+                                    <Image url="@../images/Triangle.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox spacing="5.0">
+                     <children>
+                        <RadioButton fx:id="gameOrderR" focusTraversable="false" mnemonicParsing="false" onAction="#gameIndexSort" text="Sort By Game Index">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="sortShops" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="ChronOrderR" focusTraversable="false" mnemonicParsing="false" onAction="#chronologicalSort" text="Sort by Chronological Order" toggleGroup="$sortShops" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <GridPane hgap="10.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="NEVER" />
+                  <ColumnConstraints hgrow="NEVER" />
+                <ColumnConstraints />
+                  <ColumnConstraints maxWidth="50.0" />
+                  <ColumnConstraints />
+                  <ColumnConstraints maxWidth="60.0" />
+                <ColumnConstraints hgrow="NEVER" />
+                  <ColumnConstraints hgrow="NEVER" maxWidth="50.0" />
+                  <ColumnConstraints hgrow="NEVER" />
+                  <ColumnConstraints hgrow="NEVER" maxWidth="80.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Inn Cost" />
+                  <Label text="Default Inn Cost" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                  <TextField fx:id="innCostT" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.rowIndex="1" />
+                  <TextField fx:id="defaultInnCostT" editable="false" focusTraversable="false" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  <Label text="Item Shop" underline="true" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label text="Weapon Shop" underline="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label text="Armor Shop" underline="true" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <ComboBox fx:id="item1C" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="item2C" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="item3C" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="item4C" GridPane.rowIndex="7" />
+                  <ComboBox fx:id="item5C" GridPane.rowIndex="8" />
+                  <ComboBox fx:id="item6C" GridPane.rowIndex="9" />
+                  <ComboBox fx:id="item7C" GridPane.rowIndex="10" />
+                  <ComboBox fx:id="item8C" GridPane.rowIndex="11" />
+                  <ComboBox fx:id="item9C" GridPane.rowIndex="12" />
+                  <TextField fx:id="defaultItem1T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="defaultItem2T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="defaultItem3T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="defaultItem4T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="defaultItem5T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextField fx:id="defaultItem6T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <TextField fx:id="defaultItem7T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <TextField fx:id="defaultItem8T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                  <TextField fx:id="defaultItem9T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                  <ComboBox fx:id="weapon1C" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="weapon2C" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="weapon3C" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="weapon4C" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <ComboBox fx:id="weapon5C" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                  <TextField fx:id="weaponPower1" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <TextField fx:id="weaponPower2" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <TextField fx:id="weaponPower3" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <TextField fx:id="weaponPower4" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <TextField fx:id="weaponPower5" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                  <TextField fx:id="defaultWeapon1T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                  <TextField fx:id="defaultWeapon2T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                  <TextField fx:id="defaultWeapon3T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                  <TextField fx:id="defaultWeapon4T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                  <TextField fx:id="defaultWeapon5T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                  <TextField fx:id="DweaponPower1" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                  <TextField fx:id="DweaponPower2" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                  <TextField fx:id="DweaponPower3" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                  <TextField fx:id="DweaponPower4" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                  <TextField fx:id="DweaponPower5" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                  <ComboBox fx:id="armor1C" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="armor2C" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="armor3C" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="armor4C" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                  <ComboBox fx:id="armor5C" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                  <ComboBox fx:id="armor6C" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                  <ComboBox fx:id="armor7C" GridPane.columnIndex="6" GridPane.rowIndex="10" />
+                  <ComboBox fx:id="armor8C" GridPane.columnIndex="6" GridPane.rowIndex="11" />
+                  <TextField fx:id="armorPower1" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                  <TextField fx:id="armorPower2" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                  <TextField fx:id="armorPower3" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                  <TextField fx:id="armorPower4" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                  <TextField fx:id="armorPower5" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                  <TextField fx:id="armorPower6" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="9" />
+                  <TextField fx:id="armorPower7" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="10" />
+                  <TextField fx:id="armorPower8" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="11" />
+                  <TextField fx:id="defaultArmor1T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                  <TextField fx:id="defaultArmor2T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                  <TextField fx:id="defaultArmor3T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                  <TextField fx:id="defaultArmor4T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                  <TextField fx:id="defaultArmor5T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                  <TextField fx:id="defaultArmor6T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                  <TextField fx:id="defaultArmor7T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="8" GridPane.rowIndex="10" />
+                  <TextField fx:id="defaultArmor8T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="8" GridPane.rowIndex="11" />
+                  <TextField fx:id="DarmorPower1" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+                  <TextField fx:id="DarmorPower2" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+                  <TextField fx:id="DarmorPower3" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="9" GridPane.rowIndex="6" />
+                  <TextField fx:id="DarmorPower4" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+                  <TextField fx:id="DarmorPower5" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="9" GridPane.rowIndex="8" />
+                  <TextField fx:id="DarmorPower6" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="9" GridPane.rowIndex="9" />
+                  <TextField fx:id="DarmorPower7" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="9" GridPane.rowIndex="10" />
+                  <TextField fx:id="DarmorPower8" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="9" GridPane.rowIndex="11" />
+                  <Label text="Item" GridPane.rowIndex="3" />
+                  <Label text="Default Item" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Weapon" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label text="Attack" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Label text="Default Weapon" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Label text="Attack" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Label text="Armor" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Label text="Defense" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Label text="Default Armor" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Label text="Defense" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Button fx:id="weaponSort" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortWeaponsAscending" text="Sort By Ascending Cost" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+                  <Button fx:id="weaponSort1" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortWeaponsDescending" text="Sort By Descending Cost" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+                  <Button fx:id="armorSort" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortArmorsAscending" text="Sort By Ascending Cost" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="12" />
+                  <Button fx:id="armorSort1" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortArmorsDescending" text="Sort By Descending Cost" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="12" />
+                  <Button fx:id="weaponSort2" contentDisplay="TEXT_ONLY" lineSpacing="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllWeaponsAscending" text="Sort All Shops By Ascending Cost" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="10" GridPane.rowSpan="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                  <Button fx:id="weaponSort3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllWeaponsDescending" text="Sort All Shops By Descending Cost" wrapText="true" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="10" GridPane.rowSpan="2" />
+                  <Button fx:id="armorSort2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllArmorsAscending" text="Sort All Shops By Ascending Cost" wrapText="true" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="2" />
+                  <Button fx:id="armorSort3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllArmorsDescending" text="Sort All Shops By Descending Cost" wrapText="true" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="2" />
+                  <Button fx:id="itemSort" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortItemShop" text="Sort by Itemcode" GridPane.columnSpan="2" GridPane.rowIndex="13" />
+                  <Button fx:id="itemSort1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllItemShops" text="Sort All Shops By Itemcode" GridPane.columnSpan="2" GridPane.rowIndex="14" GridPane.rowSpan="2" />
+               </children>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

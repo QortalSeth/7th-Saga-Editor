@@ -1,6 +1,6 @@
 package application;
 
-import controllers.MainMenu;
+import application.controllers.MainMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
