@@ -2,9 +2,9 @@ package application.models;
 
 import java.io.Serializable;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.staticClasses.TextReader;
-import application.staticClasses.UByte;
 
 public class Weapon extends Equipment implements Serializable
 {
@@ -19,34 +19,25 @@ public class Weapon extends Equipment implements Serializable
 
     public void getValuesFromROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerWeapon * gameIndex + header;
+		ROM.setOffset(baseOffset + bytesPerWeapon * gameIndex);
 
-	power = UByte.u2Byte(bytes[offset], bytes[offset + 1]);
-	cost = UByte.u2Byte(bytes[offset + 2], bytes[offset + 3]);
-	equipCode = UByte.u1Byte(bytes[offset + 4]);
-	namePointer = UByte.u3Byte(bytes[offset + 5], bytes[offset + 6], bytes[offset + 7]);
-	name = TextReader.readText(namePointer, bytes);
-	discount = UByte.u2Byte(bytes[offset + 8], bytes[offset + 9]);
+	power = ROM.getNextShort();
+	cost = ROM.getNextShort();
+	equipCode = ROM.getNextByte();
+	namePointer = ROM.getNextTriple();
+	name = TextReader.readText(namePointer);
+	discount = ROM.getNextShort();
     }
 
     public void writeValuesToROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerWeapon * gameIndex + header;
+	ROM.setOffset(baseOffset + bytesPerWeapon * gameIndex);
 
-	bytes[offset] = (byte) power;
-	bytes[offset + 1] = UByte.intToByte2(power);
-
-	bytes[offset + 2] = (byte) cost;
-	bytes[offset + 3] = UByte.intToByte2(cost);
-
-	bytes[offset + 4] = (byte) equipCode;
-
-	bytes[offset + 8] = (byte) discount;
-	bytes[offset + 9] = UByte.intToByte2(discount);
+	ROM.setNextShort(power);
+		ROM.setNextShort(cost);
+		ROM.setNextByte(equipCode);
+		ROM.setNextTriple(namePointer);
+		ROM.setNextShort(discount);
     }
 
     public Weapon(Weapon w, int listIndex)

@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.staticClasses.TextReader;
-import application.staticClasses.UByte;
 
 public class Monster extends Model implements Serializable
 {
@@ -46,45 +46,40 @@ public class Monster extends Model implements Serializable
 
     public void getValuesFromROM()
     {
-	byte[] bytes = MainMenu.getBytes();
-	int header = MainMenu.getHeader();
-	int offset = baseOffset + bytesPerMonster * gameIndex + header;
+		ROM.setOffset(baseOffset + bytesPerMonster * gameIndex);
 
-	unknown1 = UByte.u1Byte(bytes[offset]);
-	hp = UByte.u2Byte(bytes[offset + 1], bytes[offset + 2]);
-	mp = UByte.u2Byte(bytes[offset + 3], bytes[offset + 4]);
-	power = UByte.u2Byte(bytes[offset + 5], bytes[offset + 6]);
-	guard = UByte.u2Byte(bytes[offset + 7], bytes[offset + 8]);
-	magic = UByte.u1Byte(bytes[offset + 9]);
-	speed = UByte.u1Byte(bytes[offset + 10]);
+	unknown1 = ROM.getNextByte();
+	hp = ROM.getNextShort();
+	mp = ROM.getNextShort();
+	power = ROM.getNextShort();
+	guard = ROM.getNextShort();
+	magic = ROM.getNextByte();
+	speed = ROM.getNextByte();
 
-	offset += 11;
 	for (int i = 0; i < 8; i++)
 	{
-	    spells.add(UByte.u1Byte(bytes[offset]));
-	    offset++;
+	    spells.add(ROM.getNextByte());
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
-	    spellChance.add(UByte.u1Byte(bytes[offset]));
-	    offset++;
+	    spellChance.add(ROM.getNextByte());
 	}
 
-	laserRes = UByte.u1Byte(bytes[offset]);
-	unknownRes1 = UByte.u1Byte(bytes[offset + 1]);
-	unknownRes2 = UByte.u1Byte(bytes[offset + 2]);
-	fireRes = UByte.u1Byte(bytes[offset + 3]);
-	iceRes = UByte.u1Byte(bytes[offset + 4]);
-	vacuumRes = UByte.u1Byte(bytes[offset + 5]);
-	debuffRes = UByte.u1Byte(bytes[offset + 6]);
+	laserRes = ROM.getNextByte();
+	unknownRes1 = ROM.getNextByte();
+	unknownRes2 = ROM.getNextByte();
+	fireRes = ROM.getNextByte();
+	iceRes = ROM.getNextByte();
+	vacuumRes = ROM.getNextByte();
+	debuffRes = ROM.getNextByte();
 
-	gold = UByte.u2Byte(bytes[offset + 7], bytes[offset + 8]);
-	itemDropSet = UByte.u1Byte(bytes[offset + 9]);
-	unknown2 = UByte.u1Byte(bytes[offset + 10]);
-	runFlag = UByte.u1Byte(bytes[offset + 11]);
-	namePointer = UByte.u3Byte(bytes[offset + 12], bytes[offset + 13], bytes[offset + 14]);
-	name = TextReader.readText(namePointer, bytes);
+	gold = ROM.getNextShort();
+	itemDropSet = ROM.getNextByte();
+	unknown2 = ROM.getNextByte();
+	runFlag = ROM.getNextByte();
+	namePointer = ROM.getNextTriple();
+	name = TextReader.readText(namePointer);
 
 	int magicMod = 0;
 	int speedMod = 0;
@@ -115,16 +110,13 @@ public class Monster extends Model implements Serializable
 
     public void writeValuesToROM()
     {
-	byte[] bytes = MainMenu.getBytes();
-	int header = MainMenu.getHeader();
-	int offset = baseOffset + bytesPerMonster * gameIndex + header;
 
-	bytes[offset] = (byte) unknown1;
-	bytes[offset + 1] = (byte) hp;
-	bytes[offset + 2] = UByte.intToByte2(hp);
-	bytes[offset + 3] = (byte) mp;
-	bytes[offset + 4] = UByte.intToByte2(mp);
-	bytes[offset + 5] = (byte) power;
+	ROM.setOffset(baseOffset + bytesPerMonster * gameIndex);
+
+		ROM.setNextByte(unknown1);
+		ROM.setNextShort(hp);
+		ROM.setNextShort(mp);
+
 	int magicValue = magic;
 	int speedValue = speed;
 	int powerValue = power;
@@ -155,38 +147,33 @@ public class Monster extends Model implements Serializable
 	}
 
 	powerValue |= mod;
+		ROM.setNextShort(powerValue);
+		ROM.setNextShort(guard);
+		ROM.setNextByte(magicValue);
+		ROM.setNextByte(speedValue);
 
-	bytes[offset + 6] = UByte.intToByte2(powerValue);
-	bytes[offset + 7] = (byte) guard;
-	bytes[offset + 8] = UByte.intToByte2(guard);
-	bytes[offset + 9] = (byte) magicValue;
-	bytes[offset + 10] = (byte) speedValue;
-
-	offset += 11;
 	for (int i = 0; i < 8; i++)
 	{
-	    bytes[offset] = (byte) spells.get(i).intValue();
-	    offset++;
+		ROM.setNextByte(spells.get(i));
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
-	    bytes[offset] = (byte) spellChance.get(i).intValue();
-	    offset++;
+	    ROM.setNextByte(spellChance.get(i));
 	}
 
-	bytes[offset] = (byte) laserRes;
-	bytes[offset + 1] = (byte) unknownRes1;
-	bytes[offset + 2] = (byte) unknownRes2;
-	bytes[offset + 3] = (byte) fireRes;
-	bytes[offset + 4] = (byte) iceRes;
-	bytes[offset + 5] = (byte) vacuumRes;
-	bytes[offset + 6] = (byte) debuffRes;
-	bytes[offset + 7] = (byte) gold;
-	bytes[offset + 8] = UByte.intToByte2(gold);
-	bytes[offset + 9] = (byte) itemDropSet;
-	bytes[offset + 10] = (byte) unknown2;
-	bytes[offset + 11] = (byte) runFlag;
+	ROM.setNextByte(laserRes);
+		ROM.setNextByte(unknownRes1);
+		ROM.setNextByte(unknownRes2);
+		ROM.setNextByte(fireRes);
+		ROM.setNextByte(iceRes);
+		ROM.setNextByte(vacuumRes);
+		ROM.setNextByte(debuffRes);
+		ROM.setNextShort(gold);
+		ROM.setNextByte(itemDropSet);
+		ROM.setNextByte(unknown2);
+		ROM.setNextByte(runFlag);
+		ROM.setNextTriple(namePointer);
     }
 
     private void setChronologicalIndex()

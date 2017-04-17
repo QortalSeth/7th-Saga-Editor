@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.enums.EquipmentType;
 
@@ -53,7 +54,7 @@ public class Equipment<T extends application.models.Equipment> extends AbstractI
 		{
 			if ((equipCode & equipment.getEquipCode()) > 0)
 			{
-				if (MainMenu.getShowEmptyValues() == true || !equipment.getName().isEmpty())
+				if (ROM.showEmptyValues == true || !equipment.getName().isEmpty())
 				{
 					models.add((T) equipment);
 				}

@@ -2,9 +2,9 @@ package application.models;
 
 import java.io.Serializable;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.staticClasses.TextReader;
-import application.staticClasses.UByte;
 
 public class Item extends AbstractItem implements Serializable
 {
@@ -25,31 +25,27 @@ public class Item extends AbstractItem implements Serializable
 
     public void getValuesFromROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerItem * gameIndex + header;
+		ROM.setOffset(baseOffset + bytesPerItem * gameIndex);
 
-	target = UByte.u1Byte(bytes[offset]);
-	uses = UByte.u1Byte(bytes[offset + 1]);
-	cost = UByte.u2Byte(bytes[offset + 2], bytes[offset + 3]);
-	users = UByte.u1Byte(bytes[offset + 4]);
-	sellRatio = UByte.u1Byte(bytes[offset + 5]);
-	namePointer = UByte.u3Byte(bytes[offset + 6], bytes[offset + 7], bytes[offset + 8]);
-	name = TextReader.readText(namePointer, bytes);
+	target = ROM.getNextByte();
+	uses = ROM.getNextByte();
+	cost = ROM.getNextShort();
+	users = ROM.getNextByte();
+	sellRatio = ROM.getNextByte();
+	namePointer = ROM.getNextTriple();
+	name = TextReader.readText(namePointer);
     }
 
     public void writeValuesToROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerItem * gameIndex + header;
+	ROM.setOffset(baseOffset + bytesPerItem * gameIndex);
 
-	bytes[offset] = (byte) target;
-	bytes[offset + 1] = (byte) uses;
-	bytes[offset + 2] = (byte) cost;
-	bytes[offset + 3] = UByte.intToByte2(cost);
-	bytes[offset + 4] = (byte) users;
-	bytes[offset + 5] = (byte) sellRatio;
+	ROM.setNextByte(target);
+	ROM.setNextByte(uses);
+	ROM.setNextShort(cost);
+	ROM.setNextByte(users);
+	ROM.setNextByte(sellRatio);
+	ROM.setNextTriple(namePointer);
     }
 
     private void setChronologicalIndex()

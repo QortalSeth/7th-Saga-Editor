@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import application.ROM;
 
 import application.controllers.MainMenu;
 import application.models.Model;
@@ -147,7 +148,7 @@ public abstract class Models<T extends Model> implements Serializable
 
 	for (T model : addFrom.getModels())
 	{
-	    if (MainMenu.getShowEmptyValues() == true || !model.getName().trim().isEmpty() || (keepEmptyModel == true && model.getGameIndex() == 0))
+	    if (ROM.showEmptyValues == true || !model.getName().trim().isEmpty() || (keepEmptyModel == true && model.getGameIndex() == 0))
 	    {
 		models.add(model);
 	    }

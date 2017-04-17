@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.models.lists.Characters;
-import application.staticClasses.UByte;
 
 public class Character extends Model implements Serializable
 {
@@ -49,87 +49,76 @@ public class Character extends Model implements Serializable
 
     public void getValuesFromROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerCharacter * gameIndex + header;
 
-	hpStart = UByte.u2Byte(bytes[offset], bytes[offset + 1]);
-	mpStart = UByte.u2Byte(bytes[offset + 2], bytes[offset + 3]);
-	powerStart = UByte.u1Byte(bytes[offset + 4]);
-	guardStart = UByte.u1Byte(bytes[offset + 5]);
-	magicStart = UByte.u1Byte(bytes[offset + 6]);
-	speedStart = UByte.u1Byte(bytes[offset + 7]);
+		ROM.setOffset(baseOffset + bytesPerCharacter * gameIndex);
 
-	hpGrowth = UByte.u1Byte(bytes[offset + 8]);
-	mpGrowth = UByte.u1Byte(bytes[offset + 9]);
-	powerGrowth = UByte.u1Byte(bytes[offset + 10]);
-	guardGrowth = UByte.u1Byte(bytes[offset + 11]);
-	magicGrowth = UByte.u1Byte(bytes[offset + 12]);
-	speedGrowth = UByte.u1Byte(bytes[offset + 13]);
+	hpStart = ROM.getNextShort();
+	mpStart = ROM.getNextShort();
+	powerStart = ROM.getNextByte();
+	guardStart = ROM.getNextByte();
+	magicStart = ROM.getNextByte();
+	speedStart = ROM.getNextByte();
 
-	weaponStart = UByte.u1Byte(bytes[offset + 14]);
-	armorStart = UByte.u1Byte(bytes[offset + 15]);
-	accessoryStart = UByte.u1Byte(bytes[offset + 16]);
-	experienceStart = UByte.u1Byte(bytes[offset + 17]);
+	hpGrowth = ROM.getNextByte();
+	mpGrowth = ROM.getNextByte();
+	powerGrowth = ROM.getNextByte();
+	guardGrowth = ROM.getNextByte();
+	magicGrowth = ROM.getNextByte();
+	speedGrowth = ROM.getNextByte();
 
-	int spellListOffset = baseSpellOffset + bytesPerSpellList * gameIndex + header;
+	weaponStart = ROM.getNextByte();
+	armorStart = ROM.getNextByte();
+	accessoryStart = ROM.getNextByte();
+	experienceStart = ROM.getNextByte();
+
+	ROM.setOffset(baseSpellOffset + bytesPerSpellList * gameIndex);
 
 	spells = new ArrayList<Integer>();
 	spellLevels = new ArrayList<Integer>();
 
 	for (int i = 0; i < 16; i++)
 	{
-	    spells.add(UByte.u1Byte(bytes[spellListOffset]));
-	    spellListOffset++;
+	    spells.add(ROM.getNextByte());
 	}
 
 	for (int i = 0; i < 16; i++)
 	{
-	    spellLevels.add(UByte.u1Byte(bytes[spellListOffset]));
-	    spellListOffset++;
+	    spellLevels.add(ROM.getNextByte());
 	}
     }
 
     public void writeValuesToROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerCharacter * gameIndex + header;
 
-	bytes[offset] = (byte) hpStart;
-	bytes[offset + 1] = UByte.intToByte2(hpStart);
+	ROM.setOffset(baseOffset + bytesPerCharacter * gameIndex);
+	ROM.setNextShort(hpStart);
+	ROM.setNextShort(mpStart);
+	ROM.setNextByte(powerStart);
+		ROM.setNextByte(guardStart);
+		ROM.setNextByte(magicStart);
+		ROM.setNextByte(speedStart);
+		ROM.setNextByte(hpGrowth);
+		ROM.setNextByte(mpGrowth);
+		ROM.setNextByte(powerGrowth);
+		ROM.setNextByte(guardGrowth);
+		ROM.setNextByte(magicGrowth);
+		ROM.setNextByte(speedGrowth);
+		ROM.setNextByte(weaponStart);
+		ROM.setNextByte(armorStart);
+		ROM.setNextByte(accessoryStart);
+		ROM.setNextByte(experienceStart);
 
-	bytes[offset + 2] = (byte) mpStart;
-	bytes[offset + 3] = UByte.intToByte2(mpStart);
 
-	bytes[offset + 4] = (byte) powerStart;
-	bytes[offset + 5] = (byte) guardStart;
-	bytes[offset + 6] = (byte) magicStart;
-	bytes[offset + 7] = (byte) speedStart;
-
-	bytes[offset + 8] = (byte) hpGrowth;
-	bytes[offset + 9] = (byte) mpGrowth;
-	bytes[offset + 10] = (byte) powerGrowth;
-	bytes[offset + 11] = (byte) guardGrowth;
-	bytes[offset + 12] = (byte) magicGrowth;
-	bytes[offset + 13] = (byte) speedGrowth;
-	bytes[offset + 14] = (byte) weaponStart;
-	bytes[offset + 15] = (byte) armorStart;
-	bytes[offset + 16] = (byte) accessoryStart;
-	bytes[offset + 17] = (byte) experienceStart;
-
-	int spellListOffset = baseSpellOffset + bytesPerSpellList * gameIndex + header;
+	ROM.setOffset(baseSpellOffset + bytesPerSpellList * gameIndex);
 
 	for (int i : spells)
 	{
-	    bytes[spellListOffset] = (byte) i;
-	    spellListOffset++;
+		ROM.setNextByte(i);
 	}
 
 	for (int i : spellLevels)
 	{
-	    bytes[spellListOffset] = (byte) i;
-	    spellListOffset++;
+		ROM.setNextByte(i);
 	}
     }
 
@@ -147,14 +136,7 @@ public class Character extends Model implements Serializable
 
     public boolean canLearnSpell(Integer spellID)
     {
-	if (spells.contains(spellID))
-	{
-	    return true;
-	}
-	else
-	{
-	    return false;
-	}
+		return spells.contains(spellID);
     }
 
     public int getSpellLevel(int spellID)

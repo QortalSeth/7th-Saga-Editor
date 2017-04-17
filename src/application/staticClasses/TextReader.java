@@ -1,9 +1,11 @@
 package application.staticClasses;
 
+import application.ROM;
+
 public class TextReader
 {
 
-    public static String readText(int pointer, byte[] bytes)
+    public static String readText(int pointer)
     {
 	pointer &= 0x0FFFFF;
 
@@ -12,7 +14,7 @@ public class TextReader
 	boolean readNextByte = true;
 	while (readNextByte)
 	{
-	    int charValue = UByte.u1Byte(bytes[pointer]);
+	    int charValue = ROM.getByte(pointer);
 
 	    switch (charValue)
 	    {

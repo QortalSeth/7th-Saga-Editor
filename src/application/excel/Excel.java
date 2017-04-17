@@ -7,17 +7,19 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
+import application.ROM;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import application.controllers.MainMenu;
 
 public class Excel
 {
+
+
 
     public static XSSFCellStyle setDefaultStyle(XSSFWorkbook workbook)
     {
@@ -49,13 +51,12 @@ public class Excel
 
 	try
 	{
-	    File file = new File(MainMenu.getProgramDirectory() + "/ChangeLists");
-	    if (!file.exists())
-	    {
+		File file = ROM.getChangeListsDirectory();
+		System.out.println("Changelist Directory: " + file);
 		file.mkdir();
-	    }
-	    file = new File(MainMenu.getProgramDirectory() + "/ChangeLists/" + fileName);
-	    System.out.println("File is: " + file.getAbsolutePath());
+
+	    file = new File(file.getPath() + "/" + fileName);
+	    System.out.println("Changelist File Location: " + file.getAbsolutePath());
 	    file.createNewFile();
 
 	    return new BufferedOutputStream(new FileOutputStream(file));

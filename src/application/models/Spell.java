@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.staticClasses.TextReader;
-import application.staticClasses.UByte;
 
 public class Spell extends Model implements Serializable
 {
@@ -21,10 +21,7 @@ public class Spell extends Model implements Serializable
     private static final int	baseOffset    = 0x7018;
     private static final int	bytesPerSpell = 12;
 
-    private static List<String>	elements      = Arrays.asList(new String[]
-						{
-							"None", "Lightning", "Unknown", "Unknown", "Fire", "Ice", "Vacuum", "Debuff"
-						});
+    private static List<String>	elements      = Arrays.asList("None", "Lightning", "Unknown", "Unknown", "Fire", "Ice", "Vacuum", "Debuff");
 
     public Spell(int index)
     {
@@ -33,36 +30,31 @@ public class Spell extends Model implements Serializable
 
     public void getValuesFromROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerSpell * gameIndex + header;
+		ROM.setOffset(baseOffset + bytesPerSpell * gameIndex);
 
-	power = UByte.u2Byte(bytes[offset], bytes[offset + 1]);
-	target = UByte.u1Byte(bytes[offset + 2]);
-	cost = UByte.u2Byte(bytes[offset + 3], bytes[offset + 4]);
-	domain = UByte.u1Byte(bytes[offset + 5]);
-	element = UByte.u1Byte(bytes[offset + 6]);
-	unknown1 = UByte.u1Byte(bytes[offset + 7]);
-	unknown2 = UByte.u1Byte(bytes[offset + 8]);
-	namePointer = UByte.u3Byte(bytes[offset + 9], bytes[offset + 10], bytes[offset + 11]);
-	name = TextReader.readText(namePointer, bytes);
+	power = ROM.getNextShort();
+	target = ROM.getNextByte();
+	cost = ROM.getNextShort();
+	domain = ROM.getNextByte();
+	element = ROM.getNextByte();
+	unknown1 = ROM.getNextByte();
+	unknown2 = ROM.getNextByte();
+	namePointer = ROM.getNextTriple();
+	name = TextReader.readText(namePointer);
     }
 
     public void writeValuesToROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerSpell * gameIndex + header;
+	ROM.setOffset(baseOffset + bytesPerSpell * gameIndex);
 
-	bytes[offset] = (byte) power;
-	bytes[offset + 1] = UByte.intToByte2(power);
-	bytes[offset + 2] = (byte) target;
-	bytes[offset + 3] = (byte) cost;
-	bytes[offset + 4] = UByte.intToByte2(cost);
-	bytes[offset + 5] = (byte) domain;
-	bytes[offset + 6] = (byte) element;
-	bytes[offset + 7] = (byte) unknown1;
-	bytes[offset + 8] = (byte) unknown2;
+	ROM.setNextShort(power);
+	ROM.setNextByte(target);
+		ROM.setNextShort(cost);
+		ROM.setNextByte(domain);
+		ROM.setNextByte(element);
+		ROM.setNextByte(unknown1);
+		ROM.setNextByte(unknown2);
+		ROM.setNextTriple(namePointer);
     }
 
     public int getElementPriority()

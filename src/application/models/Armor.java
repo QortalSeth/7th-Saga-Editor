@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.staticClasses.TextReader;
-import application.staticClasses.UByte;
 
 public class Armor extends Equipment implements Serializable
 {
@@ -32,23 +32,21 @@ public class Armor extends Equipment implements Serializable
 
     public void getValuesFromROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerArmor * gameIndex + header;
 
-	power = UByte.u2Byte(bytes[offset], bytes[offset + 1]);
-	cost = UByte.u2Byte(bytes[offset + 2], bytes[offset + 3]);
-	equipCode = UByte.u1Byte(bytes[offset + 4]);
-	laserRes = UByte.u1Byte(bytes[offset + 5]);
-	unknownRes1 = UByte.u1Byte(bytes[offset + 6]);
-	unknownRes2 = UByte.u1Byte(bytes[offset + 7]);
-	fireRes = UByte.u1Byte(bytes[offset + 8]);
-	iceRes = UByte.u1Byte(bytes[offset + 9]);
-	vacuumRes = UByte.u1Byte(bytes[offset + 10]);
-	debuffRes = UByte.u1Byte(bytes[offset + 11]);
-	namePointer = UByte.u3Byte(bytes[offset + 12], bytes[offset + 13], bytes[offset + 14]);
-	name = TextReader.readText(namePointer, bytes);
-	discount = UByte.u2Byte(bytes[offset + 15], bytes[offset + 16]);
+		ROM.setOffset(baseOffset + bytesPerArmor * gameIndex);
+	power = ROM.getNextShort();
+	cost = ROM.getNextShort();
+	equipCode = ROM.getNextByte();
+	laserRes = ROM.getNextByte();
+	unknownRes1 = ROM.getNextByte();
+	unknownRes2 = ROM.getNextByte();
+	fireRes = ROM.getNextByte();
+	iceRes = ROM.getNextByte();
+	vacuumRes = ROM.getNextByte();
+	debuffRes = ROM.getNextByte();
+	namePointer = ROM.getNextTriple();
+	name = TextReader.readText(namePointer);
+	discount = ROM.getNextShort();
 
 	if (power == 0 && laserRes == 0 && fireRes == 0 && iceRes == 0 && cost == 0)
 	{
@@ -58,26 +56,20 @@ public class Armor extends Equipment implements Serializable
 
     public void writeValuesToROM()
     {
-	byte[] bytes = MainMenu.getBytes();
-	int header = MainMenu.getHeader();
-	int offset = baseOffset + bytesPerArmor * gameIndex + header;
+	ROM.setOffset(baseOffset + bytesPerArmor * gameIndex);
 
-	bytes[offset] = (byte) power;
-	bytes[offset + 1] = UByte.intToByte2(power);
-
-	bytes[offset + 2] = (byte) cost;
-	bytes[offset + 3] = UByte.intToByte2(cost);
-
-	bytes[offset + 4] = (byte) equipCode;
-	bytes[offset + 5] = (byte) laserRes;
-	bytes[offset + 6] = (byte) unknownRes1;
-	bytes[offset + 7] = (byte) unknownRes2;
-	bytes[offset + 8] = (byte) fireRes;
-	bytes[offset + 9] = (byte) iceRes;
-	bytes[offset + 10] = (byte) vacuumRes;
-	bytes[offset + 11] = (byte) debuffRes;
-	bytes[offset + 15] = (byte) discount;
-	bytes[offset + 16] = UByte.intToByte2(discount);
+	ROM.setNextShort(power);
+	ROM.setNextShort(cost);
+	ROM.setNextByte(equipCode);
+	ROM.setNextByte(laserRes);
+	ROM.setNextByte(unknownRes1);
+	ROM.setNextByte(unknownRes2);
+	ROM.setNextByte(fireRes);
+	ROM.setNextByte(iceRes);
+	ROM.setNextByte(vacuumRes);
+	ROM.setNextByte(debuffRes);
+	ROM.setNextTriple(namePointer);
+	ROM.setNextShort(discount);
     }
 
     public boolean isBodyArmor()

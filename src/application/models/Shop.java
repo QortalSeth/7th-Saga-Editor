@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.models.lists.Armors;
 import application.models.lists.Lists;
 import application.models.lists.Weapons;
 import application.staticClasses.TextReader;
-import application.staticClasses.UByte;
 
 public class Shop extends Model implements Serializable
 {
@@ -29,59 +29,50 @@ public class Shop extends Model implements Serializable
 
     public void getValuesFromROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerShop * gameIndex + header;
+
+		ROM.setOffset(baseOffset + bytesPerShop * gameIndex);
 
 	for (int i = 0; i < 5; i++)
 	{
-	    weaponCodes.add(UByte.u1Byte(bytes[offset]));
-	    offset++;
+	    weaponCodes.add(ROM.getNextByte());
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
-	    armorCodes.add(UByte.u1Byte(bytes[offset]));
-	    offset++;
+	    armorCodes.add(ROM.getNextByte());
 	}
 
 	for (int i = 0; i < 9; i++)
 	{
-	    itemCodes.add(UByte.u1Byte(bytes[offset]));
-	    offset++;
+	    itemCodes.add(ROM.getNextByte());
+
 	}
 
-	innCost = UByte.u2Byte(bytes[offset], bytes[offset + 1]);
-	namePointer = UByte.u3Byte(bytes[offset + 2], bytes[offset + 3], bytes[offset + 4]);
-	name = TextReader.readText(namePointer, bytes);
+	innCost = ROM.getNextShort();
+	namePointer = ROM.getNextTriple();
+	name = TextReader.readText(namePointer);
     }
 
     public void writeValuesToROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerShop * gameIndex + header;
+	ROM.setOffset(baseOffset + bytesPerShop * gameIndex);
 
 	for (int i = 0; i < 5; i++)
 	{
-	    bytes[offset] = (byte) weaponCodes.get(i).intValue();
-	    offset++;
+		ROM.setNextByte(weaponCodes.get(i));
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
-	    bytes[offset] = (byte) armorCodes.get(i).intValue();
-	    offset++;
+		ROM.setNextByte(armorCodes.get(i));
 	}
 
 	for (int i = 0; i < 9; i++)
 	{
-	    bytes[offset] = (byte) itemCodes.get(i).intValue();
-	    offset++;
+		ROM.setNextByte(itemCodes.get(i));
 	}
-
-	bytes[offset] = (byte) innCost;
-	bytes[offset + 1] = UByte.intToByte2(innCost);
+		ROM.setNextShort(innCost);
+		ROM.setNextTriple(namePointer);
     }
 
     private void setChronologicalIndex()

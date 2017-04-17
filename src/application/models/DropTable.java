@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.models.lists.AbstractItems;
 import application.models.lists.Lists;
-import application.staticClasses.UByte;
 
 public class DropTable extends Model implements Serializable
 {
@@ -25,26 +25,22 @@ public class DropTable extends Model implements Serializable
 
     public void getValuesFromROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerDropTable * gameIndex + header;
+		ROM.setOffset(baseOffset + bytesPerDropTable * gameIndex);
 	for (int i = 0; i < bytesPerDropTable; i++)
 	{
-	    drops[i] = UByte.u1Byte(bytes[offset + i]);
+	    drops[i] = ROM.getNextByte();
 	}
     }
 
     public void writeValuesToROM()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
-	int offset = baseOffset + bytesPerDropTable * gameIndex + header;
+	ROM.setOffset(baseOffset + bytesPerDropTable * gameIndex);
 	// System.out.println("Offset is: "+Integer.toHexString(offset)+" index is "+gameIndex);
 
 	for (int i = 0; i < bytesPerDropTable; i++)
 	{
 	    // System.out.println("write Drop "+i+" new value is: "+drops[i] + " Old value is: "+bytes[offset+i]);
-	    bytes[offset + i] = (byte) drops[i];
+	    ROM.setNextByte(drops[i]);
 	}
 	// System.out.println("\n");
     }
@@ -83,10 +79,11 @@ public class DropTable extends Model implements Serializable
 
     public static void printTables()
     {
-	int header = MainMenu.getHeader();
+
 	for (DropTable d : Lists.getDropTables().getModels())
 	{
-	    int offset = baseOffset + bytesPerDropTable * d.gameIndex + header;
+		int offset = baseOffset + bytesPerDropTable * d.gameIndex;
+	    ROM.setOffset(offset);
 	    System.out.println("Offset is: " + Integer.toHexString(offset) + " index is " + d.gameIndex);
 	    for (int i = 0; i < bytesPerDropTable; i++)
 	    {

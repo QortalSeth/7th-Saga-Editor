@@ -3,6 +3,7 @@ package application.models.lists;
 import java.io.Serializable;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.models.Monster;
 
@@ -28,7 +29,7 @@ public class Monsters extends Models<Monster> implements Serializable
 	    Monster monster = new Monster(i);
 	    monster.getValuesFromROM();
 
-	    if (MainMenu.getShowMonsterDuplicates() == false)
+	    if (ROM.showMonsterDuplicates == false)
 	    {
 
 		if (models.contains(monster)) // if monster is duplicate of

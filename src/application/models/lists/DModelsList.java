@@ -2,6 +2,7 @@ package application.models.lists;
 
 import java.util.ArrayList;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.models.Model;
 
@@ -23,7 +24,7 @@ public class DModelsList<T extends Model> extends ArrayList<T>
     {
 	for (T model : models)
 	{
-	    if (MainMenu.getShowEmptyValues() == true || !model.getName().trim().isEmpty() || (keepEmptyModel == true && model.getGameIndex() == 0))
+	    if (ROM.showEmptyValues == true || !model.getName().trim().isEmpty() || (keepEmptyModel == true && model.getGameIndex() == 0))
 	    {
 		add(model);
 	    }

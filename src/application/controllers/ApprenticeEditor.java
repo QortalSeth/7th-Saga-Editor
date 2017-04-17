@@ -184,7 +184,7 @@ public class ApprenticeEditor implements ControllerInitilizer
 							{
 								if (dialogueTs[i][k] == t)
 								{
-									dialogueDisplay.setText(TextReader.readText(apprentice.getDialoguePointers()[k], MainMenu.getBytes()));
+									dialogueDisplay.setText(TextReader.readText(apprentice.getDialoguePointers()[k]));
 									selectedTextFieldIndex = k;
 								}
 							}
@@ -314,7 +314,6 @@ public class ApprenticeEditor implements ControllerInitilizer
 			for (int k = 0; k < dialogueTs[i].length; k++)
 			{
 				dialogueTs[i][k].setText(Integer.toString(apprentice.getDialogues()[i][k]));
-				;
 			}
 		}
 
@@ -323,7 +322,6 @@ public class ApprenticeEditor implements ControllerInitilizer
 			for (int k = 0; k < DDialogueTs[i].length; k++)
 			{
 				DDialogueTs[i][k].setText(Integer.toString(Dapprentice.getDialogues()[i][k]));
-				;
 			}
 		}
 
@@ -363,7 +361,7 @@ public class ApprenticeEditor implements ControllerInitilizer
 			index++;
 		}
 		if(selectedTextFieldIndex < Integer.MAX_VALUE)
-		{dialogueDisplay.setText(TextReader.readText(apprentice.getDialoguePointers()[selectedTextFieldIndex], MainMenu.getBytes()));}
+		{dialogueDisplay.setText(TextReader.readText(apprentice.getDialoguePointers()[selectedTextFieldIndex]));}
 	}
 
 	@FXML

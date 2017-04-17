@@ -3,8 +3,8 @@ package application.models;
 import java.io.Serializable;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
-import application.staticClasses.UByte;
 
 public class Experience implements Serializable
 {
@@ -20,13 +20,11 @@ public class Experience implements Serializable
     public static void getValuesFromROM()
     {
 
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
+
 	for (int i = 0; i < expListSize; i++)
 	{
-	    int offset = baseOffset + bytesPerExp * i + header;
-	    int value = UByte.u3Byte(bytes[offset], bytes[offset + 1], bytes[offset + 2]);
-	    totalExpTable.add(value);
+		ROM.setOffset(baseOffset + bytesPerExp * i);
+	    totalExpTable.add(ROM.getNextTriple());
 	}
 	marginalExpTable.add(totalExpTable.get(0));
 	for (int i = 1; i < totalExpTable.size(); i++)
@@ -37,17 +35,14 @@ public class Experience implements Serializable
 
     public static void saveModels()
     {
-	int header = MainMenu.getHeader();
-	byte[] bytes = MainMenu.getBytes();
+
 	int sum = 0;
 	for (int i = 0; i < expListSize; i++)
 	{
-	    int offset = baseOffset + bytesPerExp * i + header;
+	    ROM.setOffset(baseOffset + bytesPerExp * i);
 	    int value = marginalExpTable.get(i);
 	    sum += value;
-	    bytes[offset] = (byte) sum;
-	    bytes[offset + 1] = UByte.intToByte2(sum);
-	    bytes[offset + 2] = UByte.intToByte3(sum);
+	    ROM.setNextTriple(sum);
 	}
     }
 

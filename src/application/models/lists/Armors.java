@@ -3,6 +3,7 @@ package application.models.lists;
 import java.io.Serializable;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import application.models.Armor;
 
@@ -83,7 +84,7 @@ public class Armors extends Equipment<Armor> implements Serializable
 	{
 	    if (a.isBodyArmor() && (equipCode & a.getEquipCode()) > 0)
 	    {
-		if (MainMenu.getShowEmptyValues() == true || !a.getName().isEmpty())
+		if (ROM.showEmptyValues == true || !a.getName().isEmpty())
 		{
 		    models.add(a);
 		}
@@ -99,7 +100,7 @@ public class Armors extends Equipment<Armor> implements Serializable
 	{
 	    if (a.isAccessory() && (equipCode & a.getEquipCode()) > 0)
 	    {
-		if (MainMenu.getShowEmptyValues() == true || !a.getName().isEmpty())
+		if (ROM.showEmptyValues == true || !a.getName().isEmpty())
 		{
 		    models.add(a);
 		}

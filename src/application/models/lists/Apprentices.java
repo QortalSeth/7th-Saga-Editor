@@ -3,6 +3,7 @@ package application.models.lists;
 import java.io.Serializable;
 import java.util.List;
 
+import application.ROM;
 import application.controllers.MainMenu;
 import javafx.collections.FXCollections;
 import application.models.Apprentice;
@@ -42,7 +43,7 @@ public class Apprentices extends Models<Apprentice> implements Serializable
 	    apprentice.getValuesFromROM();
 	    models.add(apprentice);
 	}
-	goldPerLevel = MainMenu.getBytes()[0x280c2 + MainMenu.getHeader()];
+	goldPerLevel = ROM.getByte(0x280c2);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class Apprentices extends Models<Apprentice> implements Serializable
     {
 	for (Apprentice a : models)
 	    a.writeValuesToROM();
-	MainMenu.getBytes()[0x280c2 + MainMenu.getHeader()] = (byte) goldPerLevel;
+	ROM.setByte(0x280c2, goldPerLevel);
     }
 
     public int getGoldPerLevel()

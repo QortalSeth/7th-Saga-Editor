@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import application.ControllerInitilizer;
 import application.Data;
+import application.ROM;
 import application.excel.Excel;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -35,15 +36,9 @@ import application.models.lists.states.DataState;
 
 public class MainMenu
 {
-    private File	       file;
-    private static byte[]  bytes;
-    private static int	   header;
-    private static boolean showEmptyValues	 = false;
-    private static boolean showMonsterDuplicates = false;
-    private Window	       mainWindow;
-    public static File	   programDirectory;
-    private static Stage   primaryStage;
-    private File	       changeLists;
+
+	private Window	       mainWindow;
+	private static Stage   primaryStage;
     boolean		           debug;
 
     @FXML
@@ -51,27 +46,8 @@ public class MainMenu
     {
 	this.disableButtons(true);
 	debug = false;
-	if (debug)
-	{
-	    this.openFile();
-	}
 	initializeImages();
-
-	try
-	{
-	    file = new File("7th Saga Unedited.smc");
-	    bytes = Files.readAllBytes(file.toPath());
-	    header = 0;
-	    programDirectory = new File("");
-
-	    Lists.CreateLists();
-	    Lists.InitializeLists();
-	    Data.serializeDefaultDataToDisk();
-	}
-	catch (IOException e)
-	{
-	    // e.printStackTrace();
-	}
+	ROM.setProgramDirectory();
     }
 
     private void disableButtons(boolean disable)
@@ -109,108 +85,27 @@ public class MainMenu
 	FileChooser fc = new FileChooser();
 	fc.setTitle("Choose file to open");
 	fc.getExtensionFilters().add(new ExtensionFilter("SNES Files", "*.smc"));
-	file = chooseFile(fc);
+	fc.setInitialDirectory(ROM.getProgramDirectory());
 
-	if (file != null)
+	File rom = fc.showOpenDialog(null);
+
+	if (rom != null)
 	{
 	    this.disableButtons(false);
-	}
-	else
-	{
-	    return;
-	}
-	try
-	{
-	    bytes = Files.readAllBytes(file.toPath());
 
-	    int headerTest = bytes.length % 1024;
-	    switch (headerTest) {
-		case 0:
-		    header = 0;
-		    break;
-		case 512:
-		    header = 512;
-		    break;
-		default:
-		    header = 0;
-		    System.out.println("improperly configured ROM");
-		    break;
-	    }
-	    this.openFile();
+	    ROM.setROMDirectory(rom.getParentFile());
+		ROM.openDefaultROM();
+		ROM.openROM(rom);
+		System.out.println("ROM directory is: "+ROM.getROMDirectory());
 	}
-	catch (IOException e)
-	{
-	    e.printStackTrace();
-	}
-	fc = null;
     }
 
-    public static File chooseFile(FileChooser fc)
-    {
-	File file;
-	try
-	{
-	    fc.setInitialDirectory(new File(System.getProperty("java.class.path")).getParentFile());
-	    file = fc.showOpenDialog(null);
-	}
-	catch (Exception e)
-	{
-	    fc.setInitialDirectory(new File("."));
-	    file = fc.showOpenDialog(null);
-	}
-	if (file == null) { return null; }
-	programDirectory = file.getParentFile();
-	return file;
-    }
 
-    public void openFile()
-    {
-
-	try
-	{
-	    bytes = Files.readAllBytes(file.toPath());
-
-	    int headerTest = bytes.length % 1024;
-	    switch (headerTest) {
-		case 0:
-		    header = 0;
-		    break;
-		case 512:
-		    header = 512;
-		    break;
-		default:
-		    header = 0;
-		    System.out.println("improperly configured ROM");
-		    break;
-	    }
-	    Data.serializeDefaultDataFromDisk();
-	    Lists.setState(new DataState());
-	    Lists.InitializeLists();
-
-	    this.disableButtons(false);
-	}
-	catch (IOException e)
-	{
-	    e.printStackTrace();
-	}
-    }
 
     @FXML
     void writeDataToDisk()
     {
-	try
-	{
-	    Lists.saveModels();
-	    Excel.makeChangeLists();
-	    changeLists = new File(file.getParent() + "/ChangeLists");
-	    changeLists.mkdir();
-	    Files.write(file.toPath(), bytes, StandardOpenOption.WRITE);
-	    System.out.println("Data saved to Disk" + "\n");
-	}
-	catch (IOException e)
-	{
-	    e.printStackTrace();
-	}
+	    ROM.saveROM();
     }
 
     @FXML
@@ -256,8 +151,8 @@ public class MainMenu
 	    // Load the fxml file and create a new stage for the popup dialog.
 	    FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(filename));
 
-	    Parent root = (Parent) fxmlLoader.load();
-	    final ControllerInitilizer controller = fxmlLoader.<ControllerInitilizer> getController();
+	    Parent root = fxmlLoader.load();
+	    final ControllerInitilizer controller = fxmlLoader.getController();
 
 	    // Create the dialog Stage.
 	    Stage editorStage = new Stage();
@@ -314,35 +209,13 @@ public class MainMenu
 	}
     }
 
-    public static byte[] getBytes()
-    {
-	return bytes;
-    }
 
-    public static int getHeader()
-    {
-	return header;
-    }
-
-    public static boolean getShowEmptyValues()
-    {
-	return showEmptyValues;
-    }
-
-    public static boolean getShowMonsterDuplicates()
-    {
-	return showMonsterDuplicates;
-    }
 
     public void setMainWindow(Window mainWindow)
     {
 	this.mainWindow = mainWindow;
     }
 
-    public static File getProgramDirectory()
-    {
-	return programDirectory;
-    }
 
     public static Stage getPrimaryStage()
     {
