@@ -192,39 +192,7 @@ if(pos >0)
 		return changeListsDirectory;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	public static byte[] getBytes () {
+		return bytes;
+	}
 }

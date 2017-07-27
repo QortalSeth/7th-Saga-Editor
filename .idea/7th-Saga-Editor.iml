@@ -15,5 +15,6 @@
     <orderEntry type="library" name="poi-ooxml-3.13-20150929" level="project" />
     <orderEntry type="library" name="poi-ooxml-schemas-3.13-20150929" level="project" />
     <orderEntry type="library" name="xmlbeans-2.6.0" level="project" />
+    <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
   </component>
 </module>
