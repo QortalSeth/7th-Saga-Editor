@@ -18,285 +18,402 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.CharacterEditor">
-   <tabs>
-      <Tab fx:id="statsTab" closable="false" text="Starting Stats">
-         <content>
-            <AnchorPane fx:id="frame">
-               <children>
-                  <VBox>
-                     <children>
-                        <HBox layoutX="6.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <children>
-                              <VBox layoutX="10.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
-                                 <children>
-                                    <HBox>
-                                       <children>
-                                          <ComboBox fx:id="charactersC" focusTraversable="false" layoutX="467.0" layoutY="45.0" onAction="#setSelectedCharacter" visibleRowCount="8" />
-                                          <VBox>
-                                             <children>
-                                                <Button fx:id="charUp" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#characterDecrement" prefHeight="13.0" prefWidth="20.0">
-                                                   <graphic>
-                                                      <ImageView fitHeight="6.0" fitWidth="10.0">
-                                                         <image>
-                                                            <Image url="@../images/Triangle.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </Button>
-                                                <Button fx:id="charDown" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#characterIncrement" prefHeight="13.0" prefWidth="20.0">
-                                                   <graphic>
-                                                      <ImageView fitHeight="6.0" fitWidth="10.0" rotate="180.0">
-                                                         <image>
-                                                            <Image url="@../images/Triangle.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </Button>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <ImageView fx:id="image" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                       <VBox.margin>
-                                          <Insets left="2.0" top="2.0" />
-                                       </VBox.margin>
-                                    </ImageView>
-                                 </children>
-                              </VBox>
-                              <GridPane hgap="5.0" layoutX="153.0" layoutY="1.0">
-                                 <columnConstraints>
-                                    <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="NEVER" />
-                                    <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="NEVER" />
-                                    <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="NEVER" />
-                                    <ColumnConstraints hgrow="NEVER" />
-                                    <ColumnConstraints hgrow="NEVER" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                    <RowConstraints vgrow="NEVER" />
-                                 </rowConstraints>
-                                 <children>
-                                    <Label focusTraversable="false" layoutX="14.0" layoutY="174.0" text="HP" GridPane.rowIndex="1" />
-                                    <Label focusTraversable="false" layoutX="14.0" layoutY="217.0" text="MP" GridPane.rowIndex="2" />
-                                    <Label focusTraversable="false" layoutX="14.0" layoutY="250.0" text="Power" GridPane.rowIndex="3" />
-                                    <Label focusTraversable="false" text="Guard" GridPane.rowIndex="4" />
-                                    <Label focusTraversable="false" text="Magic" GridPane.rowIndex="5" />
-                                    <Label focusTraversable="false" text="Speed" GridPane.rowIndex="6" />
-                                    <Label text="Weapon" GridPane.rowIndex="7" />
-                                    <Label text="Armor" GridPane.rowIndex="8" />
-                                    <Label text="Accessory" GridPane.rowIndex="9" />
-                                    <Label text="Experience" GridPane.rowIndex="10" />
-                                    <Label focusTraversable="false" text="HP" GridPane.rowIndex="13" />
-                                    <Label focusTraversable="false" text="MP" GridPane.rowIndex="14" />
-                                    <Label focusTraversable="false" text="Power" GridPane.rowIndex="15" />
-                                    <Label focusTraversable="false" text="Guard" GridPane.rowIndex="16" />
-                                    <Label focusTraversable="false" text="Magic" GridPane.rowIndex="17" />
-                                    <Label focusTraversable="false" text="Speed" GridPane.rowIndex="18" />
-                                    <Label focusTraversable="false" text="Starting Stats" underline="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
-                                    <TextField fx:id="hpStart" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
-                                    <TextField fx:id="mpStart" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField fx:id="powerStart" maxHeight="-Infinity" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <TextField fx:id="guardStart" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <TextField fx:id="magicStart" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <TextField fx:id="speedStart" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                    <ComboBox fx:id="weaponStart" visibleRowCount="20" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <ComboBox fx:id="armorStart" visibleRowCount="20" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                    <ComboBox fx:id="accessoryStart" visibleRowCount="20" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                    <TextField fx:id="expStart" maxWidth="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                                    <Label focusTraversable="false" text="Growth Rates" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="12" />
-                                    <TextField fx:id="hpGrowth" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                                    <TextField fx:id="mpGrowth" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                                    <TextField fx:id="powerGrowth" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                                    <TextField fx:id="guardGrowth" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                                    <TextField fx:id="magicGrowth" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                                    <TextField fx:id="speedGrowth" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="18" />
-                                    <Label focusTraversable="false" text="Default Starting Stats" underline="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
-                                    <TextField fx:id="defaultHpStart" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <TextField fx:id="defaultMpStart" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                    <TextField fx:id="defaultPowerStart" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                    <TextField fx:id="defaultGuardStart" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                    <TextField fx:id="defaultMagicStart" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                    <TextField fx:id="defaultSpeedStart" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                    <TextField fx:id="defaultWeaponStart" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                                    <TextField fx:id="defaultArmorStart" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                                    <TextField fx:id="defaultAccessoryStart" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                                    <TextField fx:id="defaultExpStart" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                                    <Label focusTraversable="false" text="Default Growth Rates" underline="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="12" />
-                                    <TextField fx:id="defaultHpGrowth" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="13" />
-                                    <TextField fx:id="defaultMpGrowth" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-                                    <TextField fx:id="defaultPowerGrowth" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="15" />
-                                    <TextField fx:id="defaultGuardGrowth" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="16" />
-                                    <TextField fx:id="defaultMagicGrowth" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="17" />
-                                    <TextField fx:id="defaultSpeedGrowth" editable="false" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="18" />
-                                 </children>
-                              </GridPane>
-                              <GridPane hgap="10.0" layoutX="408.0" vgap="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="177.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="ALWAYS" />
-                                  <ColumnConstraints hgrow="NEVER" />
-                                    <ColumnConstraints hgrow="NEVER" />
-                                    <ColumnConstraints fillWidth="false" hgrow="NEVER" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints vgrow="SOMETIMES" />
-                                  <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                  <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label focusTraversable="false" text="Spells Learned" underline="true" GridPane.halignment="CENTER" />
-                                    <ComboBox fx:id="spell1" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="1" />
-                                    <ComboBox fx:id="spell2" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="2" />
-                                    <ComboBox fx:id="spell3" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="3" />
-                                    <ComboBox fx:id="spell4" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="4" />
-                                    <ComboBox fx:id="spell5" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="5" />
-                                    <ComboBox fx:id="spell6" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="6" />
-                                    <ComboBox fx:id="spell7" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="7" />
-                                    <ComboBox fx:id="spell8" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="8" />
-                                    <ComboBox fx:id="spell9" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="9" />
-                                    <ComboBox fx:id="spell10" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="10" />
-                                    <ComboBox fx:id="spell11" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="11" />
-                                    <ComboBox fx:id="spell12" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="12" />
-                                    <ComboBox fx:id="spell13" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="13" />
-                                    <ComboBox fx:id="spell14" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="14" />
-                                    <ComboBox fx:id="spell15" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="15" />
-                                    <ComboBox fx:id="spell16" maxWidth="1.7976931348623157E308" visibleRowCount="20" GridPane.rowIndex="16" />
-                                    <Label focusTraversable="false" text="Level" underline="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                                    <TextField fx:id="spellLevel1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField fx:id="spellLevel2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField fx:id="spellLevel3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <TextField fx:id="spellLevel4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <TextField fx:id="spellLevel5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <TextField fx:id="spellLevel6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                    <TextField fx:id="spellLevel7" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <TextField fx:id="spellLevel8" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                    <TextField fx:id="spellLevel9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                    <TextField fx:id="spellLevel10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                                    <TextField fx:id="spellLevel11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                    <TextField fx:id="spellLevel12" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                                    <TextField fx:id="spellLevel13" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                                    <TextField fx:id="spellLevel14" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                                    <TextField fx:id="spellLevel15" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                                    <TextField fx:id="spellLevel16" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers" prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                                    <Label focusTraversable="false" text="Default Spells" underline="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                                    <TextField fx:id="defaultSpell1" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <TextField fx:id="defaultSpell2" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                    <TextField fx:id="defaultSpell3" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                    <TextField fx:id="defaultSpell4" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                    <TextField fx:id="defaultSpell5" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                    <TextField fx:id="defaultSpell6" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                    <TextField fx:id="defaultSpell7" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                                    <TextField fx:id="defaultSpell8" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                                    <TextField fx:id="defaultSpell9" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                                    <TextField fx:id="defaultSpell10" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                                    <TextField fx:id="defaultSpell11" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-                                    <TextField fx:id="defaultSpell12" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-                                    <TextField fx:id="defaultSpell13" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="13" />
-                                    <TextField fx:id="defaultSpell14" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-                                    <TextField fx:id="defaultSpell15" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="15" />
-                                    <TextField fx:id="defaultSpell16" editable="false" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="16" />
-                                    <Label focusTraversable="false" text="Default Level" underline="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
-                                    <TextField fx:id="defaultSpellLevel1" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                    <TextField fx:id="defaultSpellLevel2" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                    <TextField fx:id="defaultSpellLevel3" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                    <TextField fx:id="defaultSpellLevel4" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                    <TextField fx:id="defaultSpellLevel5" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                    <TextField fx:id="defaultSpellLevel6" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                                    <TextField fx:id="defaultSpellLevel7" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                    <TextField fx:id="defaultSpellLevel9" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                                    <TextField fx:id="defaultSpellLevel8" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                                    <TextField fx:id="defaultSpellLevel10" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-                                    <TextField fx:id="defaultSpellLevel11" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-                                    <TextField fx:id="defaultSpellLevel12" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="12" />
-                                    <TextField fx:id="defaultSpellLevel13" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="13" />
-                                    <TextField fx:id="defaultSpellLevel14" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="14" />
-                                    <TextField fx:id="defaultSpellLevel15" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="15" />
-                                    <TextField fx:id="defaultSpellLevel16" editable="false" prefWidth="45.0" GridPane.columnIndex="3" GridPane.rowIndex="16" />
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortSpellsByLevel" text="Sort Spells By Level" GridPane.columnSpan="2" GridPane.rowIndex="17" />
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                  </VBox>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" right="5.0" />
-               </padding>
-            </AnchorPane>
-         </content>
-      </Tab>
-      <Tab fx:id="expTab" closable="false" text="Experience">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <VBox layoutY="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
-                     <children>
-                        <HBox maxWidth="1.7976931348623157E308" spacing="2.0">
-                           <children>
-                              <TextField fx:id="expression" layoutX="146.0" layoutY="22.0" maxWidth="-Infinity" prefWidth="300.0" HBox.hgrow="NEVER" />
-                           </children>
-                        </HBox>
+<TabPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="application.controllers.CharacterEditor">
+    <Tab fx:id="statsTab" closable="false" text="Starting Stats">
+        <AnchorPane fx:id="frame">
+            <padding>
+                <Insets bottom="5.0" right="5.0"/>
+            </padding>
+            <VBox>
+                <padding>
+                    <Insets top="5.0"/>
+                </padding>
+                <HBox layoutX="6.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <VBox layoutX="10.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                          minHeight="-Infinity" minWidth="-Infinity">
                         <HBox>
-                           <children>
-                              <Label text="Use x to represent level e.g. 3*x^2+10*x+50" />
-                           </children>
+                            <ComboBox fx:id="charactersC" focusTraversable="false" layoutX="467.0"
+                                      layoutY="45.0" onAction="#setSelectedCharacter" visibleRowCount="8"/>
+                            <VBox>
+                                <Button fx:id="charUp" focusTraversable="false" maxHeight="-Infinity"
+                                        maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                                        mnemonicParsing="false" onMouseClicked="#characterDecrement"
+                                        prefHeight="13.0" prefWidth="20.0">
+                                    <graphic>
+                                        <ImageView fitHeight="6.0" fitWidth="10.0">
+                                            <Image url="@../images/Triangle.png"/>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="charDown" focusTraversable="false" maxHeight="-Infinity"
+                                        maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                                        mnemonicParsing="false" onMouseClicked="#characterIncrement"
+                                        prefHeight="13.0" prefWidth="20.0">
+                                    <graphic>
+                                        <ImageView fitHeight="6.0" fitWidth="10.0" rotate="180.0">
+                                            <Image url="@../images/Triangle.png"/>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </VBox>
                         </HBox>
-                        <HBox layoutX="2.0" layoutY="41.0" spacing="10.0" AnchorPane.leftAnchor="0.0">
-                           <children>
-                              <Button fx:id="defaultB" mnemonicParsing="false" onMouseClicked="#restoreDefaultExpTable" text="Restore to Default" />
-                              <Button fx:id="previewB" mnemonicParsing="false" onMouseClicked="#previewChanges" text="Preview" />
-                              <Button fx:id="applyB" disable="true" mnemonicParsing="false" onMouseClicked="#applyChanges" text="Apply" />
-                           </children>
-                        </HBox>
-                        <LineChart fx:id="expChart" alternativeColumnFillVisible="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" title="Experience Over Time" VBox.vgrow="ALWAYS">
-                          <xAxis>
-                            <NumberAxis label="Level" minorTickCount="10" side="BOTTOM" tickLabelGap="1.0" tickLength="10.0" upperBound="70.0" fx:id="xAxis" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis fx:id="yAxis" label="Exp to Next Level" minorTickCount="10" side="LEFT" tickLabelGap="1.0" tickLength="10.0" upperBound="50000.0" />
-                          </yAxis>
-                        </LineChart>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-        </content>
-      </Tab>
-   </tabs>
+                        <ImageView fx:id="image" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <VBox.margin>
+                                <Insets left="2.0" top="2.0"/>
+                            </VBox.margin>
+                        </ImageView>
+                    </VBox>
+                    <GridPane hgap="5.0" layoutX="153.0" layoutY="1.0">
+                        <columnConstraints>
+                            <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="NEVER"/>
+                            <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="NEVER"/>
+                            <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="NEVER"/>
+                            <ColumnConstraints hgrow="NEVER"/>
+                            <ColumnConstraints hgrow="NEVER"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0"
+                                            vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                            <RowConstraints vgrow="NEVER"/>
+                        </rowConstraints>
+                        <Label layoutX="14.0" layoutY="174.0" text="HP" GridPane.rowIndex="1"/>
+                        <Label layoutX="14.0" layoutY="217.0" text="MP" GridPane.rowIndex="2"/>
+                        <Label layoutX="14.0" layoutY="250.0" text="Power" GridPane.rowIndex="3"/>
+                        <Label text="Guard" GridPane.rowIndex="4"/>
+                        <Label text="Magic" GridPane.rowIndex="5"/>
+                        <Label text="Speed" GridPane.rowIndex="6"/>
+                        <Label text="Weapon" GridPane.rowIndex="7"/>
+                        <Label text="Armor" GridPane.rowIndex="8"/>
+                        <Label text="Accessory" GridPane.rowIndex="9"/>
+                        <Label text="Experience" GridPane.rowIndex="10"/>
+                        <Label text="HP" GridPane.rowIndex="13"/>
+                        <Label text="MP" GridPane.rowIndex="14"/>
+                        <Label text="Power" GridPane.rowIndex="15"/>
+                        <Label text="Guard" GridPane.rowIndex="16"/>
+                        <Label text="Magic" GridPane.rowIndex="17"/>
+                        <Label text="Speed" GridPane.rowIndex="18"/>
+                        <Label text="Starting Stats" underline="true" GridPane.columnIndex="1"
+                               GridPane.halignment="LEFT"/>
+                        <TextField fx:id="hpStart" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER"
+                                   GridPane.rowIndex="1" GridPane.vgrow="NEVER"/>
+                        <TextField fx:id="mpStart" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <TextField fx:id="powerStart" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="3"/>
+                        <TextField fx:id="guardStart" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        <TextField fx:id="magicStart" maxWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        <TextField fx:id="speedStart" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                        <ComboBox fx:id="weaponStart" visibleRowCount="20" GridPane.columnIndex="1"
+                                  GridPane.rowIndex="7"/>
+                        <ComboBox fx:id="armorStart" visibleRowCount="20" GridPane.columnIndex="1"
+                                  GridPane.rowIndex="8"/>
+                        <ComboBox fx:id="accessoryStart" visibleRowCount="20" GridPane.columnIndex="1"
+                                  GridPane.rowIndex="9"/>
+                        <TextField fx:id="expStart" maxWidth="-Infinity" minWidth="-Infinity"
+                                   onKeyTyped="#removeNonNumbers" prefWidth="50.0" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="10"/>
+                        <Label text="Growth Rates" underline="true" GridPane.columnIndex="1"
+                               GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="12"/>
+                        <TextField fx:id="hpGrowth" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="13"/>
+                        <TextField fx:id="mpGrowth" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="14"/>
+                        <TextField fx:id="powerGrowth" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="15"/>
+                        <TextField fx:id="guardGrowth" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="16"/>
+                        <TextField fx:id="magicGrowth" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="17"/>
+                        <TextField fx:id="speedGrowth" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="18"/>
+                        <Label text="Default Starting Stats" underline="true" GridPane.columnIndex="2"
+                               GridPane.halignment="LEFT"/>
+                        <TextField fx:id="defaultHpStart" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        <TextField fx:id="defaultMpStart" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                        <TextField fx:id="defaultPowerStart" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                        <TextField fx:id="defaultGuardStart" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                        <TextField fx:id="defaultMagicStart" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                        <TextField fx:id="defaultSpeedStart" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                        <TextField fx:id="defaultWeaponStart" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+                        <TextField fx:id="defaultArmorStart" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="8"/>
+                        <TextField fx:id="defaultAccessoryStart" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="9"/>
+                        <TextField fx:id="defaultExpStart" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="10"/>
+                        <Label text="Default Growth Rates" underline="true" GridPane.columnIndex="2"
+                               GridPane.halignment="LEFT" GridPane.rowIndex="12"/>
+                        <TextField fx:id="defaultHpGrowth" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="13"/>
+                        <TextField fx:id="defaultMpGrowth" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="14"/>
+                        <TextField fx:id="defaultPowerGrowth" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="15"/>
+                        <TextField fx:id="defaultGuardGrowth" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="16"/>
+                        <TextField fx:id="defaultMagicGrowth" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="17"/>
+                        <TextField fx:id="defaultSpeedGrowth" editable="false" prefWidth="50.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="18"/>
+                    </GridPane>
+                    <GridPane hgap="10.0" layoutX="408.0" vgap="3.0" AnchorPane.bottomAnchor="0.0"
+                              AnchorPane.rightAnchor="177.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="NEVER"/>
+                            <ColumnConstraints hgrow="NEVER"/>
+                            <ColumnConstraints fillWidth="false" hgrow="NEVER"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints vgrow="SOMETIMES"/>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        </rowConstraints>
+                        <Label text="Spells Learned" underline="true" GridPane.halignment="CENTER"/>
+                        <ComboBox fx:id="spell1" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="1"/>
+                        <ComboBox fx:id="spell2" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="2"/>
+                        <ComboBox fx:id="spell3" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="3"/>
+                        <ComboBox fx:id="spell4" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="4"/>
+                        <ComboBox fx:id="spell5" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="5"/>
+                        <ComboBox fx:id="spell6" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="6"/>
+                        <ComboBox fx:id="spell7" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="7"/>
+                        <ComboBox fx:id="spell8" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="8"/>
+                        <ComboBox fx:id="spell9" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="9"/>
+                        <ComboBox fx:id="spell10" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="10"/>
+                        <ComboBox fx:id="spell11" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="11"/>
+                        <ComboBox fx:id="spell12" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="12"/>
+                        <ComboBox fx:id="spell13" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="13"/>
+                        <ComboBox fx:id="spell14" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="14"/>
+                        <ComboBox fx:id="spell15" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="15"/>
+                        <ComboBox fx:id="spell16" maxWidth="1.7976931348623157E308" visibleRowCount="20"
+                                  GridPane.rowIndex="16"/>
+                        <Label text="Level" underline="true" GridPane.columnIndex="1"
+                               GridPane.halignment="CENTER"/>
+                        <TextField fx:id="spellLevel1" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <TextField fx:id="spellLevel2" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <TextField fx:id="spellLevel3" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <TextField fx:id="spellLevel4" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        <TextField fx:id="spellLevel5" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        <TextField fx:id="spellLevel6" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                        <TextField fx:id="spellLevel7" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                        <TextField fx:id="spellLevel8" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                        <TextField fx:id="spellLevel9" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+                        <TextField fx:id="spellLevel10" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
+                        <TextField fx:id="spellLevel11" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="11"/>
+                        <TextField fx:id="spellLevel12" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="12"/>
+                        <TextField fx:id="spellLevel13" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="13"/>
+                        <TextField fx:id="spellLevel14" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="14"/>
+                        <TextField fx:id="spellLevel15" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="15"/>
+                        <TextField fx:id="spellLevel16" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#removeNonNumbers"
+                                   prefWidth="45.0" GridPane.columnIndex="1" GridPane.rowIndex="16"/>
+                        <Label text="Default Spells" underline="true" GridPane.columnIndex="2"
+                               GridPane.halignment="CENTER"/>
+                        <TextField fx:id="defaultSpell1" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        <TextField fx:id="defaultSpell2" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                        <TextField fx:id="defaultSpell3" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                        <TextField fx:id="defaultSpell4" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                        <TextField fx:id="defaultSpell5" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                        <TextField fx:id="defaultSpell6" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                        <TextField fx:id="defaultSpell7" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+                        <TextField fx:id="defaultSpell8" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="8"/>
+                        <TextField fx:id="defaultSpell9" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="9"/>
+                        <TextField fx:id="defaultSpell10" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="10"/>
+                        <TextField fx:id="defaultSpell11" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="11"/>
+                        <TextField fx:id="defaultSpell12" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="12"/>
+                        <TextField fx:id="defaultSpell13" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="13"/>
+                        <TextField fx:id="defaultSpell14" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="14"/>
+                        <TextField fx:id="defaultSpell15" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="15"/>
+                        <TextField fx:id="defaultSpell16" editable="false" prefWidth="100.0"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="16"/>
+                        <Label text="Default Level" underline="true" GridPane.columnIndex="3"
+                               GridPane.halignment="CENTER"/>
+                        <TextField fx:id="defaultSpellLevel1" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                        <TextField fx:id="defaultSpellLevel2" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                        <TextField fx:id="defaultSpellLevel3" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                        <TextField fx:id="defaultSpellLevel4" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+                        <TextField fx:id="defaultSpellLevel5" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+                        <TextField fx:id="defaultSpellLevel6" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+                        <TextField fx:id="defaultSpellLevel7" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+                        <TextField fx:id="defaultSpellLevel9" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="9"/>
+                        <TextField fx:id="defaultSpellLevel8" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="8"/>
+                        <TextField fx:id="defaultSpellLevel10" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="10"/>
+                        <TextField fx:id="defaultSpellLevel11" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="11"/>
+                        <TextField fx:id="defaultSpellLevel12" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="12"/>
+                        <TextField fx:id="defaultSpellLevel13" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="13"/>
+                        <TextField fx:id="defaultSpellLevel14" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="14"/>
+                        <TextField fx:id="defaultSpellLevel15" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="15"/>
+                        <TextField fx:id="defaultSpellLevel16" editable="false" prefWidth="45.0"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="16"/>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                mnemonicParsing="false" onMouseClicked="#sortSpellsByLevel"
+                                text="Sort Spells By Level" GridPane.columnSpan="2" GridPane.rowIndex="17"/>
+                    </GridPane>
+                </HBox>
+            </VBox>
+        </AnchorPane>
+    </Tab>
+    <Tab fx:id="expTab" closable="false" text="Experience">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <VBox layoutY="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                  spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                <HBox maxWidth="1.7976931348623157E308" spacing="2.0">
+                    <TextField fx:id="expression" layoutX="146.0" layoutY="22.0" maxWidth="-Infinity"
+                               prefWidth="300.0" HBox.hgrow="NEVER"/>
+                </HBox>
+                <HBox>
+                    <Label text="Use x to represent level e.g. 3x^2+10x+50"/>
+                </HBox>
+                <HBox layoutX="2.0" layoutY="41.0" spacing="10.0" AnchorPane.leftAnchor="0.0">
+                    <Button fx:id="defaultB" mnemonicParsing="false" onMouseClicked="#restoreDefaultExpTable"
+                            text="Restore to Default"/>
+                    <Button fx:id="previewB" mnemonicParsing="false" onMouseClicked="#previewChanges"
+                            text="Preview"/>
+                    <Button fx:id="applyB" disable="true" mnemonicParsing="false"
+                            onMouseClicked="#applyChanges" text="Apply"/>
+                </HBox>
+                <LineChart fx:id="expChart" alternativeColumnFillVisible="true"
+                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                           title="Experience Over Time" VBox.vgrow="ALWAYS">
+                    <xAxis>
+                        <NumberAxis label="Level" minorTickCount="10" side="BOTTOM" tickLabelGap="1.0"
+                                    tickLength="10.0" upperBound="70.0" fx:id="xAxis"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis fx:id="yAxis" label="Exp to Next Level" minorTickCount="10" side="LEFT"
+                                    tickLabelGap="1.0" tickLength="10.0" upperBound="50000.0"/>
+                    </yAxis>
+                </LineChart>
+            </VBox>
+        </AnchorPane>
+    </Tab>
 </TabPane>

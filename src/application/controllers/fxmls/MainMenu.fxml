@@ -10,104 +10,104 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="mainMenuPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MainMenu">
-   <children>
-      <GridPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.60"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MainMenu">
+    <GridPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="ALWAYS" />
-          <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints hgrow="ALWAYS" />
+          <ColumnConstraints hgrow="ALWAYS"/>
+          <ColumnConstraints hgrow="ALWAYS"/>
+          <ColumnConstraints hgrow="ALWAYS"/>
+          <ColumnConstraints hgrow="ALWAYS"/>
+          <ColumnConstraints hgrow="ALWAYS"/>
+          <ColumnConstraints hgrow="ALWAYS"/>
+          <ColumnConstraints hgrow="ALWAYS"/>
+          <ColumnConstraints hgrow="ALWAYS"/>
+          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints vgrow="NEVER" />
+          <RowConstraints vgrow="NEVER"/>
         </rowConstraints>
-         <children>
-            <Button fx:id="open" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#getFileToOpen" text="Open" textOverrun="CLIP">
-               <graphic>
-                  <ImageView>
-                     <image>
-                        <Image url="@../images/Open%20Icon2.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="save" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#writeDataToDisk" text="Save" textOverrun="CLIP" GridPane.columnIndex="1">
-               <graphic>
-                  <ImageView>
-                     <image>
-                        <Image url="@../images/save%20icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="character" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#characterEditor" text="Character" textOverrun="CLIP" GridPane.columnIndex="2">
-               <graphic>
-                  <ImageView>
-                     <image>
-                        <Image url="@../images/Lemele.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="spell" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#spellEditor" text="Spell" textOverrun="CLIP" GridPane.columnIndex="4">
-               <graphic>
-                  <ImageView>
-                     <image>
-                        <Image url="@../images/Laser%203.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="equipment" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#equipmentEditor" text="Equipment" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="5">
-               <graphic>
-                  <ImageView>
-                     <image>
-                        <Image url="@../images/Weapon%20and%20Armor%20Shop%20Characters%202.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="shop" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#shopEditor" text="Shop" textOverrun="CLIP" GridPane.columnIndex="6">
-               <graphic>
-                  <ImageView>
-                     <image>
-                        <Image url="@../images/Item%20Shop%20Character.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="monster" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#monsterEditor" text="Monster" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="7">
-               <graphic>
-                  <ImageView fitHeight="32.0">
-                     <image>
-                        <Image url="@../images/Brain.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="apprentice" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#apprenticeEditor" text="Apprentice" textOverrun="CLIP" GridPane.columnIndex="3">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Lejes.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </GridPane>
-      <ImageView fx:id="sceneryImage" fitHeight="224.0" fitWidth="536.0" layoutY="61.0" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
-         <image>
-            <Image url="@../images/Scenery%20Icon.png" />
-         </image>
-         <viewport>
-            <Rectangle2D />
-         </viewport>
-      </ImageView>
-   </children>
+        <Button fx:id="open" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#getFileToOpen" text="Open"
+                textOverrun="CLIP">
+          <graphic>
+              <ImageView>
+                  <Image url="@../images/Open_Icon2.png"/>
+              </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="save" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#writeDataToDisk" text="Save"
+                textOverrun="CLIP" GridPane.columnIndex="1">
+          <graphic>
+              <ImageView>
+                  <Image url="@../images/save_icon.png"/>
+              </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="character" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#characterEditor"
+                text="Character" textOverrun="CLIP" GridPane.columnIndex="2">
+          <graphic>
+              <ImageView>
+                  <Image url="@../images/Lemele.png"/>
+              </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="spell" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#spellEditor" text="Spell"
+                textOverrun="CLIP" GridPane.columnIndex="4">
+          <graphic>
+              <ImageView>
+                  <Image url="@../images/Laser_3.png"/>
+              </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="equipment" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#equipmentEditor"
+                text="Equipment" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="5">
+          <graphic>
+              <ImageView>
+                  <Image url="@../images/Weapon_and_Armor_Shop_Characters_2.png"/>
+              </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="shop" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#shopEditor" text="Shop"
+                textOverrun="CLIP" GridPane.columnIndex="6">
+          <graphic>
+              <ImageView>
+                  <Image url="@../images/Item_Shop_Character.png"/>
+              </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="monster" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#monsterEditor" text="Monster"
+                textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="7">
+          <graphic>
+              <ImageView fitHeight="32.0">
+                  <Image url="@../images/Brain.png"/>
+              </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="apprentice" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#apprenticeEditor"
+                text="Apprentice" textOverrun="CLIP" GridPane.columnIndex="3">
+          <graphic>
+              <ImageView pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/Lejes.png"/>
+              </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="text" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                mnemonicParsing="false" onMouseClicked="#textEditor" text="Text" GridPane.columnIndex="8"/>
+    </GridPane>
+    <ImageView fx:id="sceneryImage" fitHeight="224.0" fitWidth="536.0" layoutY="61.0" pickOnBounds="true"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" GridPane.hgrow="ALWAYS"
+               GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
+        <viewport>
+            <Rectangle2D/>
+        </viewport>
+        <Image url="@../images/Scenery_Icon.png"/>
+    </ImageView>
 </AnchorPane>

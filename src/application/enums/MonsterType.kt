@@ -1,0 +1,123 @@
+package application.enums
+
+import application.models.Monster
+
+enum class MonsterType
+{
+	EMPTY,
+	HERMIT, WYVERN, DEMON, CHIMERA, STATUE, ROMUS,
+	UNDEAD, PISON, ANDROID, MANROT, B_DEMON, ORC, TRICK, R_PISON,
+	MANTA, BRAIN, DESPAIR, COCCOON, TITAN, S_WITCH, SPIDEK, R_TRICK,
+	DEFEAT, R_DEMON, SAGE, MUTANT, PLATER, S_BRAIN, K_TRICK, DRAGON,
+	SOIDIEK, B_NIGHT, FLAME, GRIFFIN, WYROCK, DOROS, SERPENT,
+	SWORD, DOOM, P_MOON, N_BRAIN, M_PISON,
+	UNDED, K_MOON, MONMO, CHIMERE, V_NIGHT, GARISO,
+	GHOUL, DERGUN, SERPANT, F_WITCH, SPIRIT,
+	DOGUN, REAPER, FOMA,
+	SERPINT, CRAB, K_NIGHT, UNDEED, S_DEMON, GORON, GRIFFAN,
+	FALOCK, F_NIGHT, D_NIGHT, GORSIA,
+
+
+	TALL, SASEE, DESRICH, KADOOM, HEYSIR, BLASU, LIHALL, DEBAG, D_TRICK,
+	KAMIL, OLVAN, ESUNA, WILME, LUX, VALSU, LEJES, MISC;
+
+	companion object
+	{
+
+
+		fun getChronOrder(monster: Monster): MonsterType
+				= when (monster.gameIndex)
+		{
+			0x00 -> EMPTY
+			0x02 -> DEMON
+			0x03 -> TRICK
+			0x04 -> TITAN
+			0x05 -> COCCOON
+			0x06 -> SOIDIEK
+			0x07 -> SPIDEK
+			0x08 -> MUTANT
+			0x09 -> DEFEAT
+			0x0A -> ORC
+			0x0B -> TALL
+			0x0C -> SASEE
+			0x0D -> DESPAIR
+			0x0E -> DOOM
+			0x0F -> REAPER
+			0x10 -> DESRICH
+			0x11 -> MANROT
+			0x12 -> KADOOM
+			0x13 -> HEYSIR
+			0x14 -> BLASU
+			0x15 -> BRAIN
+			0x16 -> GHOUL
+			0x17 -> SPIRIT
+			0x18 -> CRAB
+			0x19 -> GRIFFIN
+			0x1A -> ANDROID
+			0x1B -> SAGE
+			0x1C -> WYROCK
+			0x1D -> FLAME
+			0x1E -> PISON
+			0x1F -> R_PISON
+			0x20 -> M_PISON
+			0x21 -> ROMUS
+			0x22 -> DOROS
+			0x23 -> SERPENT
+			0x24 -> HERMIT
+			0x26 -> GARISO
+			0x27 -> FOMA
+			0x28 -> GORSIA
+			0x29 -> WYVERN
+			0x2A -> UNDEAD
+			0x2B -> LIHALL
+			0x2C -> MANTA
+			0x2D -> S_WITCH
+			0x2E -> B_NIGHT
+			0x2F -> STATUE
+			0x30 -> CHIMERA
+			0x31 -> SWORD
+			0x32 -> DRAGON
+			0x33 -> DOROS
+			0x34 -> GARISO
+			0x35 -> GORSIA
+			0x36 -> GORSIA
+			0x37 -> GORSIA
+			0x3D -> PLATER
+			0x3E -> FALOCK
+			0x3F -> DEBAG
+			0x40 -> B_DEMON
+			0x41 -> R_DEMON
+			0x42 -> S_DEMON
+			0x43 -> R_TRICK
+			0x44 -> K_TRICK
+			0x45 -> D_TRICK
+			0x46 -> SERPANT
+			0x47 -> SERPINT
+			0x48 -> S_BRAIN
+			0x49 -> N_BRAIN
+			0x4A -> GORON
+			0x4C -> UNDED
+			0x4D -> UNDEED
+			0x4E -> K_MOON
+			0x4F -> F_NIGHT
+			0x50 -> P_MOON
+			0x51 -> V_NIGHT
+			0x52 -> K_NIGHT
+			0x53 -> D_NIGHT
+			0x54 -> F_WITCH
+			0x55 -> CHIMERE
+			0x56 -> DERGUN
+			0x57 -> DOGUN
+			0x58 -> MONMO
+			0x59 -> GRIFFAN
+			0x5B -> KAMIL
+			0x5C -> OLVAN
+			0x5D -> ESUNA
+			0x5E -> WILME
+			0x5F -> LUX
+			0x60 -> VALSU
+			0x61 -> LEJES
+			else -> MISC
+		}
+	}
+}
