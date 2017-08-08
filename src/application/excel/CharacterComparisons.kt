@@ -19,7 +19,7 @@ class CharacterComparisons(fileName: String) : Excel(fileName)
 
 					val spells = Spells()
 					spells.addUsefulModels(Lists.spells, false)
-					spells.sortSpellsByType()
+					spells.chronologicalIndexSort()
 
 					// this loop creates a row for each spell
 					spells.models.forEach {

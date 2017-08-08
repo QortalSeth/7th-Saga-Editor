@@ -46,28 +46,28 @@ class Shop : Model, Serializable
 	fun sortWeaponsAscending()
 	{
 		val weapons = Weapons(weaponCodes)
-		weapons.sortByAscendingType()
+		weapons.sortByAscendingCost()
 		weaponCodes = weapons.toIntegers()
 	}
 
 	fun sortWeaponsDescending()
 	{
 		val weapons = Weapons(weaponCodes)
-		weapons.sortByDescendingType()
+		weapons.sortByDescendingCost()
 		weaponCodes = weapons.toIntegers()
 	}
 
 	fun sortArmorsAscending()
 	{
 		val armors = Armors(armorCodes)
-		armors.sortByAscendingType()
+		armors.sortByAscendingCost()
 		armorCodes = armors.toIntegers()
 	}
 
 	fun sortArmorsDescending()
 	{
 		val armors = Armors(armorCodes)
-		armors.sortByDescendingType()
+		armors.sortByDescendingCost()
 		armorCodes = armors.toIntegers()
 	}
 

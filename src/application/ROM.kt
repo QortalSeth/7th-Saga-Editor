@@ -60,6 +60,7 @@ object ROM
 	{
 		rom = file
 		changeListsDirectory = File(romDirectory.toString() + "/ChangeLists/" + removeFileExtension(rom))
+		println(rom.canonicalPath)
 		try
 		{
 			bytes = Files.readAllBytes(rom.toPath())

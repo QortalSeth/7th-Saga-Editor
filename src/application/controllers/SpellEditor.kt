@@ -76,6 +76,7 @@ class SpellEditor : ControllerInitilizer
 
 	@FXML fun initialize()
 	{
+		spells.chronologicalIndexSort()
 		spellsC.items = spells.models
 		addChangeListenerToTextFields()
 		initializeComboboxes()

@@ -28,7 +28,7 @@ class ShopEditor : ControllerInitilizer
 	lateinit var weaponsC: MutableList<ComboBox<Weapon>>
 	lateinit var armorsC: MutableList<ComboBox<Armor>>
 	lateinit var defaultItemsT: MutableList<TextField>
-	lateinit var defaultWeaponsT: MutableList<TextField>
+	lateinit var DweaponsT: MutableList<TextField>
 	lateinit var defaultArmorsT: MutableList<TextField>
 	lateinit var weaponAttacksT: MutableList<TextField>
 	lateinit var DweaponAttacksT: MutableList<TextField>
@@ -43,7 +43,7 @@ class ShopEditor : ControllerInitilizer
 		weaponsC = mutableListOf(weapon1C, weapon2C, weapon3C, weapon4C, weapon5C)
 		armorsC = mutableListOf(armor1C, armor2C, armor3C, armor4C, armor5C, armor6C, armor7C, armor8C)
 		defaultItemsT = mutableListOf(defaultItem1T, defaultItem2T, defaultItem3T, defaultItem4T, defaultItem5T, defaultItem6T, defaultItem7T, defaultItem8T, defaultItem9T)
-		defaultWeaponsT = mutableListOf(defaultWeapon1T, defaultWeapon2T, defaultWeapon3T, defaultWeapon4T, defaultWeapon5T)
+		DweaponsT = mutableListOf(defaultWeapon1T, defaultWeapon2T, defaultWeapon3T, defaultWeapon4T, defaultWeapon5T)
 		defaultArmorsT = mutableListOf(defaultArmor1T, defaultArmor2T, defaultArmor3T, defaultArmor4T, defaultArmor5T, defaultArmor6T, defaultArmor7T, defaultArmor8T)
 		weaponAttacksT = mutableListOf(weaponPower1, weaponPower2, weaponPower3, weaponPower4, weaponPower5)
 		DweaponAttacksT = mutableListOf(DweaponPower1, DweaponPower2, DweaponPower3, DweaponPower4, DweaponPower5)
@@ -58,6 +58,7 @@ class ShopEditor : ControllerInitilizer
 			chronologicalSort()
 		}
 		shopsC.items = shops.models
+		armors.addEmptyModel(armors.dModels)
 		shopsC.selectionModel.select(startShop)
 
 		var i = shopUp.graphic as ImageView
@@ -75,15 +76,15 @@ class ShopEditor : ControllerInitilizer
 		updateController()
 	}
 
-	fun updateController()
+	@FXML fun updateController()
 	{
-		var shop: Shop? = shopsC.selectionModel.selectedItem
+		var shop = shopsC.selectionModel.selectedItem
 		if (shop == null) shop = previouslySelectedShop
 		previouslySelectedShop = shop
 
-		val defaultShop = shops.getDModel(shop!!.gameIndex)
+		val Dshop = shops.getDModel(shop!!.gameIndex)
 		innCostT.text = toString(shop.innCost)
-		defaultInnCostT.text = toString(defaultShop.innCost)
+		defaultInnCostT.text = toString(Dshop.innCost)
 
 		shop.itemCodes.withIndex()
 				// fill item shop values
@@ -91,37 +92,37 @@ class ShopEditor : ControllerInitilizer
 					val listIndex = items.getIndex(itemCode)
 					itemsC[index].selectionModel.select(listIndex)
 
-					defaultItemsT[index].text = items.getDName(defaultShop.itemCodes[index])
+					defaultItemsT[index].text = items.getDName(Dshop.itemCodes[index])
 				}
 
 
 		shop.weaponCodes.withIndex()
 				// fill weapon shop values
 				.forEach { (index, weaponCode) ->
-					// System.out.println("weapon code is: " + Integer.toHexString(weaponCode));
 					val listIndex = weapons.getIndex(weaponCode)
-					// System.out.println("ListIndex is: " + listIndex);
 					weaponsC[index].selectionModel.select(listIndex)
 
 					val weapon = weapons.models[listIndex]
-					weaponAttacksT[index].text = toString(weapon.power)
+					weaponAttacksT[index].text = toString(weapon.cost)
 
-					val Dweapon = weapons.getDModel(weapon)
-					DweaponAttacksT[index].text = toString(Dweapon.power)
-					defaultWeaponsT[index].text = Dweapon.toString()
+					val dWeaponIndex = Dshop.weaponCodes[index]
+					val Dweapon = weapons.getDItem(dWeaponIndex)
+					DweaponAttacksT[index].text = toString(Dweapon.cost)
+					DweaponsT[index].text = Dweapon.toString()
 				}
-
+		println("armor codes: ${shop.armorCodes}")
 		shop.armorCodes.withIndex()
 				// fill armor shop values
 				.forEach { (index, armorCode) ->
 					val listIndex = armors.getIndex(armorCode)
 					armorsC[index].selectionModel.select(listIndex)
 
-					val armor = armorsC[index].selectionModel.selectedItem
-					armorDefensesT[index].text = toString(armor.power)
+					val armor = armors.models[listIndex]
+					armorDefensesT[index].text = toString(armor.cost)
 
-					val Darmor = armors.getDModel(armor)
-					DarmorDefensesT[index].text = toString(Darmor.power)
+					val DarmorIndex = Dshop.armorCodes[index]
+					val Darmor = armors.getDItem(DarmorIndex)
+					DarmorDefensesT[index].text = toString(Darmor.cost)
 					defaultArmorsT[index].text = Darmor.toString()
 				}
 	}

@@ -1,12 +1,16 @@
 package application.models
 
 import application.ROM
+import application.enums.SpellType
 import application.staticClasses.TextReader
 import java.io.Serializable
 
 class Spell : Model, Serializable
 {
 	constructor(index: Int) : super(index)
+	{
+		chronologicalIndex = SpellType.getChronOrder(this).ordinal
+	}
 
 	var power: Int = 0
 	var target: Int = 0

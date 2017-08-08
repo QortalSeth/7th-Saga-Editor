@@ -5,7 +5,7 @@ import application.models.Equipment
 enum class EquipmentType
 {
 
-	SWORD, AXE, SABER, KNIFE, ROD,
+	SWORD, AXE, SABER, ROD, KNIFE,
 	STAFF, HAND, MAIL, ARMOR, ROBE,
 	CLOAK, SHIELD, CROWN, AMULET, MASK,
 	HELMET, MISC, EMPTY;

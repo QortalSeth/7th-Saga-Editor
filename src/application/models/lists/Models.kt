@@ -62,7 +62,7 @@ abstract class Models<T : Model> : Serializable
 	fun sortList(c: Comparator<T>)
 	{
 		models.sortWith(c)
-		dModels.sortWith(c)
+		//dModels.sortWith(c)
 	}
 
 	fun gameIndexSort() = sortList(Comparator<T> { m1, m2 -> m1.gameIndex - m2.gameIndex })
@@ -84,7 +84,7 @@ abstract class Models<T : Model> : Serializable
 
 	fun getDModel(gameIndex: Int): T
 	{
-		models.forEach { if (it.gameIndex == gameIndex) return it }
+		dModels.forEach { if (it.gameIndex == gameIndex) return it }
 		TODO()
 		return dModels.first()
 	}
