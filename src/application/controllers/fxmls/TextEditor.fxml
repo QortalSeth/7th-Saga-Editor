@@ -18,7 +18,7 @@
             <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="220.0" />
          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="10.0" />
          <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" prefWidth="110.0" />
-         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="200.0" />
+         <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" prefWidth="200.0" />
         </columnConstraints>
         <rowConstraints>
          <RowConstraints vgrow="NEVER" />
@@ -42,7 +42,7 @@
       <Label text="Text Reader" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
       <Label text="Text Writer" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
       <Label text="**Text to Write:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <TextArea fx:id="textWriteT" prefHeight="200.0" prefWidth="150.0" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="1" />
       <GridPane GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
         <columnConstraints>
           <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
@@ -58,16 +58,15 @@
             <Label text="*New Pointer Value:" GridPane.rowIndex="2" />
             <Label text="*Pointer to Overwrite, if any:" GridPane.rowIndex="1" />
             <Label alignment="CENTER_RIGHT" text="*Location to Write to: " textAlignment="RIGHT" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Write Bytes to Location" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TextField fx:id="textLocationT" onKeyTyped="#removeNonHexNumbers" GridPane.columnIndex="1" />
+            <TextField fx:id="textPointerLocationT" onKeyTyped="#removeNonHexNumbers" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="textPointerValueT" onKeyTyped="#removeNonHexNumbers" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#writeText" text="Write Bytes to Location" GridPane.columnSpan="2" GridPane.rowIndex="3" />
          </children>
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </GridPane>
-      <Label text="* Value must be in Hex" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
       <GridPane GridPane.columnSpan="2147483647" GridPane.rowIndex="5" GridPane.rowSpan="2147483647">
         <columnConstraints>
@@ -90,6 +89,11 @@
             <Label text="Special Characters:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Label text="**  /END is automatically applied at end of Text" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3">
+         <children>
+            <Label text="* Value must be in Hex" />
+            <Label text="**  /END is automatically applied at end of Text" />
+         </children>
+      </VBox>
     </GridPane>
 </AnchorPane>

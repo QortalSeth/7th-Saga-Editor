@@ -120,11 +120,11 @@
             <TextField fx:id="defaultItem7T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             <TextField fx:id="defaultItem8T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
             <TextField fx:id="defaultItem9T" editable="false" focusTraversable="false" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-            <ComboBox fx:id="weapon1C" onAction="#updateController" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <ComboBox fx:id="weapon2C" onAction="#updateController" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <ComboBox fx:id="weapon3C" onAction="#updateController" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <ComboBox fx:id="weapon4C" onAction="#updateController" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <ComboBox fx:id="weapon5C" onAction="#updateController" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <ComboBox fx:id="weapon1C" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <ComboBox fx:id="weapon2C" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <ComboBox fx:id="weapon3C" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <ComboBox fx:id="weapon4C" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <ComboBox fx:id="weapon5C" GridPane.columnIndex="2" GridPane.rowIndex="8" />
             <TextField fx:id="weaponPower1" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
             <TextField fx:id="weaponPower2" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
             <TextField fx:id="weaponPower3" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
@@ -140,14 +140,14 @@
             <TextField fx:id="DweaponPower3" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
             <TextField fx:id="DweaponPower4" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
             <TextField fx:id="DweaponPower5" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-            <ComboBox fx:id="armor1C" onAction="#updateController" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-            <ComboBox fx:id="armor2C" onAction="#updateController" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-            <ComboBox fx:id="armor3C" onAction="#updateController" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-            <ComboBox fx:id="armor4C" onAction="#updateController" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-            <ComboBox fx:id="armor5C" onAction="#updateController" GridPane.columnIndex="6" GridPane.rowIndex="8" />
-            <ComboBox fx:id="armor6C" onAction="#updateController" GridPane.columnIndex="6" GridPane.rowIndex="9" />
-            <ComboBox fx:id="armor7C" onAction="#updateController" GridPane.columnIndex="6" GridPane.rowIndex="10" />
-            <ComboBox fx:id="armor8C" onAction="#updateController" GridPane.columnIndex="6" GridPane.rowIndex="11" />
+            <ComboBox fx:id="armor1C" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+            <ComboBox fx:id="armor2C" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+            <ComboBox fx:id="armor3C" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+            <ComboBox fx:id="armor4C" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+            <ComboBox fx:id="armor5C" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+            <ComboBox fx:id="armor6C" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+            <ComboBox fx:id="armor7C" GridPane.columnIndex="6" GridPane.rowIndex="10" />
+            <ComboBox fx:id="armor8C" GridPane.columnIndex="6" GridPane.rowIndex="11" />
             <TextField fx:id="armorPower1" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
             <TextField fx:id="armorPower2" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
             <TextField fx:id="armorPower3" editable="false" focusTraversable="false" prefWidth="50.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />

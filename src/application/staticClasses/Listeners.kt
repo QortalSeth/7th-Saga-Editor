@@ -4,8 +4,9 @@ import javafx.beans.property.ReadOnlyBooleanProperty
 import javafx.beans.value.ChangeListener
 import javafx.scene.control.TextField
 import javafx.scene.input.KeyEvent
-import java.lang.Integer.*
+import java.lang.Integer.toString
 import java.math.BigInteger
+
 
 object Listeners
 {
@@ -21,8 +22,22 @@ object Listeners
 				return@forEach
 			}
 		}
-
 		if (!Character.isDigit(keyTyped) && !exception) event.consume()
+	}
+
+	fun removeNonHexNumbers(event: KeyEvent, exceptions: List<Char>?)
+	{
+		val keyTyped = event.character[0].toUpperCase()
+		var exception = false
+		exceptions?.forEach {
+			if (keyTyped == it)
+			{
+				exception = true
+				return@forEach
+			}
+		}
+
+		if (!Character.isDigit(keyTyped) && keyTyped !in 'A'..'F' && !exception) event.consume()
 	}
 
 	fun textFieldFocusListener(maxValue: Int): ChangeListener<Boolean>

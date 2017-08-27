@@ -248,7 +248,8 @@ class MonsterEditor : ControllerInitilizer
 		iceResT.focusedProperty().addListener(Listeners.textFieldFocusListener(100))
 		vacuumResT.focusedProperty().addListener(Listeners.textFieldFocusListener(100))
 		debuffResT.focusedProperty().addListener(Listeners.textFieldFocusListener(100))
-		goldT.focusedProperty().addListener(// limit gold given from battle to prevent exp overflow
+		// limit gold given from battle to prevent exp overflow
+		goldT.focusedProperty().addListener(
 				ChangeListener<Boolean> { observable, oldValue, newValue ->
 					if (!newValue)
 					{

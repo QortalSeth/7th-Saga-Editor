@@ -1,15 +1,11 @@
 package application.staticClasses
 
-import java.util.*
-
 object TextWriter
 {
 
-	@JvmStatic fun TextToBytes(text: String): ArrayList<Int>
+	@JvmStatic fun TextToBytes(text: String): MutableList<Int>
 	{
-		val textBytes = ArrayList<Int>()
-
-
+		val textBytes = mutableListOf<Int>()
 		//for((index, x) in text.withIndex())
 		var index: Int = 0
 		while (index < text.length)

@@ -34,16 +34,15 @@ class EquipmentData(fileName: String) : Excel(fileName)
 		weapons.models.forEach {
 			when (EquipmentType.getType(it))
 			{
-				EquipmentType.SWORD -> if (it.equipCode == 1) knightSwords.models.add(it)
+				EquipmentType.SWORD                                         -> if (it.equipCode == 1) knightSwords.models.add(it)
 				else if (it.equipCode and 0x08 > 0) misc.models.add(it) // if only Wilme can equip it
 				else swords.models.add(it)
 
-				EquipmentType.AXE   -> axes.models.add(it)
-				EquipmentType.SABER -> rods.models.add(it)
-				EquipmentType.ROD   -> rods.models.add(it)
-				EquipmentType.KNIFE -> knives.models.add(it)
-				EquipmentType.HAND  -> fists.models.add(it)
-				else                -> misc.models.add(it)
+				EquipmentType.AXE                                           -> axes.models.add(it)
+				EquipmentType.STAFF, EquipmentType.ROD, EquipmentType.SABER -> rods.models.add(it)
+				EquipmentType.KNIFE                                         -> knives.models.add(it)
+				EquipmentType.HAND                                          -> fists.models.add(it)
+				else                                                        -> misc.models.add(it)
 			}
 		}
 
@@ -57,12 +56,12 @@ class EquipmentData(fileName: String) : Excel(fileName)
 		rowData.add(RowData(boldStyle, mutableListOf("Knight Swords")))
 		addWeaponType(rowData, knightSwords, shops, defaultStyle)
 
-		rowData.add(RowData(boldStyle, mutableListOf("Swords")))
-		addWeaponType(rowData, swords, shops, defaultStyle)
-
 		rowData.add(RowData(boldStyle, mutableListOf("Axes")))
 		addWeaponType(rowData, axes, shops, defaultStyle)
 
+		rowData.add(RowData(boldStyle, mutableListOf("Swords")))
+		addWeaponType(rowData, swords, shops, defaultStyle)
+		
 		rowData.add(RowData(boldStyle, mutableListOf("Knives")))
 		addWeaponType(rowData, knives, shops, defaultStyle)
 

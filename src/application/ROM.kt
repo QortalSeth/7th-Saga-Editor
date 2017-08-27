@@ -17,6 +17,7 @@ object ROM
 	var bytes: ByteArray = byteArrayOf(1)
 	private var header: Int = 0
 	@JvmStatic var showEmptyValues = false
+	@JvmStatic var updateBelaineSwordTexts = true
 	var showMonsterDuplicates = false
 	var programDirectory = File(".")
 

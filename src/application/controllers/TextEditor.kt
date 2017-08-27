@@ -2,9 +2,12 @@ package application.controllers
 
 import application.ControllerInitilizer
 import application.ROM
+import application.staticClasses.Listeners
 import application.staticClasses.TextWriter
 import javafx.fxml.FXML
 import javafx.scene.control.TextArea
+import javafx.scene.control.TextField
+import javafx.scene.input.KeyEvent
 import javafx.scene.input.MouseEvent
 import java.util.*
 
@@ -14,7 +17,10 @@ class TextEditor : ControllerInitilizer
 	@FXML lateinit var hexValuesT: TextArea
 	@FXML lateinit var locationsT: TextArea
 	@FXML lateinit var pointersT: TextArea
-
+	@FXML lateinit var textWriteT: TextArea
+	@FXML lateinit var textLocationT: TextField
+	@FXML lateinit var textPointerLocationT: TextField
+	@FXML lateinit var textPointerValueT: TextField
 
 	@FXML fun generateResults(event: MouseEvent)
 	{
@@ -110,8 +116,38 @@ class TextEditor : ControllerInitilizer
 
 	}
 
+	@FXML fun writeText()
+	{
+		val bytes = TextWriter.TextToBytes(textWriteT.text)
+		bytes.appendEndCharacter()
+
+		if (textLocationT.text.isEmpty()) return
+
+		val location = textLocationT.text.toInt(16)
+
+		ROM.offset = location
+		bytes.forEach { ROM.nextByte = it }//// write text to location
+
+
+		val pointerLocation = textPointerLocationT.text
+		val pointerValue = textPointerValueT.text
+		if (pointerLocation.isNotEmpty() && pointerValue.isNotEmpty()) // overwrite pointer
+			ROM.setTriple(pointerLocation.toInt(16), pointerValue.toInt(16))
+
+	}
+
+	@FXML fun removeNonHexNumbers(event: KeyEvent) = Listeners.removeNonHexNumbers(event, null)
+
 	@FXML fun initialize()
 	{
+		text2BytesT.text = text2BytesS
+		hexValuesT.text = hexValuesS
+		locationsT.text = locationsS
+		pointersT.text = pointersS
+		textWriteT.text = textWriteS
+		textLocationT.text = textLocationS
+		textPointerLocationT.text = textPointerLocationS
+		textPointerValueT.text = textPointerValueS
 	}
 
 	override fun saveData()
@@ -121,6 +157,32 @@ class TextEditor : ControllerInitilizer
 
 	override fun saveState()
 	{
+		text2BytesS = text2BytesT.text
+		hexValuesS = hexValuesT.text
+		locationsS = locationsT.text
+		pointersS = pointersT.text
+		textWriteS = textWriteT.text
+		textLocationS = textLocationT.text
+		textPointerLocationS = textPointerLocationT.text
+		textPointerValueS = textPointerValueT.text
+	}
 
+	private fun MutableList<Int>.appendEndCharacter()
+	{
+		this.add(0xF7)
+	}
+
+	companion object
+	{
+		private var text2BytesS: String = ""
+		private var hexValuesS: String = ""
+		private var locationsS: String = ""
+		private var pointersS: String = ""
+		private var textWriteS: String = ""
+		private var textLocationS: String = ""
+		private var textPointerLocationS: String = ""
+		private var textPointerValueS: String = ""
 	}
 }
+
+
