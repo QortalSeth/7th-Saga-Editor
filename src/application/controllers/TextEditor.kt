@@ -3,6 +3,7 @@ package application.controllers
 import application.ControllerInitilizer
 import application.ROM
 import application.staticClasses.Listeners
+import application.staticClasses.TextReader
 import application.staticClasses.TextWriter
 import javafx.fxml.FXML
 import javafx.scene.control.TextArea
@@ -13,6 +14,7 @@ import java.util.*
 
 class TextEditor : ControllerInitilizer
 {
+	@FXML lateinit var pointerToReadT: TextField
 	@FXML lateinit var text2BytesT: TextArea
 	@FXML lateinit var hexValuesT: TextArea
 	@FXML lateinit var locationsT: TextArea
@@ -21,6 +23,11 @@ class TextEditor : ControllerInitilizer
 	@FXML lateinit var textLocationT: TextField
 	@FXML lateinit var textPointerLocationT: TextField
 	@FXML lateinit var textPointerValueT: TextField
+
+	@FXML fun readText()
+	{
+		text2BytesT.text = TextReader.readText(pointerToReadT.text.toInt(16))
+	}
 
 	@FXML fun generateResults(event: MouseEvent)
 	{
@@ -127,27 +134,20 @@ class TextEditor : ControllerInitilizer
 
 		ROM.offset = location
 		bytes.forEach { ROM.nextByte = it }//// write text to location
+	}
 
-
+	@FXML fun writePointer()
+	{
 		val pointerLocation = textPointerLocationT.text
 		val pointerValue = textPointerValueT.text
 		if (pointerLocation.isNotEmpty() && pointerValue.isNotEmpty()) // overwrite pointer
 			ROM.setTriple(pointerLocation.toInt(16), pointerValue.toInt(16))
-
 	}
 
 	@FXML fun removeNonHexNumbers(event: KeyEvent) = Listeners.removeNonHexNumbers(event, null)
 
 	@FXML fun initialize()
 	{
-		text2BytesT.text = text2BytesS
-		hexValuesT.text = hexValuesS
-		locationsT.text = locationsS
-		pointersT.text = pointersS
-		textWriteT.text = textWriteS
-		textLocationT.text = textLocationS
-		textPointerLocationT.text = textPointerLocationS
-		textPointerValueT.text = textPointerValueS
 	}
 
 	override fun saveData()
@@ -157,6 +157,7 @@ class TextEditor : ControllerInitilizer
 
 	override fun saveState()
 	{
+		textToReadS = pointerToReadT.text
 		text2BytesS = text2BytesT.text
 		hexValuesS = hexValuesT.text
 		locationsS = locationsT.text
@@ -174,6 +175,7 @@ class TextEditor : ControllerInitilizer
 
 	companion object
 	{
+		private var textToReadS: String = ""
 		private var text2BytesS: String = ""
 		private var hexValuesS: String = ""
 		private var locationsS: String = ""

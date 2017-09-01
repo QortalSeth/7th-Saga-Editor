@@ -109,7 +109,7 @@ object TextReader
 				0x7D -> text.append("RD")
 				0x7E -> text.append("ML")
 				0x7F -> text.append("RB")
-			// case 0x82: text.append("bold"); break;
+				0x82 -> text.append("/B")
 				0x85 -> text.append('!')
 				0xC9 -> text.append("  ")
 				0xCA -> text.append("er")
@@ -149,11 +149,10 @@ object TextReader
 				0xEC -> text.append("n ")
 				0xED -> text.append("wh")
 				0xEE -> text.append("in")
-			// case 0xEF: text.append(" bold"); break;
+				0xEF -> text.append(" /B")
 				0xF7 -> readNextByte = false
 				0xF9 -> text.append("\n")
-			// case 0xFA: text.append("\n\n"); break;
-				0xFA -> text.append("\n")
+				0xFA -> text.append("\n\n")
 			}
 			pointer++
 

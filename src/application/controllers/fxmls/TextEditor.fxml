@@ -15,60 +15,63 @@
     <GridPane layoutX="74.0" layoutY="37.0" prefHeight="650.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
-            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="220.0" />
+            <ColumnConstraints hgrow="ALWAYS" prefWidth="220.0" />
          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="10.0" />
          <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" prefWidth="110.0" />
          <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" prefWidth="200.0" />
         </columnConstraints>
         <rowConstraints>
          <RowConstraints vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+         <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+         <RowConstraints prefHeight="300.0" vgrow="ALWAYS" />
         </rowConstraints>
-        <Label text="Text to Bytes:" GridPane.rowIndex="1" />
-        <Label text="Possible Text Locations:" GridPane.rowIndex="3" />
-        <Label text="Byte Values:" GridPane.rowIndex="2" />
-        <Label text="Possible Pointers to Locations:" GridPane.rowIndex="4" />
-        <TextArea fx:id="hexValuesT" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <TextArea fx:id="locationsT" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <TextArea fx:id="pointersT" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <Label text="Text to Bytes:" GridPane.rowIndex="2" />
+        <Label text="Possible Text Locations:" GridPane.rowIndex="4" />
+        <Label text="Byte Values:" GridPane.rowIndex="3" />
+        <Label text="Possible Pointers to Locations:" GridPane.rowIndex="5" />
+        <TextArea fx:id="hexValuesT" editable="false" prefHeight="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextArea fx:id="locationsT" prefHeight="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+        <TextArea fx:id="pointersT" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <TextArea fx:id="text2BytesT" prefHeight="200.0" prefWidth="200.0" />
             <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#generateResults" text="Generate Results" />
         </VBox>
       <Label text="Text Reader" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
       <Label text="Text Writer" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
-      <Label text="**Text to Write:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <TextArea fx:id="textWriteT" prefHeight="200.0" prefWidth="150.0" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="1" />
-      <GridPane GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+      <Label text="**Text to Write:" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <TextArea fx:id="textWriteT" prefHeight="200.0" prefWidth="150.0" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="2" />
+      <GridPane GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="CENTER">
         <columnConstraints>
           <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
             <ColumnConstraints hgrow="ALWAYS" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints vgrow="NEVER" />
+            <RowConstraints vgrow="NEVER" />
           <RowConstraints vgrow="NEVER" />
           <RowConstraints vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints vgrow="NEVER" />
         </rowConstraints>
          <children>
-            <Label text="*New Pointer Value:" GridPane.rowIndex="2" />
-            <Label text="*Pointer to Overwrite, if any:" GridPane.rowIndex="1" />
+            <Label text="*New Pointer Value:" GridPane.rowIndex="3" />
+            <Label text="*Pointer to Overwrite, if any:" GridPane.rowIndex="2" />
             <Label alignment="CENTER_RIGHT" text="*Location to Write to: " textAlignment="RIGHT" />
             <TextField fx:id="textLocationT" onKeyTyped="#removeNonHexNumbers" GridPane.columnIndex="1" />
-            <TextField fx:id="textPointerLocationT" onKeyTyped="#removeNonHexNumbers" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="textPointerValueT" onKeyTyped="#removeNonHexNumbers" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#writeText" text="Write Bytes to Location" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TextField fx:id="textPointerLocationT" onKeyTyped="#removeNonHexNumbers" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="textPointerValueT" onKeyTyped="#removeNonHexNumbers" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#writeText" text="Write Bytes to Location" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#writePointer" text="Write Pointer" GridPane.columnSpan="2" GridPane.rowIndex="4" />
          </children>
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </GridPane>
-      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-      <GridPane GridPane.columnSpan="2147483647" GridPane.rowIndex="5" GridPane.rowSpan="2147483647">
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+      <GridPane GridPane.columnSpan="2147483647" GridPane.rowIndex="6" GridPane.rowSpan="2147483647">
         <columnConstraints>
             <ColumnConstraints hgrow="NEVER" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="115.0" />
@@ -76,12 +79,12 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="45.0" valignment="BOTTOM" vgrow="NEVER" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints valignment="BOTTOM" vgrow="NEVER" />
+          <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Miscellaneous Characters" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-            <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" text="/B Toggle Bold&#10;/END End of Text&#10;/PD Page Down (Ends page of dialog)&#10;/1 Number used in Spell Names&#10;/2 Number used in Spell Names&#10;/3 Number used in Spell Names&#10;/G Gold" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextArea editable="false" text="/B Toggle Bold&#10;/END End of Text&#10;/PD Page Down (Ends page of dialog)&#10;/1 Number used in Spell Names&#10;/2 Number used in Spell Names&#10;/3 Number used in Spell Names&#10;/G Gold" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Weapon Characters" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
             <TextArea prefHeight="200.0" prefWidth="200.0" text="/SW Sword&#10;/AX Axe&#10;/SB Saber&#10;/RD Rod&#10;/KN Knife&#10;/ST Staff&#10;/HA Hand&#10;&#10;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextArea prefHeight="200.0" prefWidth="200.0" text="/ML Mail&#10;/AR Armor&#10;/RB Robe&#10;/CK Cloak&#10;/SH Shield&#10;/CR Crown&#10;/AM Amulet&#10;/MK Mask&#10;/HT Helmet" GridPane.columnIndex="3" GridPane.rowIndex="1" />
@@ -89,10 +92,17 @@
             <Label text="Special Characters:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3">
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4">
          <children>
             <Label text="* Value must be in Hex" />
             <Label text="**  /END is automatically applied at end of Text" />
+         </children>
+      </VBox>
+      <Label text="Text Location to Read:" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <TextField fx:id="pointerToReadT" onKeyTyped="#removeNonHexNumbers" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#readText" text="Read Text" />
          </children>
       </VBox>
     </GridPane>
