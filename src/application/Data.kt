@@ -24,18 +24,15 @@ class Data : Serializable
 	private val defaultTotalExperience = experience.totalExpTable
 
 
+
+
 	fun serializeDefaultDataToDisk()
 	{
 		try
 		{
 			val defaultData = File(javaClass.getResource("models/defaultModels.data").toURI())
 			println("file path to disk: " + defaultData.absolutePath)
-			val file = FileOutputStream(defaultData)
-			val buffer = BufferedOutputStream(file)
-			val output = ObjectOutputStream(buffer)
-			output.writeObject(this)
-			output.close()
-			file.close()
+			ObjectOutputStream(BufferedOutputStream(FileOutputStream(defaultData))).use{it.writeObject(this)}
 		}
 		catch (e: IOException)
 		{

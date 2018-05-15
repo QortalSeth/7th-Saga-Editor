@@ -1,6 +1,7 @@
 package application.models.lists
 
 import application.ROM
+import application.Settings
 import application.models.Armor
 import java.io.Serializable
 
@@ -32,7 +33,7 @@ class Armors : Equipment<Armor>, Serializable
 	fun addUsefulBodyArmors(armors: Armors, equipCode: Int)
 	{
 		armors.models
-				.filter { it.isBodyArmor && equipCode and it.equipCode > 0 && (ROM.showEmptyValues || it.name.isNotEmpty()) }
+				.filter { (it.isBodyArmor && equipCode and (it.equipCode or 0x80) > 0) && (it.name.isNotEmpty() || ROM.settings.showEmptyValues)  }
 				.forEach { models.add(it) }
 		dModels.addAll(armors.dModels)
 	}
@@ -40,7 +41,7 @@ class Armors : Equipment<Armor>, Serializable
 	fun addUsefulAccessories(armors: Armors, equipCode: Int)
 	{
 		armors.models
-				.filter { equipCode and it.equipCode > 0 && it.isAccessory && (ROM.showEmptyValues || it.name.isNotEmpty()) }
+				.filter { (it.isAccessory && equipCode and (it.equipCode or 0x80) > 0) && (it.name.isNotEmpty() || ROM.settings.showEmptyValues)  }
 				.forEach { models.add(it) }
 		dModels.addAll(armors.dModels)
 	}

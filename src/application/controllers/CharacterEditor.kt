@@ -1,6 +1,7 @@
 package application.controllers
 
 import application.ControllerInitilizer
+import application.ROM
 import application.models.Armor
 import application.models.Experience
 import application.models.Spell
@@ -38,12 +39,13 @@ class CharacterEditor : ControllerInitilizer
 	private var armors = Armors(Lists.armors)
 	private var accessories = Armors(Lists.armors)
 
-	private var spells = Spells(Lists.spells, true)
+	private var spells = Spells(Lists.spells, ROM.settings.showEmptyValues)
 	private var characters = Characters(Lists.characters)
 	private var experience = Experience(Lists.experience)
 
 	@FXML fun initialize()
 	{
+		spells.addEmptySpell()
 		characters.chronologicalIndexSort()
 		charactersC.items.addAll(characters.models)
 		charactersC.selectionModel.select(startCharacter)
@@ -315,7 +317,8 @@ class CharacterEditor : ControllerInitilizer
 		}
 	}
 
-	@FXML lateinit private var defaultHpStart: TextField
+	@FXML
+    private lateinit var defaultHpStart: TextField
 	@FXML lateinit var defaultMpStart: TextField
 	@FXML lateinit var defaultPowerStart: TextField
 	@FXML lateinit var defaultGuardStart: TextField

@@ -1,6 +1,7 @@
 package application.models
 
 import application.ROM
+import application.Settings
 import application.staticClasses.TextReader
 import java.io.Serializable
 
@@ -35,7 +36,7 @@ class Weapon : Equipment, Serializable
 		ROM.nextByte = equipCode
 		ROM.nextTriple = namePointer
 		ROM.nextShort = discount
-		if (ROM.updateBelaineSwordTexts)
+		if (ROM.settings.belaineSwordsMatchCosts)
 		{
 			updateBelaineSwordTexts()
 		}

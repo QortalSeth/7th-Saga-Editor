@@ -23,6 +23,9 @@ class TextEditor : ControllerInitilizer
 	@FXML lateinit var textLocationT: TextField
 	@FXML lateinit var textPointerLocationT: TextField
 	@FXML lateinit var textPointerValueT: TextField
+	@FXML lateinit var textMoverOldLocationT: TextField
+	@FXML lateinit var textMoverNewLocationT: TextField
+
 
 	@FXML fun readText()
 	{
@@ -142,6 +145,36 @@ class TextEditor : ControllerInitilizer
 		val pointerValue = textPointerValueT.text
 		if (pointerLocation.isNotEmpty() && pointerValue.isNotEmpty()) // overwrite pointer
 			ROM.setTriple(pointerLocation.toInt(16), pointerValue.toInt(16))
+	}
+
+	// get text into list
+	// replace original text with 0xFF
+	// place text in new location
+	@FXML fun moveText()
+	{
+		val oldText = textMoverOldLocationT.text
+		val newText = textMoverNewLocationT.text
+		if (oldText.isNotEmpty() && newText.isNotEmpty()) // overwrite pointer
+		{
+			var oldPointer = oldText.toInt(16)
+			var newPointer = newText.toInt(16)
+			var text = mutableListOf<Int>()
+			var pointer = oldPointer
+			ROM.offset = oldPointer
+
+			while(pointer< ROM.bytes.size)
+			{
+			var byte = ROM.getByte(pointer)
+				text.add(byte)
+				ROM.setByte(pointer, 0xFF)
+				pointer++
+			if(byte == 0xF7)
+				break
+			}
+
+			ROM.offset=newPointer
+			text.forEach{ROM.nextByte = it}
+		}
 	}
 
 	@FXML fun removeNonHexNumbers(event: KeyEvent) = Listeners.removeNonHexNumbers(event, null)

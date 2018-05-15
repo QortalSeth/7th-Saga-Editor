@@ -19,6 +19,12 @@ class Spells : Models<Spell>, Serializable
 		}
 	}
 
+	fun addEmptySpell()
+	{
+		if(models[0].gameIndex !=0)
+		{models.add(0,Lists.spells.models[0])}
+	}
+
 	override fun saveModels() = models.forEach { it.writeValuesToROM() }
 
 	companion object

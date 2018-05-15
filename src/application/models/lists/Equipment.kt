@@ -1,6 +1,7 @@
 package application.models.lists
 
 import application.ROM
+import application.Settings
 import application.enums.EquipmentType
 import java.io.Serializable
 import java.util.*
@@ -39,7 +40,7 @@ open class Equipment<T : application.models.Equipment> : AbstractItems<T>, Seria
 	fun addUsefulModels(addFrom: Equipment<T>, equipCode: Int)
 	{
 		addFrom.models
-				.filter { equipCode and it.equipCode > 0 && (ROM.showEmptyValues || it.name.isNotEmpty()) }
+				.filter { equipCode and (it.equipCode or 0x80) > 0 && (ROM.settings.showEmptyValues || it.name.isNotEmpty()) }
 				.forEach { models.add(it) }
 
 		dModels.addAll(addFrom.dModels)

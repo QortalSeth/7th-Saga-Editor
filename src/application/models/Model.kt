@@ -20,7 +20,7 @@ abstract class Model(index: Int) : Serializable
 
 	override fun toString(): String
 	{
-		if (name.isEmpty()) return "(empty)"
+		if (name.trim().isEmpty()) return "(empty)"
 		return name
 	}
 

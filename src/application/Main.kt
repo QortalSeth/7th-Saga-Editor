@@ -37,5 +37,7 @@ class Main : Application()
 			//Application.launch(Main.javaClass.getResource)
 			Application.launch(Main::class.java, *args)
 		}
+
+
 	}
 }

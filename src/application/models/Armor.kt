@@ -60,10 +60,10 @@ class Armor : Equipment, Serializable
 	}
 
 	val isBodyArmor: Boolean
-		get() = this.itemCode < 0xB5
+		get() = this.itemCode < 0xB4
 
 	val isAccessory: Boolean
-		get() = this.itemCode >= 0xB5
+		get() = this.itemCode >= 0xB4
 
 	val isCoat: Boolean
 		get() = isBodyArmor && equipCode == 0x10

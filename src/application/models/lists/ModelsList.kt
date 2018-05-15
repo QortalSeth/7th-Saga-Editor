@@ -15,6 +15,6 @@ open class ModelsList<T : Model>() : SimpleListProperty<T>(FXCollections.observa
 
 	fun addUsefulModels(models: ModelsList<T>, keepEmptyModel: Boolean)
 	{
-		models.asSequence().filter { model -> ROM.showEmptyValues == true || !model.name.trim { it <= ' ' }.isEmpty() || keepEmptyModel == true && model.gameIndex == 0 }.forEach { add(it) }
+		models.asSequence().filter { model -> ROM.settings.showEmptyValues == false || !model.name.trim { it <= ' ' }.isEmpty() || keepEmptyModel == true && model.gameIndex == 0 }.forEach { add(it) }
 	}
 }

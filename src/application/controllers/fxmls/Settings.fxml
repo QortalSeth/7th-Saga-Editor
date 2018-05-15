@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.SettingsEditor">
+   <children>
+      <VBox layoutX="13.0" layoutY="59.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <CheckBox fx:id="emptyNamesCH" mnemonicParsing="false" text="Show Empty Values" />
+            <CheckBox fx:id="dupMonstersCH" mnemonicParsing="false" text="Show Duplicate Monsters" />
+            <CheckBox fx:id="excelCH" mnemonicParsing="false" selected="true" text="Write Data to Excel File on Save" />
+            <CheckBox fx:id="belaineCH" mnemonicParsing="false" selected="true" text="Make Belaine Sword Prices match Equipment Cost" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

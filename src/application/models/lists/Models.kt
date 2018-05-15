@@ -40,7 +40,7 @@ abstract class Models<T : Model> : Serializable
 	fun initializeDModels() = initialize(dModels)
 	fun initializeModels() = initialize(models)
 
-	open protected fun initialize(models: ModelsList<T>) = Unit
+	protected open fun initialize(models: ModelsList<T>) = Unit
 	open fun saveModels() = Unit
 
 	fun clear()
@@ -70,7 +70,7 @@ abstract class Models<T : Model> : Serializable
 
 	fun <R : T> addUsefulModels(addFrom: Models<R>, keepEmptyModel: Boolean)
 	{
-		addFrom.models.filter { model -> ROM.showEmptyValues || !model.name.trim { it <= ' ' }.isEmpty() || keepEmptyModel && model.gameIndex == 0 }.forEach { models.add(it) }
+		addFrom.models.filter { model -> keepEmptyModel || model.name.trim().isNotEmpty()}.forEach { models.add(it) }
 		dModels.addAll(addFrom.dModels)
 	}
 

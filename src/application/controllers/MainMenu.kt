@@ -2,6 +2,7 @@ package application.controllers
 
 import application.ControllerInitilizer
 import application.ROM
+import application.Settings
 import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -27,9 +28,9 @@ class MainMenu
 	@FXML fun initialize()
 	{
 		this.disableButtons(true)
-		debug = false
 		initializeImages()
 		ROM.setProgramDirectory()
+		ROM.settings.readSettings()
 	}
 
 	private fun disableButtons(disable: Boolean)
@@ -76,7 +77,8 @@ class MainMenu
 			disableButtons(false)
 
 			ROM.romDirectory = rom.parentFile
-			ROM.openDefaultROM()
+			if(debug)
+			{ROM.openDefaultROM()}
 			ROM.openROM(rom)
 			System.out.println("ROM directory is: ${ROM.romDirectory.canonicalPath}")
 		}
@@ -91,6 +93,7 @@ class MainMenu
 	@FXML fun shopEditor() = openDialog("fxmls/ShopEditor.fxml", "Shop Editor", false)
 	@FXML fun monsterEditor() = openDialog("fxmls/MonsterEditor.fxml", "Monster Editor", false)
 	@FXML fun textEditor() = openDialog("fxmls/TextEditor.fxml", "Text Editor", false)
+	@FXML fun settingsEditor() = openDialog("fxmls/Settings.fxml", "Settings Editor", false)
 
 	fun openDialog(filename: String, title: String, resizable: Boolean)
 	{
@@ -159,6 +162,7 @@ class MainMenu
 	@FXML lateinit var open: Button
 	@FXML lateinit var monster: Button
 	@FXML lateinit var text: Button
+	@FXML lateinit var settings: Button
 
 	companion object
 	{

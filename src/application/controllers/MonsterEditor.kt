@@ -23,7 +23,7 @@ import java.lang.Integer.toString
 
 class MonsterEditor : ControllerInitilizer
 {
-	private var monsters = Monsters(Lists.monsters, false)
+	private var monsters = Monsters(Lists.monsters, ROM.settings.showEmptyValues, ROM.settings.showMonsterDuplicates)
 	private var dropTables = DropTables(Lists.dropTables)
 	private var previouslySelectedMonster: Monster? = null
 	private var previouslySelectedDropTable: DropTable? = null
@@ -40,7 +40,8 @@ class MonsterEditor : ControllerInitilizer
 	{
 		monstersC.items = monsters.models
 		itemDropListsC.items = dropTables.models
-		spells.addUsefulModels(Lists.spells, true)
+		spells.addUsefulModels(Lists.spells, ROM.settings.showEmptyValues)
+		spells.addEmptySpell()
 
 		if (gameIndexIsSelected) gameOrderR.isSelected = true
 		else

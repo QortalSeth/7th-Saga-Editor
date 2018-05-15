@@ -67,6 +67,7 @@ class Monster : Model, Serializable
 		namePointer = ROM.nextTriple
 		name = TextReader.readText(namePointer)
 
+
 		var magicMod = 0
 		var speedMod = 0
 
@@ -144,8 +145,8 @@ class Monster : Model, Serializable
 	{
 		if (o == null) return false
 		val m = o as Monster?
-		if (m!!.name.trim { it <= ' ' }.isEmpty() || name.trim { it <= ' ' }.isEmpty()) return false
-		return name == m.name
+//		if(name.trim().isEmpty() || m!!.name.trim().isEmpty()) return false  this line causes a bug where empty values cannot be selected
+		return name == m!!.name
 	}
 
 	val spellChanceStrings: List<String>

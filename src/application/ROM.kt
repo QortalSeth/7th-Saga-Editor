@@ -2,12 +2,14 @@ package application
 
 import application.excel.*
 import application.models.lists.Lists
+import kotlinx.coroutines.experimental.async
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.nio.file.Files
 import java.nio.file.StandardOpenOption
+import kotlinx.coroutines.experimental.runBlocking
 
 /**
  * Created by Seth on 4/3/2017.
@@ -16,11 +18,9 @@ object ROM
 {
 	var bytes: ByteArray = byteArrayOf(1)
 	private var header: Int = 0
-	@JvmStatic var showEmptyValues = false
-	@JvmStatic var updateBelaineSwordTexts = true
-	var showMonsterDuplicates = false
-	var programDirectory = File(".")
 
+
+	var programDirectory = File(".")
 	private var rom = File(".")
 	var romDirectory = File(".")
 	var magicAndSpeedPatch = false
@@ -28,7 +28,7 @@ object ROM
 
 	var changeListsDirectory = File(".")
 	var offset: Int = 0
-
+	var settings = Settings()
 
 	fun openDefaultROM()
 	{
@@ -37,8 +37,6 @@ object ROM
 			rom = File(romDirectory.toString() + "/7th Saga Unedited.smc")
 			bytes = Files.readAllBytes(rom.toPath())
 			header = 0
-
-
 			Lists.initializeDModels()
 			val d = Data()
 			d.serializeDefaultDataToDisk()
@@ -46,16 +44,11 @@ object ROM
 		catch (e: Exception)
 		{
 			println("Open default ROM failed")
+			e.printStackTrace()
 		}
 	}
 
-	private fun removeFileExtension(file: File): String
-	{
-		var fileName = file.name
-		val pos = fileName.lastIndexOf(".")
-		if (pos > 0) fileName = fileName.substring(0, pos)
-		return fileName
-	}
+
 
 	fun openROM(file: File)
 	{
@@ -87,7 +80,6 @@ object ROM
 			ObjectInputStream(inputFile).use {
 				// deserialize the List
 				val d = it.readObject() as Data
-
 				d.serializeDefaultDataFromDisk()
 			}
 
@@ -106,24 +98,33 @@ object ROM
 	fun saveROM()
 	{
 		Lists.saveModels()
-		saveToExcelFiles()
+
+		if(ROM.settings.createExcelFilesOnSave){saveToExcelFiles()}
+
 		Files.write(rom.toPath(), ROM.bytes, StandardOpenOption.WRITE)
 		println("Data saved to Disk" + "\n")
 	}
 
 	fun saveToExcelFiles()
 	{
-		CharacterComparisons("Character Comparisons.xlsx")
-		CharacterData("Character.xlsx")
-		EquipmentData("Equipment.xlsx")
-		ExpData("Experience.xlsx")
-		MonsterData("Monster.xlsx")
+		val startTime = System.currentTimeMillis()
 
-		// ApprenticeData.makeChangeList();
-		// DropTableData.makeChangeList();
-		// ItemData.makeChangeList();
-		// ShopData.makeChangeList();
-		// SpellData.makeChangeList();
+		val cc = async{CharacterComparisons("Character Comparisons.xlsx")}
+		val ch = async{CharacterData("Character.xlsx")}
+		val eq = async{EquipmentData("Equipment.xlsx")}
+		val ex = async{ExpData("Experience.xlsx")}
+		val mo = async{MonsterData("Monster.xlsx")}
+
+		runBlocking {
+			cc.await()
+			ch.await()
+			eq.await()
+			ex.await()
+			mo.await()
+			val endTime = System.currentTimeMillis()
+			val timeElapsed = (endTime - startTime)
+			println("Excel Export Time is: ${timeElapsed.toDouble()/1000} seconds")
+		}
 	}
 
 	fun setProgramDirectory()
@@ -141,6 +142,13 @@ object ROM
 
 	}
 
+	private fun removeFileExtension(file: File): String
+	{
+		var fileName = file.name
+		val pos = fileName.lastIndexOf(".")
+		if (pos > 0) fileName = fileName.substring(0, pos)
+		return fileName
+	}
 
 	fun getByte(offset: Int): Int
 	{

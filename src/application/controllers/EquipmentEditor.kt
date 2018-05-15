@@ -1,6 +1,7 @@
 package application.controllers
 
 import application.ControllerInitilizer
+import application.ROM
 import application.models.Armor
 import application.models.Item
 import application.models.Weapon
@@ -29,7 +30,7 @@ class EquipmentEditor : ControllerInitilizer
 	private var previouslySelectedTab: Tab? = null
 	private var previouslySelectedArmorComboBox: ComboBox<Armor>? = null
 
-	private var items = Items(Lists.items, false)
+	private var items = Items(Lists.items, ROM.settings.showEmptyValues)
 	private var weapons = Weapons(Lists.weapons, 0xFF)
 	private var armors = Armors(Lists.armors, 0xFF)
 	private var accessories = Armors(Lists.armors, 0xFF)

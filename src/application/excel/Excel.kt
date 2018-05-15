@@ -118,7 +118,7 @@ open class Excel(var fileName: String)
 		{
 			var file = ROM.changeListsDirectory
 			println("Changelist Directory: " + file)
-			file.mkdir()
+			file.mkdirs()
 
 			file = File(file.path + "/" + fileName)
 			println("Changelist File Location: " + file.absolutePath)
