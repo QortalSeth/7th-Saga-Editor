@@ -315,7 +315,8 @@ class CharacterEditor : ControllerInitilizer
 		}
 	}
 
-	@FXML lateinit private var defaultHpStart: TextField
+	@FXML
+    private lateinit var defaultHpStart: TextField
 	@FXML lateinit var defaultMpStart: TextField
 	@FXML lateinit var defaultPowerStart: TextField
 	@FXML lateinit var defaultGuardStart: TextField

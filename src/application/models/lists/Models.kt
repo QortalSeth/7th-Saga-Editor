@@ -40,7 +40,7 @@ abstract class Models<T : Model> : Serializable
 	fun initializeDModels() = initialize(dModels)
 	fun initializeModels() = initialize(models)
 
-	open protected fun initialize(models: ModelsList<T>) = Unit
+	protected open fun initialize(models: ModelsList<T>) = Unit
 	open fun saveModels() = Unit
 
 	fun clear()
