@@ -6,6 +6,18 @@ This program is for editing data tables in a ROM of the Super Nintendo game the 
 
 Run the file 7th-Saga-Editor.jar found in the executable folder.
 
+## Table of Contents
+
+1. [Character Editor](#character-editor) | [Experience Editor. ](#experience-editor)
+2. [Apprentice Editor](#apprentice-editor) 
+3. [Spell Editor](#spell-editor) 
+4. [Item Editor](#item-editor) | [Weapon Editor](#weapon-editor) | [Armor Editor](#armor-editor)
+5. [Shop Editor](#shop-editor) 
+6. [Monster Editor](#monster-editor) | [Drop Table Editor](#drop-table-editor)
+7. [Text Editor](#text-editor) 
+8. [Settings](#settings) 
+9. [Known Issues](#known-issues)                            
+
 
 ### Main Menu
 ![Image Not Found](Documents/Images/Main%20Menu.png)
