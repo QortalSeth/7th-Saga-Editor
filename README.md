@@ -99,3 +99,4 @@ If the option is selected, data from each supported table will be put into an ex
 In the town of Belaine, there are some blacksmiths who sell swords to the player at prices different from those swords value in the weapon table. If this option is selected, the swords sold by those blacksmiths will have their prices set according to the equipment table. The default value is True.
 
 ### Known issues
+Opening one ROM and then another will lead to data corruption if data is saved.
