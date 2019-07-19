@@ -176,6 +176,12 @@ object TextReader
 		return sb.toString()
 	}
 
+	fun pointerToLittleEndian(pointerInt: Int): Int
+	{
+		var pointerLittleEndianText = pointerToText(pointerInt).replace("\\s".toRegex(),"")
+		return pointerLittleEndianText.toInt(16)
+	}
+
 	fun appendByteToStringBuilder(sb: StringBuilder, stringByte: String)
 	{
 		if (stringByte.length < 2) sb.append("0")

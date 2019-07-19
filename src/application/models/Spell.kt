@@ -23,6 +23,7 @@ class Spell : Model, Serializable
 	fun getValuesFromROM()
 	{
 		ROM.offset = baseOffset + bytesPerSpell * gameIndex
+		offset = ROM.offset
 
 		power = ROM.nextShort
 		target = ROM.nextByte

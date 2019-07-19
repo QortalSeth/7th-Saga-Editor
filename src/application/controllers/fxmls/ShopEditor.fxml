@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ShopEditor">
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ShopEditor">
     <VBox layoutX="63.0" layoutY="47.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <HBox>
             <ComboBox fx:id="shopsC" onAction="#setSelectedShop" />
@@ -182,14 +182,14 @@
             <Label text="Cost" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <Label text="Default Armor" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <Label text="Default Cost" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <Button fx:id="weaponSort" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortWeaponsAscending" text="Sort By Ascending Cost" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" />
-            <Button fx:id="weaponSort1" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortWeaponsDescending" text="Sort By Descending Cost" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="9" />
-            <Button fx:id="armorSort" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortArmorsAscending" text="Sort By Ascending Cost" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="12" />
-            <Button fx:id="armorSort1" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortArmorsDescending" text="Sort By Descending Cost" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="12" />
-            <Button fx:id="weaponSort2" contentDisplay="TEXT_ONLY" lineSpacing="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllWeaponsAscending" text="Sort All Shops By Ascending Cost" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="10" GridPane.rowSpan="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <Button fx:id="weaponSort3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllWeaponsDescending" text="Sort All Shops By Descending Cost" wrapText="true" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="10" GridPane.rowSpan="2" />
-            <Button fx:id="armorSort2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllArmorsAscending" text="Sort All Shops By Ascending Cost" wrapText="true" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="2" />
-            <Button fx:id="armorSort3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllArmorsDescending" text="Sort All Shops By Descending Cost" wrapText="true" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="2" />
+            <Button fx:id="weaponSort" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortWeaponsAscending" text="Sort By Type (Ascending)" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+            <Button fx:id="weaponSort1" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortWeaponsDescending" text="Sort By Type (Descending)" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+            <Button fx:id="armorSort" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortArmorsAscending" text="Sort By Type (Ascending)" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="12" />
+            <Button fx:id="armorSort1" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortArmorsDescending" text="Sort By Type (Ascending)" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="12" />
+            <Button fx:id="weaponSort2" contentDisplay="TEXT_ONLY" lineSpacing="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllWeaponsAscending" text="Sort All Shops By Type (Ascending)" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="10" GridPane.rowSpan="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+            <Button fx:id="weaponSort3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllWeaponsDescending" text="Sort All Shops By Type (Descending)" wrapText="true" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="10" GridPane.rowSpan="2" />
+            <Button fx:id="armorSort2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllArmorsAscending" text="Sort All Shops By Type (Ascending)" wrapText="true" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="2" />
+            <Button fx:id="armorSort3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllArmorsDescending" text="Sort All Shops By Type (Descending)" wrapText="true" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="2" />
             <Button fx:id="itemSort" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortItemShop" text="Sort by Itemcode" GridPane.columnSpan="2" GridPane.rowIndex="13" />
             <Button fx:id="itemSort1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#sortAllItemShops" text="Sort All Shops By Itemcode" GridPane.columnSpan="2" GridPane.rowIndex="14" GridPane.rowSpan="2" />
         </GridPane>

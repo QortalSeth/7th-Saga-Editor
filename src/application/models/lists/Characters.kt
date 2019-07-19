@@ -13,7 +13,7 @@ class Characters : Models<application.models.Character>, Serializable
 	{
 		for (i in 0..characterListSize - 1)
 		{
-			val c = Character(Characters.characterNames[i], i)
+			val c = Character(Characters.characterNamesByGameIndex[i], i)
 			c.getValuesFromROM()
 			c.chronologicalIndex = chronologicalIndexes[i]
 			models.add(c)
@@ -38,7 +38,8 @@ class Characters : Models<application.models.Character>, Serializable
 
 		val characterListSize = 7
 
-		val characterNames = mutableListOf("Kamil", "Olvan", "Esuna", "Wilme", "Lux", "Valsu", "Lejes")
+		val characterNamesByGameIndex = mutableListOf("Kamil", "Olvan", "Esuna", "Wilme", "Lux", "Valsu", "Lejes")
+		val characterNamesByClassOrder = mutableListOf("Wilme","Lux","Olvan","Kamil","Lejes","Valsu","Esuna")
 		val equipCodes = intArrayOf(1, 2, 4, 8, 16, 32, 64)
 
 		private val chronologicalIndexes = intArrayOf(3, 2, 6, 0, 1, 5, 4)

@@ -12,6 +12,7 @@
             <CheckBox fx:id="dupMonstersCH" mnemonicParsing="false" text="Show Duplicate Monsters" />
             <CheckBox fx:id="excelCH" mnemonicParsing="false" selected="true" text="Write Data to Excel File on Save" />
             <CheckBox fx:id="belaineCH" mnemonicParsing="false" selected="true" text="Make Belaine Sword Prices match Equipment Cost" />
+            <CheckBox fx:id="discountCH" mnemonicParsing="false" selected="true" text="Apply Discount to Belain Swords" />
          </children>
       </VBox>
    </children>

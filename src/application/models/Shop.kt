@@ -25,6 +25,8 @@ class Shop : Model, Serializable
 	fun getValuesFromROM()
 	{
 		ROM.offset = baseOffset + bytesPerShop * gameIndex
+		offset = ROM.offset
+
 		for (i in 0..4) weaponCodes.add(ROM.nextByte)
 		for (i in 0..7) armorCodes.add(ROM.nextByte)
 		for (i in 0..8) itemCodes.add(ROM.nextByte)
@@ -46,28 +48,32 @@ class Shop : Model, Serializable
 	fun sortWeaponsAscending()
 	{
 		val weapons = Weapons(weaponCodes)
-		weapons.sortByAscendingCost()
+		//weapons.sortByAscendingCost()
+		weapons.sortByAscendingType()
 		weaponCodes = weapons.toIntegers()
 	}
 
 	fun sortWeaponsDescending()
 	{
 		val weapons = Weapons(weaponCodes)
-		weapons.sortByDescendingCost()
+		//weapons.sortByDescendingCost()
+		weapons.sortByDescendingType()
 		weaponCodes = weapons.toIntegers()
 	}
 
 	fun sortArmorsAscending()
 	{
 		val armors = Armors(armorCodes)
-		armors.sortByAscendingCost()
+		//armors.sortByAscendingCost()
+		armors.sortByAscendingType()
 		armorCodes = armors.toIntegers()
 	}
 
 	fun sortArmorsDescending()
 	{
 		val armors = Armors(armorCodes)
-		armors.sortByDescendingCost()
+		//armors.sortByDescendingCost()
+		armors.sortByDescendingType()
 		armorCodes = armors.toIntegers()
 	}
 

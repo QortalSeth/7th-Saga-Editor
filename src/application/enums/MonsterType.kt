@@ -35,7 +35,7 @@ enum class MonsterType
 			0x05 -> COCCOON
 			0x06 -> SOIDIEK
 			0x07 -> SPIDEK
-			0x08 -> MUTANT
+			0x2A -> MUTANT
 			0x09 -> DEFEAT
 			0x0A -> ORC
 			0x0B -> TALL
@@ -68,7 +68,7 @@ enum class MonsterType
 			0x27 -> FOMA
 			0x28 -> GORSIA
 			0x29 -> WYVERN
-			0x2A -> UNDEAD
+			0x08 -> UNDEAD
 			0x2B -> LIHALL
 			0x2C -> MANTA
 			0x2D -> S_WITCH

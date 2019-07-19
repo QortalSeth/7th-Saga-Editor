@@ -14,6 +14,7 @@ class SettingsEditor: ControllerInitilizer {
     @FXML  lateinit var dupMonstersCH: CheckBox
     @FXML  lateinit var excelCH: CheckBox
     @FXML  lateinit var belaineCH: CheckBox
+    @FXML  lateinit var discountCH: CheckBox
 
     @FXML fun initialize()
     {
@@ -21,13 +22,14 @@ class SettingsEditor: ControllerInitilizer {
             ROM.settings.belaineSwordsMatchCosts = newValue}
         dupMonstersCH.selectedProperty().addListener { observable, oldValue, newValue ->  ROM.settings.showMonsterDuplicates = newValue}
     emptyNamesCH.selectedProperty().addListener { observable, oldValue, newValue ->  ROM.settings.showEmptyValues = newValue}
-              excelCH.selectedProperty().addListener { observable, oldValue, newValue ->  ROM.settings.createExcelFilesOnSave = newValue}
-
+        excelCH.selectedProperty().addListener { observable, oldValue, newValue ->  ROM.settings.createExcelFilesOnSave = newValue}
+        discountCH.selectedProperty().addListener { observable, oldValue, newValue ->  ROM.settings.applyDiscountToBelainSwords = newValue}
 
         belaineCH.selectedProperty().set(ROM.settings.belaineSwordsMatchCosts)
         dupMonstersCH.selectedProperty().set(ROM.settings.showMonsterDuplicates)
         emptyNamesCH.selectedProperty().set(ROM.settings.showEmptyValues)
         excelCH.selectedProperty().set(ROM.settings.createExcelFilesOnSave)
+        discountCH.selectedProperty().set(ROM.settings.applyDiscountToBelainSwords)
 
     }
     override fun saveData()

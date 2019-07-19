@@ -18,6 +18,7 @@ class DropTable(i: Int) : Model(i), Serializable
 	fun getValuesFromROM()
 	{
 		ROM.offset = baseOffset + bytesPerDropTable * gameIndex
+		offset = ROM.offset
 		for (i in 0..bytesPerDropTable - 1)
 		{
 			drops[i] = ROM.nextByte

@@ -39,6 +39,7 @@ class Monster : Model, Serializable
 	fun getValuesFromROM()
 	{
 		ROM.offset = baseOffset + bytesPerMonster * gameIndex
+		offset = ROM.offset
 
 		unknown1 = ROM.nextByte
 		hp = ROM.nextShort

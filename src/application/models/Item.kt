@@ -30,6 +30,7 @@ class Item : AbstractItem, Serializable
 	fun getValuesFromROM()
 	{
 		ROM.offset = baseOffset + bytesPerItem * gameIndex
+		offset = ROM.offset
 
 		target = ROM.nextByte
 		uses = ROM.nextByte

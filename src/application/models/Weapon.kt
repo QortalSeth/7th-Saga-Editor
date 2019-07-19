@@ -18,6 +18,7 @@ class Weapon : Equipment, Serializable
 	fun getValuesFromROM()
 	{
 		ROM.offset = baseOffset + bytesPerWeapon * gameIndex
+		offset = ROM.offset
 
 		power = ROM.nextShort
 		cost = ROM.nextShort
@@ -55,8 +56,15 @@ class Weapon : Equipment, Serializable
 
 	fun updateBelaineSword(costOffset: Int, textOffset: Int)
 	{
-		ROM.setShort(costOffset, cost)
-		val text = getCostText()
+		var costToApply = cost
+		if(costToApply > 9999 || ROM.settings.applyDiscountToBelainSwords) // cost must be < 1000 because the game only displays 4 digits for this value. Adding more will overwrite data in the game.
+		{costToApply-=discount}
+
+		else if (costToApply > 9999)
+			costToApply = 9999
+
+		ROM.setShort(costOffset, costToApply)
+		val text = getCostText(costToApply)
 		ROM.offset = textOffset
 		text.forEach { ROM.nextByte = it }
 	}

@@ -3,6 +3,7 @@ package application
 import application.excel.*
 import application.models.lists.Lists
 import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.IOException
@@ -98,7 +99,7 @@ object ROM
 	fun saveROM()
 	{
 		Lists.saveModels()
-
+		println("Before save: " + Integer.toHexString(ROM.getTriple(0x6532)).toUpperCase())
 		if(ROM.settings.createExcelFilesOnSave){saveToExcelFiles()}
 
 		Files.write(rom.toPath(), ROM.bytes, StandardOpenOption.WRITE)
@@ -106,6 +107,46 @@ object ROM
 	}
 
 	fun saveToExcelFiles()
+	{
+	launch()
+	}
+
+	fun standard()
+	{
+		val startTime = System.currentTimeMillis()
+
+		CharacterComparisons("Character Comparisons.xlsx")
+		CharacterData("Character.xlsx")
+		EquipmentData("Equipment.xlsx")
+		ExpData("Experience.xlsx")
+		MonsterData("Monster.xlsx")
+		val endTime = System.currentTimeMillis()
+		val timeElapsed = (endTime - startTime)
+		println("Excel Export Time is: ${timeElapsed.toDouble()/1000} seconds")
+	}
+
+	fun launch() = runBlocking {
+
+		val startTime = System.currentTimeMillis()
+
+		val job1 = launch{CharacterComparisons("Character Comparisons.xlsx")}
+		val job2 = 	launch{	CharacterData("Character.xlsx")}
+		val job3 = 	launch{EquipmentData("Equipment.xlsx")}
+		val job4 = 	launch{ExpData("Experience.xlsx")}
+		val job5 = 	launch{MonsterData("Monster.xlsx")}
+
+
+		job1.join()
+		job2.join()
+		job3.join()
+		job4.join()
+		job5.join()
+		val endTime = System.currentTimeMillis()
+		val timeElapsed = (endTime - startTime)
+		println("Excel Export Time is: ${timeElapsed.toDouble()/1000} seconds")
+	}
+
+	fun acyncExcel()
 	{
 		val startTime = System.currentTimeMillis()
 
@@ -126,6 +167,10 @@ object ROM
 			println("Excel Export Time is: ${timeElapsed.toDouble()/1000} seconds")
 		}
 	}
+
+
+
+
 
 	fun setProgramDirectory()
 	{

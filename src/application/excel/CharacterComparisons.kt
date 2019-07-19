@@ -10,8 +10,9 @@ class CharacterComparisons(fileName: String) : Excel(fileName)
 	{
 					val sheet = workbook.createSheet("Spell Comparisons")
 					val rowData = mutableListOf<RowData>()
-					val characterNames = Characters.characterNames
-					characterNames.add(0, "")
+					var characterNames = mutableListOf<String>()
+					characterNames.add("")
+					characterNames.addAll(Characters.characterNamesByClassOrder)
 
 					val characters = Characters(Lists.characters)
 					characters.chronologicalIndexSort()

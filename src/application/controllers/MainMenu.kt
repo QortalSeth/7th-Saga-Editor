@@ -23,7 +23,7 @@ class MainMenu
 {
 
 	private lateinit var mainWindow: Window
-	internal var debug: Boolean = false
+	internal var debug: Boolean = true
 
 	@FXML fun initialize()
 	{
@@ -67,7 +67,7 @@ class MainMenu
 	{
 		val fc = FileChooser()
 		fc.title = "Choose file to open"
-		fc.extensionFilters.add(ExtensionFilter("SNES Files", "*.smc"))
+		fc.extensionFilters.add(ExtensionFilter("SNES Files", "*.smc","*.sfc"))
 		fc.initialDirectory = ROM.programDirectory
 
 		val rom = fc.showOpenDialog(null)

@@ -25,6 +25,7 @@ class Armor : Equipment, Serializable
 	{
 
 		ROM.offset = baseOffset + bytesPerArmor * gameIndex
+		offset = ROM.offset
 		power = ROM.nextShort
 		cost = ROM.nextShort
 		equipCode = ROM.nextByte
@@ -60,10 +61,10 @@ class Armor : Equipment, Serializable
 	}
 
 	val isBodyArmor: Boolean
-		get() = this.itemCode < 0xB4
+		get() = this.itemCode < 0xB5
 
 	val isAccessory: Boolean
-		get() = this.itemCode >= 0xB4
+		get() = this.itemCode >= 0xB5
 
 	val isCoat: Boolean
 		get() = isBodyArmor && equipCode == 0x10

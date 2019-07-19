@@ -46,7 +46,7 @@ class EquipmentData(fileName: String) : Excel(fileName)
 			}
 		}
 
-		rowData.add(RowData(defaultStyle, mutableListOf("Name", "Power", "Cost", "Discount", "Equip", "Locations", "Default Locations", "Name Pointer")))
+		rowData.add(RowData(defaultStyle, mutableListOf("Name", "Power", "Cost", "Discount", "Equip", "Locations", "Default Locations", "Name Pointer", "ROM Location")))
 		rowData.add(RowData(defaultStyle, mutableListOf("")))
 
 		val shops = Shops()
@@ -83,7 +83,7 @@ class EquipmentData(fileName: String) : Excel(fileName)
 		weapons.models.forEach {
 			val Dw = weapons.getDModel(it)
 			val namePointer = CompareValues(TextReader.pointerToText(Dw.namePointer), TextReader.pointerToText(it.namePointer))
-			rowData.add(RowData(defaultStyle, mutableListOf(CompareValues(Dw.name, it.name), CompareValues(Dw.power, it.power), CompareValues(Dw.cost, it.cost), CompareValues(Dw.discount, it.discount), CompareValues(getEquipNames(Dw.equipCode), getEquipNames(it.equipCode)), AbstractItems.getLocations(shops.models, Lists.characters.models, it.itemCode), AbstractItems.getLocations(shops.dModels, Lists.characters.dModels, Dw.itemCode), namePointer)))
+			rowData.add(RowData(defaultStyle, mutableListOf(CompareValues(Dw.name, it.name), CompareValues(Dw.power, it.power), CompareValues(Dw.cost, it.cost), CompareValues(Dw.discount, it.discount), CompareValues(getEquipNames(Dw.equipCode), getEquipNames(it.equipCode)), AbstractItems.getLocations(shops.models, Lists.characters.models, it.itemCode), AbstractItems.getLocations(shops.dModels, Lists.characters.dModels, Dw.itemCode), namePointer, "0x${Integer.toHexString(it.offset).toUpperCase()}")))
 		}
 		rowData.add(RowData(defaultStyle, mutableListOf("")))
 	}
@@ -92,6 +92,9 @@ class EquipmentData(fileName: String) : Excel(fileName)
 	{
 		val rowData = ArrayList<RowData>()
 		val armors = Armors(Lists.armors)
+		armors.models.removeIf{it.equipCode==0}
+
+
 		val bodyArmors = Armors(armors.dModels)
 		val robes = Armors(armors.dModels)
 		val coats = Armors(armors.dModels)
@@ -115,7 +118,7 @@ class EquipmentData(fileName: String) : Excel(fileName)
 			}
 		}
 
-		rowData.add(RowData(defaultStyle, mutableListOf("Name", "Defense", "Cost", "Discount", "Equip", "Lit", "???", "???", "Fire", "Ice", "Vac", "Deb", "Locations", "Default Locations", "Misc.")))
+		rowData.add(RowData(defaultStyle, mutableListOf("Name", "Defense", "Cost", "Discount", "Equip", "Lit", "???", "???", "Fire", "Ice", "Vac", "Deb", "Locations", "Default Locations", "Name Pointer", "ROM Location")))
 		rowData.add(RowData(defaultStyle, mutableListOf("")))
 
 		val shops = Shops(Lists.shops)
@@ -142,11 +145,10 @@ class EquipmentData(fileName: String) : Excel(fileName)
 		armors.models.forEach {
 			val Da = armors.getDModel(it)
 
-			var miscData = ""
 
-			if (it.namePointer != Da.namePointer) miscData = "Name Pointer Changed to " + TextReader.pointerToText(it.namePointer)
 
-			rowData.add(RowData(defaultStyle, mutableListOf(CompareValues(Da.name, it.name), CompareValues(Da.power, it.power), CompareValues(Da.cost, it.cost), CompareValues(Da.discount, it.discount), CompareValues(getEquipNames(Da.equipCode), getEquipNames(it.equipCode)), CompareValues(Da.laserRes, it.laserRes), CompareValues(Da.unknownRes1, it.unknownRes1), CompareValues(Da.unknownRes2, it.unknownRes2), CompareValues(Da.fireRes, it.fireRes), CompareValues(Da.iceRes, it.iceRes), CompareValues(Da.vacuumRes, it.vacuumRes), CompareValues(Da.debuffRes, it.debuffRes), AbstractItems.getLocations(shops.models, Lists.characters.models, it.itemCode), AbstractItems.getLocations(shops.dModels, Lists.characters.dModels, Da.itemCode), miscData)))
+			val namePointer = CompareValues(TextReader.pointerToText(Da.namePointer), TextReader.pointerToText(it.namePointer))
+			rowData.add(RowData(defaultStyle, mutableListOf(CompareValues(Da.name, it.name), CompareValues(Da.power, it.power), CompareValues(Da.cost, it.cost), CompareValues(Da.discount, it.discount), CompareValues(getEquipNames(Da.equipCode), getEquipNames(it.equipCode)), CompareValues(Da.laserRes, it.laserRes), CompareValues(Da.unknownRes1, it.unknownRes1), CompareValues(Da.unknownRes2, it.unknownRes2), CompareValues(Da.fireRes, it.fireRes), CompareValues(Da.iceRes, it.iceRes), CompareValues(Da.vacuumRes, it.vacuumRes), CompareValues(Da.debuffRes, it.debuffRes), AbstractItems.getLocations(shops.models, Lists.characters.models, it.itemCode), AbstractItems.getLocations(shops.dModels, Lists.characters.dModels, Da.itemCode), namePointer, "0x${Integer.toHexString(it.offset).toUpperCase()}")))
 		}
 		rowData.add(RowData(defaultStyle, mutableListOf("")))
 	}

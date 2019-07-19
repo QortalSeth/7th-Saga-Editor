@@ -14,18 +14,19 @@ class Apprentice(gameIndex: Int) : Model(gameIndex), Serializable
 
 	init
 	{
-		name = Characters.characterNames[gameIndex]
+		name = Characters.characterNamesByGameIndex[gameIndex]
 	}
 
 	fun getValuesFromROM()
 	{
 
 		ROM.offset = baseOffset + bytesPerApprentice * gameIndex
+		offset = ROM.offset
 		for (i in 0..numOfDialogues - 1)
 		{
 			dialoguePointers[i] = ROM.nextTriple
 		}
-		name = Characters.characterNames[gameIndex]
+		name = Characters.characterNamesByGameIndex[gameIndex]
 
 
 

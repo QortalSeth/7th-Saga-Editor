@@ -41,6 +41,7 @@ class Character(nameP: String, gameIndex: Int) : Model(gameIndex), Serializable
 	{
 
 		ROM.offset = baseoffset + bytespercharacter * gameIndex
+		offset = ROM.offset
 
 		hpStart = ROM.nextShort
 		mpStart = ROM.nextShort

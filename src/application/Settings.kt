@@ -9,6 +9,7 @@ class Settings : Serializable{
    var showMonsterDuplicates = false
    var createExcelFilesOnSave = true
    var belaineSwordsMatchCosts = true
+    var applyDiscountToBelainSwords = true
 
 
 
@@ -31,7 +32,7 @@ class Settings : Serializable{
                 showMonsterDuplicates = s.showMonsterDuplicates
                 createExcelFilesOnSave = s.createExcelFilesOnSave
                 belaineSwordsMatchCosts = s.belaineSwordsMatchCosts
-
+                applyDiscountToBelainSwords = s.applyDiscountToBelainSwords
             }
             printSettings()
         }
@@ -51,7 +52,6 @@ class Settings : Serializable{
             println("Write Settings Failed")
         }
     }
-
 
 
     fun printSettings()

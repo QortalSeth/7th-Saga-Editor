@@ -131,6 +131,7 @@ class TextEditor : ControllerInitilizer
 		val bytes = TextWriter.TextToBytes(textWriteT.text)
 		bytes.appendEndCharacter()
 
+		println("Text to Write Values" + Integer.toHexString(ROM.getTriple(0x6532)).toUpperCase())
 		if (textLocationT.text.isEmpty()) return
 
 		val location = textLocationT.text.toInt(16)
@@ -143,8 +144,16 @@ class TextEditor : ControllerInitilizer
 	{
 		val pointerLocation = textPointerLocationT.text
 		val pointerValue = textPointerValueT.text
+		var pointerLittleEndian = TextReader.pointerToLittleEndian(pointerValue.toInt(16))
+		pointerLittleEndian = pointerLittleEndian or 0x0000C0  // pointers in 7th Saga always have these bits set
+
+		println("Before save: " + Integer.toHexString(ROM.getTriple(0x6532)).toUpperCase())
+
+
 		if (pointerLocation.isNotEmpty() && pointerValue.isNotEmpty()) // overwrite pointer
-			ROM.setTriple(pointerLocation.toInt(16), pointerValue.toInt(16))
+			ROM.setTriple(pointerLocation.toInt(16), pointerLittleEndian)
+		println("After save: " + Integer.toHexString(ROM.getTriple(0x6532)).toUpperCase())
+
 	}
 
 	// get text into list

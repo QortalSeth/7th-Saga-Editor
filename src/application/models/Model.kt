@@ -9,6 +9,7 @@ abstract class Model(index: Int) : Serializable
 	var namePointer: Int = 0
 	var chronologicalIndex: Int = 0
 	var listIndex: Int = 0
+	var offset = 0
 
 	constructor(m: Model) : this(m.gameIndex)
 	{
@@ -16,6 +17,7 @@ abstract class Model(index: Int) : Serializable
 		namePointer = m.namePointer
 		chronologicalIndex = m.chronologicalIndex
 		listIndex = m.listIndex
+		offset = m.offset
 	}
 
 	override fun toString(): String

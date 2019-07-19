@@ -32,7 +32,7 @@
                  </rowConstraints>
                   <children>
                      <Label text="Text Reader" underline="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                     <Label text="Text Location to Read:" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+                     <Label text="*Text Location to Read:" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
                      <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <children>
                            <TextField fx:id="pointerToReadT" onKeyTyped="#removeNonHexNumbers" />
@@ -98,6 +98,7 @@
                         <Label text="**  /END is automatically applied at end of Text" />
                         <Label text="*** Newlines must match in game text to locate it" />
                         <Label text="Some text can't be read by the editor, if text isn't found, try searching with fewer characters" />
+                        <Label text="Changes to name pointers for equipment must be changed in their respective editors" />
                      </children>
                   </VBox>
                   <Label text="Pointer Writer" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="5" />
