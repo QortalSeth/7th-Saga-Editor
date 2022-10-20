@@ -8,6 +8,8 @@
       <excludeFolder url="file://$MODULE_DIR$/Executable/Link to Roms" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/Executable/ChangeLists" />
+      <excludeFolder url="file://$MODULE_DIR$/Coroutines" />
+      <excludeFolder url="file://$MODULE_DIR$/Executable/EXE" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
