@@ -1,6 +1,7 @@
 package application.excel
 
 import application.ROM
+import org.apache.poi.xssf.usermodel.XSSFCellStyle
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.BufferedOutputStream
@@ -12,32 +13,54 @@ import java.lang.Integer.toString
 open class Excel(var fileName: String)
 {
 	val workbook = XSSFWorkbook()
-	val defaultStyle = workbook.createCellStyle()
-	val boldStyle = workbook.createCellStyle()
+	val defaultStyle: XSSFCellStyle = workbook.createCellStyle()
+	val bigStyle: XSSFCellStyle = workbook.createCellStyle()
+	val boldStyle: XSSFCellStyle = workbook.createCellStyle()
+	val bigBoldStyle: XSSFCellStyle = workbook.createCellStyle()
+
 
 	init
 	{
 		setDefaultStyle()
+		setBigStyle()
 		setBoldStyle()
+		setBigBoldStyle()
 		saveData()
 	}
 
-	fun setDefaultStyle()
+	private fun setDefaultStyle()
 	{
 		val defaultFont = workbook.createFont()
-		defaultFont.fontHeightInPoints = 10.toShort()
+		defaultFont.fontHeightInPoints = 14.toShort()
 		defaultFont.fontName = "Times New Roman"
 		defaultFont.bold = false
 		defaultStyle.setFont(defaultFont)
 	}
 
+	fun setBigStyle()
+	{
+		val boldFont = workbook.createFont()
+		boldFont.fontHeightInPoints = 16.toShort()
+		boldFont.fontName = "Times New Roman"
+		boldFont.bold = false
+		bigStyle.setFont(boldFont)
+	}
+
 	fun setBoldStyle()
 	{
 		val boldFont = workbook.createFont()
-		boldFont.fontHeightInPoints = 12.toShort()
+		boldFont.fontHeightInPoints = 14.toShort()
 		boldFont.fontName = "Times New Roman"
 		boldFont.bold = true
 		boldStyle.setFont(boldFont)
+	}
+	fun setBigBoldStyle()
+	{
+		val boldFont = workbook.createFont()
+		boldFont.fontHeightInPoints = 16.toShort()
+		boldFont.fontName = "Times New Roman"
+		boldFont.bold = true
+		bigBoldStyle.setFont(boldFont)
 	}
 
 	fun CompareValues(a: Int, b: Int): String
@@ -63,25 +86,22 @@ open class Excel(var fileName: String)
 		else return a + "=>" + b
 	}
 
-	fun writeDataToSheet(sheet: XSSFSheet, rowData: List<RowData>)
+	fun writeDataToSheet(sheet: XSSFSheet, sheetData: SheetData)
 	{
-		rowData.indices.forEach { rowNum ->
-			val data = rowData[rowNum].text
-			val style = rowData[rowNum].style
-			val row = sheet.createRow(rowNum)
+		sheetData.rows.forEachIndexed {rowIndex, rowData ->
+			val row = sheet.createRow(rowIndex)
 
-			data.indices.forEach { cellNum ->
-				val cell = row.createCell(cellNum)
-				cell.row.height = 0.toShort()
-				cell.cellStyle = style
-				cell.setCellValue(data[cellNum])
+			rowData.cells.forEachIndexed{ cellIndex, cellData ->
+				val cell = row.createCell(cellIndex)
+				cell.cellStyle = cellData.style
+				cell.setCellValue(cellData.text)
 			}
 		}
 
 		val columnsInSheet = calculateNumberOfColumnsInSheet(sheet)
 		// System.out.println("number of columns is:
 		// "+Integer.toString(columnsInSheet));
-		for (i in 0..columnsInSheet - 1) sheet.autoSizeColumn(i)
+		for (i in 0 until columnsInSheet) sheet.autoSizeColumn(i)
 	}
 
 	fun calculateNumberOfColumnsInSheet(sheet: XSSFSheet): Int
@@ -111,7 +131,7 @@ open class Excel(var fileName: String)
 		else return ""
 	}
 
-	open fun saveData()
+	fun saveData()
 	{
 		makeChangeList()
 		try

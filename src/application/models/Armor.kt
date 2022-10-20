@@ -38,6 +38,13 @@ class Armor : Equipment, Serializable
 		debuffRes = ROM.nextByte
 		namePointer = ROM.nextTriple
 		name = TextReader.readText(namePointer)
+
+		if (name.length>20) {
+			println("""Offset: ${namePointer.toString(16)}""")
+			println("""Error, Name: ${name} is too long""")
+			val pointerTest = TextReader.readText(namePointer)
+		}
+
 		discount = ROM.nextShort
 
 		if (power == 0 && laserRes == 0 && fireRes == 0 && iceRes == 0 && cost == 0) equipCode = 0

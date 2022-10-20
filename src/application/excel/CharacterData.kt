@@ -2,28 +2,99 @@ package application.excel
 
 import application.models.lists.Characters
 import application.models.lists.Lists
+import org.apache.poi.xssf.usermodel.XSSFSheet
 
 class CharacterData(fileName: String) : Excel(fileName)
 {
 	override fun makeChangeList()
 	{
-		val sheet = workbook.createSheet("Character Data")
-		val rowData = mutableListOf<RowData>()
-
 		val characters = Characters()
 		characters.addUsefulModels(Lists.characters, false)
+		characters.chronologicalIndexSort()
+		fillStatsSheet(characters)
+		fillSpellsSheet(characters)
 
-		for (i in 0..Characters.characterListSize - 1)
+	}
+	private fun fillStatsSheet(characters: Characters) {
+		val statsSheet = workbook.createSheet("Stats")
+		val sheetData = SheetData()
+		sheetData.addRow(RowData(bigBoldStyle, mutableListOf("", "HP", "MP", "Power", "Guard", "Magic", "Speed")))
+		sheetData.addRow(RowData(bigStyle, mutableListOf("Starting Stats")))
+		characters.models.forEachIndexed { index, c ->
+			val Dc = characters.dModels[index]
+			sheetData.addRow(RowData(defaultStyle, mutableListOf(
+				c.name,
+				CompareValues(Dc.hpStart,c.hpStart),
+				CompareValues(Dc.mpStart,c.mpStart),
+				CompareValues(Dc.powerStart,c.powerStart),
+				CompareValues(Dc.guardStart,c.guardStart),
+				CompareValues(Dc.magicStart, c.magicStart),
+				CompareValues(Dc.speedStart, c.speedStart)
+			)))
+		}
+		sheetData.addRow(RowData(defaultStyle, mutableListOf("")))
+		sheetData.addRow(RowData(bigBoldStyle, mutableListOf("Growth Rates")))
+		characters.models.forEachIndexed { index, c ->
+			val Dc = characters.dModels[index]
+			sheetData.addRow(RowData(defaultStyle, mutableListOf(
+				c.name,
+				CompareValues(Dc.hpGrowth,c.hpGrowth),
+				CompareValues(Dc.mpGrowth,c.mpGrowth),
+				CompareValues(Dc.powerGrowth,c.powerGrowth),
+				CompareValues(Dc.guardGrowth,c.guardGrowth),
+				CompareValues(Dc.magicGrowth, c.magicGrowth),
+				CompareValues(Dc.speedGrowth, c.speedGrowth)
+			)))
+		}
+		statsSheet.createFreezePane(0,1,0,1)
+		sheetData.setColumnStyle(bigBoldStyle,0)
+		writeDataToSheet(statsSheet, sheetData)
+	}
+
+
+	private fun fillSpellsSheet(characters: Characters) {
+		val spellsSheet = workbook.createSheet("Spells")
+		val sheetData = SheetData()
+		val header = mutableListOf<String>()
+		header.add("#")
+		characters.models.forEach{
+
+			header.add(it.name)
+			header.add("Level")
+			header.add(" ")
+		}
+
+		sheetData.addRow(RowData(boldStyle, header))
+		val spells = Lists.spells
+		for(i in 0 until 16){
+			val row = mutableListOf<String>()
+			row.add((i+1).toString())
+
+			characters.models.forEachIndexed{ index, c ->
+				val Dc = characters.dModels[index]
+
+
+				row.add(CompareValues(spells.getDName(Dc.spells[i]), spells.getName(c.spells[i])))
+				row.add(CompareValues(Dc.spellLevels[i], c.spellLevels[i]))
+				row.add("")
+			}
+			sheetData.addRow(RowData(defaultStyle, row))
+		}
+		spellsSheet.createFreezePane(1,1,1,1)
+		sheetData.setColumnStyle(bigBoldStyle,0)
+		writeDataToSheet(spellsSheet, sheetData)
+	}
+	/*	for (i in 0..Characters.characterListSize - 1)
 		{
 
 			val c = characters.models[i]
 			val Dc = characters.dModels[i]
 
-			rowData.add(RowData(boldStyle, mutableListOf(c.name)))
-			rowData.add(RowData(defaultStyle, mutableListOf("Stats", "HP", "MP", "Power", "Guard", "Magic", "Speed")))
-			rowData.add(RowData(defaultStyle, mutableListOf("Initial", CompareValues(Dc.hpStart, c.hpStart), CompareValues(Dc.mpStart, c.mpStart), CompareValues(Dc.powerStart, c.powerStart), CompareValues(Dc.guardStart, c.guardStart), CompareValues(Dc.magicStart, c.magicStart), CompareValues(Dc.speedStart, c.speedStart))))
-			rowData.add(RowData(defaultStyle, mutableListOf("Level Up", CompareValues(Dc.hpGrowth, c.hpGrowth), CompareValues(Dc.mpGrowth, c.mpGrowth), CompareValues(Dc.powerGrowth, c.powerGrowth), CompareValues(Dc.guardGrowth, c.guardGrowth), CompareValues(Dc.magicGrowth, c.magicGrowth), CompareValues(Dc.speedGrowth, c.speedGrowth))))
-			rowData.add(RowData(defaultStyle, mutableListOf("")))
+			sheetData.addRow(RowData(boldStyle, mutableListOf(c.name)))
+
+			sheetData.addRow(RowData(defaultStyle, mutableListOf("Initial", CompareValues(Dc.hpStart, c.hpStart), CompareValues(Dc.mpStart, c.mpStart), CompareValues(Dc.powerStart, c.powerStart), CompareValues(Dc.guardStart, c.guardStart), CompareValues(Dc.magicStart, c.magicStart), CompareValues(Dc.speedStart, c.speedStart))))
+			sheetData.addRow(RowData(defaultStyle, mutableListOf("Level Up", CompareValues(Dc.hpGrowth, c.hpGrowth), CompareValues(Dc.mpGrowth, c.mpGrowth), CompareValues(Dc.powerGrowth, c.powerGrowth), CompareValues(Dc.guardGrowth, c.guardGrowth), CompareValues(Dc.magicGrowth, c.magicGrowth), CompareValues(Dc.speedGrowth, c.speedGrowth))))
+			sheetData.addRow(RowData(defaultStyle, mutableListOf("")))
 
 			val spells = mutableListOf<String>()
 			val levels = mutableListOf<String>()
@@ -67,18 +138,18 @@ class CharacterData(fileName: String) : Excel(fileName)
 				levels2.add(levels.removeAt(9))
 			}
 
-			rowData.add(RowData(defaultStyle, spells))
-			rowData.add(RowData(defaultStyle, levels))
+			sheetData.addRow(RowData(defaultStyle, spells))
+			sheetData.addRow(RowData(defaultStyle, levels))
 
 			if (spells2.size > 1)
 			{
-				rowData.add(RowData(defaultStyle, mutableListOf("")))
-				rowData.add(RowData(defaultStyle, spells2))
-				rowData.add(RowData(defaultStyle, levels2))
+				sheetData.addRow(RowData(defaultStyle, mutableListOf("")))
+				sheetData.addRow(RowData(defaultStyle, spells2))
+				sheetData.addRow(RowData(defaultStyle, levels2))
 			}
 
-			rowData.add(RowData(defaultStyle, mutableListOf("")))
+			sheetData.addRow(RowData(defaultStyle, mutableListOf("")))
 		}
-		writeDataToSheet(sheet, rowData)
-	}
+		writeDataToSheet(statsSheet, sheetData)*/
+
 }

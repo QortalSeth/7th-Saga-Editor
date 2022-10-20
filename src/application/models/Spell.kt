@@ -1,6 +1,7 @@
 package application.models
 
 import application.ROM
+import application.enums.SpellOrder
 import application.enums.SpellType
 import application.staticClasses.TextReader
 import java.io.Serializable
@@ -9,7 +10,8 @@ class Spell : Model, Serializable
 {
 	constructor(index: Int) : super(index)
 	{
-		chronologicalIndex = SpellType.getChronOrder(this).ordinal
+		chronologicalIndex = SpellOrder.getChronOrder(this).ordinal
+		spellType = SpellType.getTypeOrder(this)
 	}
 
 	var power: Int = 0
@@ -19,6 +21,8 @@ class Spell : Model, Serializable
 	var element: Int = 0
 	var unknown1: Int = 0
 	var unknown2: Int = 0
+	lateinit var spellType: SpellType
+
 
 	fun getValuesFromROM()
 	{
@@ -34,6 +38,7 @@ class Spell : Model, Serializable
 		unknown2 = ROM.nextByte
 		namePointer = ROM.nextTriple
 		name = TextReader.readText(namePointer)
+
 	}
 
 	fun writeValuesToROM()
@@ -84,7 +89,19 @@ class Spell : Model, Serializable
 	{
 		private val baseOffset = 0x7018
 		private val bytesPerSpell = 12
-		val elements = arrayOf("None", "Lightning", "Unknown", "Unknown", "Fire", "Ice", "Vacuum", "Debuff")
+
+		//val targetingText = mapOf()
+
+		val elementText = arrayOf("None", "Lightning", "Unknown", "Unknown", "Fire", "Ice", "Vacuum", "Debuff")
+		val targetingText = mapOf(
+			0 to "Single Enemy",
+			1 to "All Enemies",
+			2 to "Ally",
+			4 to "Map"
+		).withDefault { "ERROR" }
+
+		val domainText = arrayOf("All", "Battle", "Map")
+
 	}
 
 }

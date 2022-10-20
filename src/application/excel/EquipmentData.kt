@@ -14,12 +14,15 @@ class EquipmentData(fileName: String) : Excel(fileName)
 	{
 		val weaponsSheet = workbook.createSheet("Weapon Data")
 		val armorSheet = workbook.createSheet("Armor Data")
+
+		weaponsSheet.createFreezePane(2,2,2,2)
+		armorSheet.createFreezePane(2,2,2,2)
 		writeDataToSheet(weaponsSheet, fillWeaponSheet())
 		writeDataToSheet(armorSheet, fillArmorSheet())
 	}
 
 
-	private fun fillWeaponSheet(): MutableList<RowData>
+	private fun fillWeaponSheet(): SheetData
 	{
 		val weapons = Weapons(Lists.weapons)
 		val axes = Weapons(weapons.dModels)
@@ -30,7 +33,7 @@ class EquipmentData(fileName: String) : Excel(fileName)
 		val fists = Weapons(weapons.dModels)
 		val misc = Weapons(weapons.dModels)
 
-		val rowData = mutableListOf<RowData>()
+		val sheetData = SheetData()
 		weapons.models.forEach {
 			when (EquipmentType.getType(it))
 			{
@@ -46,51 +49,63 @@ class EquipmentData(fileName: String) : Excel(fileName)
 			}
 		}
 
-		rowData.add(RowData(defaultStyle, mutableListOf("Name", "Power", "Cost", "Discount", "Equip", "Locations", "Default Locations", "Name Pointer", "ROM Location")))
-		rowData.add(RowData(defaultStyle, mutableListOf("")))
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Name", "Power", "Cost", "Discount", "Equip", "Locations", "Default Locations", "Name Pointer", "ROM Location")))
+		sheetData.addRow(RowData(defaultStyle, mutableListOf("")))
 
 		val shops = Shops()
 		shops.addUsefulModels(Lists.shops, false)
 		shops.chronologicalIndexSort()
 
-		rowData.add(RowData(boldStyle, mutableListOf("Knight Swords")))
-		addWeaponType(rowData, knightSwords, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Knight Swords")))
+		addWeaponType(sheetData, knightSwords, shops, defaultStyle)
 
-		rowData.add(RowData(boldStyle, mutableListOf("Axes")))
-		addWeaponType(rowData, axes, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Axes")))
+		addWeaponType(sheetData, axes, shops, defaultStyle)
 
-		rowData.add(RowData(boldStyle, mutableListOf("Swords")))
-		addWeaponType(rowData, swords, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Swords")))
+		addWeaponType(sheetData, swords, shops, defaultStyle)
 		
-		rowData.add(RowData(boldStyle, mutableListOf("Knives")))
-		addWeaponType(rowData, knives, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Knives")))
+		addWeaponType(sheetData, knives, shops, defaultStyle)
 
-		rowData.add(RowData(boldStyle, mutableListOf("Rods")))
-		addWeaponType(rowData, rods, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Rods")))
+		addWeaponType(sheetData, rods, shops, defaultStyle)
 
-		rowData.add(RowData(boldStyle, mutableListOf("Fists")))
-		addWeaponType(rowData, fists, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Fists")))
+		addWeaponType(sheetData, fists, shops, defaultStyle)
 
-		rowData.add(RowData(boldStyle, mutableListOf("Misc.")))
-		addWeaponType(rowData, misc, shops, defaultStyle)
-		return rowData
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Misc.")))
+		addWeaponType(sheetData, misc, shops, defaultStyle)
+		return sheetData
 	}
 
-	private fun addWeaponType(rowData: MutableList<RowData>, weapons: Weapons, shops: Shops, defaultStyle: XSSFCellStyle)
+	private fun addWeaponType(rowData: SheetData, weapons: Weapons, shops: Shops, defaultStyle: XSSFCellStyle)
 	{
 		weapons.sortList(application.models.lists.Equipment.ascendingComparator as Comparator<Weapon>)
 
 		weapons.models.forEach {
 			val Dw = weapons.getDModel(it)
 			val namePointer = CompareValues(TextReader.pointerToText(Dw.namePointer), TextReader.pointerToText(it.namePointer))
-			rowData.add(RowData(defaultStyle, mutableListOf(CompareValues(Dw.name, it.name), CompareValues(Dw.power, it.power), CompareValues(Dw.cost, it.cost), CompareValues(Dw.discount, it.discount), CompareValues(getEquipNames(Dw.equipCode), getEquipNames(it.equipCode)), AbstractItems.getLocations(shops.models, Lists.characters.models, it.itemCode), AbstractItems.getLocations(shops.dModels, Lists.characters.dModels, Dw.itemCode), namePointer, "0x${Integer.toHexString(it.offset).toUpperCase()}")))
+			rowData.addRow(RowData(defaultStyle,
+				mutableListOf(CompareValues(Dw.name, it.name),
+					CompareValues(Dw.power, it.power),
+					CompareValues(Dw.cost, it.cost),
+					CompareValues(Dw.discount, it.discount),
+					CompareValues(getEquipNames(Dw.equipCode),
+						getEquipNames(it.equipCode)),
+					AbstractItems.getLocations(shops.models,
+						Lists.characters.models, it.itemCode),
+					AbstractItems.getLocations(shops.dModels,
+						Lists.characters.dModels, Dw.itemCode),
+					namePointer,
+					"0x${Integer.toHexString(it.offset).toUpperCase()}")))
 		}
-		rowData.add(RowData(defaultStyle, mutableListOf("")))
+		rowData.addRow(RowData(defaultStyle, mutableListOf("")))
 	}
 
-	private fun fillArmorSheet(): MutableList<RowData>
+	private fun fillArmorSheet(): SheetData
 	{
-		val rowData = ArrayList<RowData>()
+		val sheetData = SheetData()
 		val armors = Armors(Lists.armors)
 		armors.models.removeIf{it.equipCode==0}
 
@@ -118,28 +133,28 @@ class EquipmentData(fileName: String) : Excel(fileName)
 			}
 		}
 
-		rowData.add(RowData(defaultStyle, mutableListOf("Name", "Defense", "Cost", "Discount", "Equip", "Lit", "???", "???", "Fire", "Ice", "Vac", "Deb", "Locations", "Default Locations", "Name Pointer", "ROM Location")))
-		rowData.add(RowData(defaultStyle, mutableListOf("")))
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Name", "Defense", "Cost", "Discount", "Equip", "Lit", "???", "???", "Fire", "Ice", "Vac", "Deb", "Locations", "Default Locations", "Name Pointer", "ROM Location")))
+		sheetData.addRow(RowData(defaultStyle, mutableListOf("")))
 
 		val shops = Shops(Lists.shops)
 		shops.chronologicalIndexSort()
 
-		rowData.add(RowData(boldStyle, mutableListOf("Armors")))
-		addArmorType(rowData, bodyArmors, shops, defaultStyle)
-		rowData.add(RowData(boldStyle, mutableListOf("Robes")))
-		addArmorType(rowData, robes, shops, defaultStyle)
-		rowData.add(RowData(boldStyle, mutableListOf("Coats")))
-		addArmorType(rowData, coats, shops, defaultStyle)
-		rowData.add(RowData(boldStyle, mutableListOf("Misc. Armors")))
-		addArmorType(rowData, miscArmors, shops, defaultStyle)
-		rowData.add(RowData(boldStyle, mutableListOf("Shields")))
-		addArmorType(rowData, shields, shops, defaultStyle)
-		rowData.add(RowData(boldStyle, mutableListOf("Accessories")))
-		addArmorType(rowData, accessories, shops, defaultStyle)
-		return rowData
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Armors")))
+		addArmorType(sheetData, bodyArmors, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Robes")))
+		addArmorType(sheetData, robes, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Coats")))
+		addArmorType(sheetData, coats, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Misc. Armors")))
+		addArmorType(sheetData, miscArmors, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Shields")))
+		addArmorType(sheetData, shields, shops, defaultStyle)
+		sheetData.addRow(RowData(boldStyle, mutableListOf("Accessories")))
+		addArmorType(sheetData, accessories, shops, defaultStyle)
+		return sheetData
 	}
 
-	private fun addArmorType(rowData: MutableList<RowData>, armors: Armors, shops: Shops, defaultStyle: XSSFCellStyle)
+	private fun addArmorType(rowData: SheetData, armors: Armors, shops: Shops, defaultStyle: XSSFCellStyle)
 	{
 		armors.sortList(application.models.lists.Equipment.ascendingComparator as Comparator<Armor>)
 		armors.models.forEach {
@@ -148,9 +163,9 @@ class EquipmentData(fileName: String) : Excel(fileName)
 
 
 			val namePointer = CompareValues(TextReader.pointerToText(Da.namePointer), TextReader.pointerToText(it.namePointer))
-			rowData.add(RowData(defaultStyle, mutableListOf(CompareValues(Da.name, it.name), CompareValues(Da.power, it.power), CompareValues(Da.cost, it.cost), CompareValues(Da.discount, it.discount), CompareValues(getEquipNames(Da.equipCode), getEquipNames(it.equipCode)), CompareValues(Da.laserRes, it.laserRes), CompareValues(Da.unknownRes1, it.unknownRes1), CompareValues(Da.unknownRes2, it.unknownRes2), CompareValues(Da.fireRes, it.fireRes), CompareValues(Da.iceRes, it.iceRes), CompareValues(Da.vacuumRes, it.vacuumRes), CompareValues(Da.debuffRes, it.debuffRes), AbstractItems.getLocations(shops.models, Lists.characters.models, it.itemCode), AbstractItems.getLocations(shops.dModels, Lists.characters.dModels, Da.itemCode), namePointer, "0x${Integer.toHexString(it.offset).toUpperCase()}")))
+			rowData.addRow(RowData(defaultStyle, mutableListOf(CompareValues(Da.name, it.name), CompareValues(Da.power, it.power), CompareValues(Da.cost, it.cost), CompareValues(Da.discount, it.discount), CompareValues(getEquipNames(Da.equipCode), getEquipNames(it.equipCode)), CompareValues(Da.laserRes, it.laserRes), CompareValues(Da.unknownRes1, it.unknownRes1), CompareValues(Da.unknownRes2, it.unknownRes2), CompareValues(Da.fireRes, it.fireRes), CompareValues(Da.iceRes, it.iceRes), CompareValues(Da.vacuumRes, it.vacuumRes), CompareValues(Da.debuffRes, it.debuffRes), AbstractItems.getLocations(shops.models, Lists.characters.models, it.itemCode), AbstractItems.getLocations(shops.dModels, Lists.characters.dModels, Da.itemCode), namePointer, "0x${Integer.toHexString(it.offset).toUpperCase()}")))
 		}
-		rowData.add(RowData(defaultStyle, mutableListOf("")))
+		rowData.addRow(RowData(defaultStyle, mutableListOf("")))
 	}
 
 	fun getEquipNames(equipCode: Int): String

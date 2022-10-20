@@ -66,7 +66,7 @@ class Items : AbstractItems<Item>, Serializable
 				else zerosNum++
 			}
 
-			for (i in 0..zerosNum - 1) newItemCodes.add(0) // add zeros back into list
+			for (i in 0..zerosNum - 1) newItemCodes.add(0) // addRow zeros back into list
 			for (i in itemCodes.indices) itemCodes[i] = newItemCodes[i]
 		}
 	}

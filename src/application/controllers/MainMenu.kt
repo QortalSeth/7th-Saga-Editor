@@ -23,7 +23,7 @@ class MainMenu
 {
 
 	private lateinit var mainWindow: Window
-	internal var debug: Boolean = true
+	var debug: Boolean = true
 
 	@FXML fun initialize()
 	{
@@ -124,7 +124,7 @@ class MainMenu
 				val kb = KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN)
 				if (kb.match(event))
 				{
-					println("data saved from main menu")
+					println("data saved from Launcher menu")
 					controller.saveData()
 					writeDataToDisk()
 				}

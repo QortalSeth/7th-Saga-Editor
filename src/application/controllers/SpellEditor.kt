@@ -101,7 +101,7 @@ class SpellEditor : ControllerInitilizer
 	{
 		targetingC.items = FXCollections.observableArrayList("Single Enemy", "All Enemies", "Ally", "Map")
 		domainC.items = FXCollections.observableArrayList("All", "Battle", "Map")
-		elementC.items.addAll(Spell.elements)
+		elementC.items.addAll(Spell.elementText)
 	}
 
 	@FXML lateinit var spellsC: ComboBox<Spell>

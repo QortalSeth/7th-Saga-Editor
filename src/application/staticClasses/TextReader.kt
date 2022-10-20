@@ -8,7 +8,7 @@ object TextReader
 	fun readText(pointer: Int): String
 	{
 		var pointer = pointer
-		pointer = pointer and 0x0FFFFF
+		pointer = pointer - 0xC00000
 
 		val text = StringBuilder()
 

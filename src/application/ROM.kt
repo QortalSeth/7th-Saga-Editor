@@ -2,19 +2,17 @@ package application
 
 import application.excel.*
 import application.models.lists.Lists
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+//import kotlinx.coroutines.experimental.async
+//import kotlinx.coroutines.experimental.launch
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.nio.file.Files
 import java.nio.file.StandardOpenOption
-import kotlinx.coroutines.experimental.runBlocking
+//import kotlinx.coroutines.experimental.runBlocking
 
-/**
- * Created by Seth on 4/3/2017.
- */
+
 object ROM
 {
 	var bytes: ByteArray = byteArrayOf(1)
@@ -35,7 +33,9 @@ object ROM
 	{
 		try
 		{
+
 			rom = File(romDirectory.toString() + "/7th Saga Unedited.smc")
+			println("""default ROM File: ${rom.toString()}""")
 			bytes = Files.readAllBytes(rom.toPath())
 			header = 0
 			Lists.initializeDModels()
@@ -45,7 +45,7 @@ object ROM
 		catch (e: Exception)
 		{
 			println("Open default ROM failed")
-			e.printStackTrace()
+			//e.printStackTrace()
 		}
 	}
 
@@ -74,9 +74,9 @@ object ROM
 
 			// assemble Data object
 
-			println("file path from disk: " + File(javaClass.getResource("models/defaultModels.data").toExternalForm()))
-			val inputFile = BufferedInputStream(this.javaClass.getResourceAsStream("models/defaultModels.data"))
-			// File defaultData = new File(Main.class.getResource("models/defaultModels.data").toURI());
+			println("file path from disk: " + File(javaClass.getResource("models/defaultModels.data")!!.toExternalForm()))
+			val inputFile = BufferedInputStream(this.javaClass.getResourceAsStream("models/defaultModels.data")!!)
+			// File defaultData = new File(MyApplication.class.getResource("models/defaultModels.data").toURI());
 			// System.out.println("File Path from disk: " + defaultData.getAbsolutePath());
 			ObjectInputStream(inputFile).use {
 				// deserialize the List
@@ -108,45 +108,47 @@ object ROM
 
 	fun saveToExcelFiles()
 	{
-	launch()
+	// launch()
+		standardExcelSave()
 	}
 
-	fun standard()
+	fun standardExcelSave()
 	{
 		val startTime = System.currentTimeMillis()
 
-		CharacterComparisons("Character Comparisons.xlsx")
+		CharacterComparisons("Character Spell Level Comparisons.xlsx")
 		CharacterData("Character.xlsx")
 		EquipmentData("Equipment.xlsx")
 		ExpData("Experience.xlsx")
 		MonsterData("Monster.xlsx")
+		SpellData("Spell.xlsx")
 		val endTime = System.currentTimeMillis()
 		val timeElapsed = (endTime - startTime)
 		println("Excel Export Time is: ${timeElapsed.toDouble()/1000} seconds")
 	}
 
-	fun launch() = runBlocking {
-
-		val startTime = System.currentTimeMillis()
-
-		val job1 = launch{CharacterComparisons("Character Comparisons.xlsx")}
-		val job2 = 	launch{	CharacterData("Character.xlsx")}
-		val job3 = 	launch{EquipmentData("Equipment.xlsx")}
-		val job4 = 	launch{ExpData("Experience.xlsx")}
-		val job5 = 	launch{MonsterData("Monster.xlsx")}
-
-
-		job1.join()
-		job2.join()
-		job3.join()
-		job4.join()
-		job5.join()
-		val endTime = System.currentTimeMillis()
-		val timeElapsed = (endTime - startTime)
-		println("Excel Export Time is: ${timeElapsed.toDouble()/1000} seconds")
-	}
-
-	fun acyncExcel()
+//	fun launch() = runBlocking {
+//
+//		val startTime = System.currentTimeMillis()
+//
+//		val job1 = launch{CharacterComparisons("Character Comparisons.xlsx")}
+//		val job2 = 	launch{	CharacterData("Character.xlsx")}
+//		val job3 = 	launch{EquipmentData("Equipment.xlsx")}
+//		val job4 = 	launch{ExpData("Experience.xlsx")}
+//		val job5 = 	launch{MonsterData("Monster.xlsx")}
+//
+//
+//		job1.join()
+//		job2.join()
+//		job3.join()
+//		job4.join()
+//		job5.join()
+//		val endTime = System.currentTimeMillis()
+//		val timeElapsed = (endTime - startTime)
+//		println("Excel Export Time is: ${timeElapsed.toDouble()/1000} seconds")
+//	}
+//
+/*	fun acyncExcel()
 	{
 		val startTime = System.currentTimeMillis()
 
@@ -166,7 +168,7 @@ object ROM
 			val timeElapsed = (endTime - startTime)
 			println("Excel Export Time is: ${timeElapsed.toDouble()/1000} seconds")
 		}
-	}
+}*/
 
 
 

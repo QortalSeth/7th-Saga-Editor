@@ -15,6 +15,7 @@ import expr.Variable
 import javafx.fxml.FXML
 import javafx.scene.chart.LineChart
 import javafx.scene.chart.XYChart
+import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TextField
@@ -24,7 +25,6 @@ import javafx.scene.input.KeyEvent
 import java.lang.Integer.parseInt
 import java.lang.Integer.toString
 import java.util.*
-import javax.swing.JOptionPane
 
 class CharacterEditor : ControllerInitilizer
 {
@@ -240,7 +240,7 @@ class CharacterEditor : ControllerInitilizer
 		val expr: Expr
 		try
 		{
-			var text = StringBuilder(expression.text)
+			val text = StringBuilder(expression.text)
 			var append = 0
 			expression.text.withIndex().forEach { (index, value) ->
 				if (value == 'x')
@@ -253,7 +253,11 @@ class CharacterEditor : ControllerInitilizer
 		}
 		catch (e: SyntaxException)
 		{
-			JOptionPane.showMessageDialog(null, e.explain(), "Error", JOptionPane.ERROR_MESSAGE)
+			val alert = Alert(Alert.AlertType.ERROR)
+			alert.title = "ERROR"
+			alert.contentText = e.explain()
+			alert.show()
+			//JOptionPane.showMessageDialog(null, e.explain(), "Error", JOptionPane.ERROR_MESSAGE)
 			return
 		}
 
@@ -279,7 +283,11 @@ class CharacterEditor : ControllerInitilizer
 		previewExp.forEach {
 			if (it <= 0)
 			{
-				JOptionPane.showMessageDialog(null, "Exp to next level can't be less than 1", "Error", JOptionPane.ERROR_MESSAGE)
+				val alert = Alert(Alert.AlertType.ERROR)
+				alert.title = "Error"
+				alert.contentText = "Exp to next level can't be less than 1"
+				alert.show()
+				// JOptionPane.showMessageDialog(null, "Exp to next level can't be less than 1", "Error", JOptionPane.ERROR_MESSAGE)
 				return
 			}
 		}

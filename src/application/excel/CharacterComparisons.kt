@@ -3,20 +3,25 @@ package application.excel
 import application.models.lists.Characters
 import application.models.lists.Lists
 import application.models.lists.Spells
+import org.apache.poi.xssf.usermodel.XSSFSheet
+
+
+
 
 class CharacterComparisons(fileName: String) : Excel(fileName)
 {
 	override fun makeChangeList()
 	{
 					val sheet = workbook.createSheet("Spell Comparisons")
-					val rowData = mutableListOf<RowData>()
+					val sheetData = SheetData()
 					var characterNames = mutableListOf<String>()
 					characterNames.add("")
 					characterNames.addAll(Characters.characterNamesByClassOrder)
 
 					val characters = Characters(Lists.characters)
 					characters.chronologicalIndexSort()
-					rowData.add(RowData(boldStyle, characterNames)) // creates row made of character names
+					sheetData.addRow(RowData(boldStyle, characterNames)) // creates row made of character names
+					sheetData.addRow(RowData(defaultStyle, mutableListOf("")))
 
 					val spells = Spells()
 					spells.addUsefulModels(Lists.spells, false)
@@ -34,8 +39,12 @@ class CharacterComparisons(fileName: String) : Excel(fileName)
 							val Dcharacter = characters.dModels[i]
 							data.add(CompareValues(Dcharacter.getSpellLevel(it.gameIndex), character.getSpellLevel(it.gameIndex)))
 						}
-						rowData.add(RowData(defaultStyle, data))
+						sheetData.addRow(RowData(defaultStyle, data))
 					}
-					writeDataToSheet(sheet, rowData)
+					sheet.createFreezePane(1,1,1,1)
+
+					sheetData.setColumnStyle(boldStyle, 0)
+					writeDataToSheet(sheet, sheetData)
+					(sheet as XSSFSheet).columnHelper.setColDefaultStyle(1, boldStyle)
 	}
 }

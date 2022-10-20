@@ -32,7 +32,7 @@ class Monsters : Models<Monster>, Serializable
 					{
 						if (models.contains(it))
 						// if monster is duplicate of existing monster,
-						// add it to that monsters list of aliases
+						// addRow it to that monsters list of aliases
 						{
 							val monsterInList = models[models.indexOf(it)]
 							monsterInList.aliases.add(it)

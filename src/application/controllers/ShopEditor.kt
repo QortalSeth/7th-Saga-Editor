@@ -169,7 +169,7 @@ class ShopEditor : ControllerInitilizer
 		val weaponCodes = mutableListOf<Int>()
 		val armorCodes = mutableListOf<Int>()
 
-		// for each combobox get its item code and add to list
+		// for each combobox get its item code and addRow to list
 		itemsC.forEach { itemCodes.add(it.selectionModel!!.selectedItem!!.gameIndex) }
 		weaponsC.forEach { weaponCodes.add(it.selectionModel!!.selectedItem!!.itemCode) }
 		armorsC.forEach { armorCodes.add(it.selectionModel!!.selectedItem!!.itemCode) }

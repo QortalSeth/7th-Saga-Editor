@@ -30,9 +30,15 @@ class Data : Serializable
 	{
 		try
 		{
-			val defaultData = File(javaClass.getResource("models/defaultModels.data").toURI())
+			// This function should only be called in an IDE. an external JAR can't be written to while running.
+			val dataFile = """./src${File.separator}application${File.separator}models${File.separator}defaultModels.data"""
+			val defaultData = File(dataFile)
 			println("file path to disk: " + defaultData.absolutePath)
 			ObjectOutputStream(BufferedOutputStream(FileOutputStream(defaultData))).use{it.writeObject(this)}
+		}
+		catch (e: FileNotFoundException)
+		{
+			println("defaultModels.data Not found")
 		}
 		catch (e: IOException)
 		{
@@ -42,6 +48,7 @@ class Data : Serializable
 		{
 			e.printStackTrace()
 		}
+
 	}
 
 	fun serializeDefaultDataFromDisk()

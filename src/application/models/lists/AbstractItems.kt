@@ -134,7 +134,7 @@ open class AbstractItems<T : AbstractItem> : Models<T>, Serializable
 			val startCharacters = StringBuilder()
 
 			characters
-					// add initial weapons
+					// addRow initial weapons
 					.filter { it.weaponStart == itemCode || it.armorStart == itemCode || it.accessoryStart == itemCode }.forEach { startCharacters.append(it.equipName) }
 
 			if (startCharacters.isNotEmpty())
@@ -143,7 +143,7 @@ open class AbstractItems<T : AbstractItem> : Models<T>, Serializable
 			}
 
 			shops
-					// add weapons from shops
+					// addRow weapons from shops
 					.filter { it.weaponCodes.contains(itemCode) || it.armorCodes.contains(itemCode) }.forEach {
 				if (it.name.length < 6)
 				{
@@ -156,7 +156,7 @@ open class AbstractItems<T : AbstractItem> : Models<T>, Serializable
 			}
 
 			val monsterDrops = mutableListOf<String>()
-			Lists.dropTables.models // add weapons from monster drops
+			Lists.dropTables.models // addRow weapons from monster drops
 					.forEach { d ->
 						d.drops.filter { itemCode == it }.forEach {
 							Lists.monsters.models.filter { it.itemDropSet == d.gameIndex && it.name !in monsterDrops }.forEach { monsterDrops.add(it.name) }

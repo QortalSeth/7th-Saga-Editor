@@ -57,7 +57,7 @@ object TextSort
 		p.close()
 	}
 	/*
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void Launcher(String[] args) throws FileNotFoundException {
 		Sort();
 	}
 */
