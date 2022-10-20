@@ -4,7 +4,7 @@ This program is for editing data tables in a ROM of the Super Nintendo game the 
 
 ## How to use
 
-Run the file 7th-Saga-Editor.jar found in the executable folder.
+Run the file 7th-Saga-Editor.jar found in the Executable/JAR folder. A version of Java that includes JavaFX is required for it to function. This can be obtained through [BellSoft Liberica JDK](https://bell-sw.com/pages/downloads/#/java-19-current) with the Package: Full JDK option selected.
 
 ## Table of Contents
 
@@ -110,5 +110,3 @@ If the option is selected, data from each supported table will be put into an Ex
 **Make Belaine Sword Prices Match Equipment Cost**
 In the Town of Belaine, there are some blacksmiths who sell swords to the player at prices different from their value in the weapon table. If this option is selected, the swords sold by those blacksmiths will have their prices set according to the equipment table. The default value is True.
 
-### Known issues
-Opening one ROM and then another will lead to data corruption, if data is saved.
