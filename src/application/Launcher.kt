@@ -1,4 +1,4 @@
-package application;
+package application
 
 import javafx.application.Application
 
@@ -37,8 +37,20 @@ Add --type app-image to make an exe that does not install itself
 jpackage --type exe --input ./Executable/JAR --dest ./Executable --main-jar ./7th-Saga-Editor.jar --main-class application.Launcher --module-path "C:\Program Files\BellSoft\LibericaJDK-19-Full\jmods" --add-modules javafx.controls,javafx.fxml --icon Icon.ico --name "7th-Saga-Editor" --jlink-options --bind-services --type app-image
 
 
- Sizes
+delete commit:
+Alt+9 to summon git console
+click on Log tag
+commits are in center dialog
+right click, then ???
 
+
+remove file from git tracking
+Ctrl+Alt+1 to open Terminal
+ git rm <filename> --cached
+
+
+
+ Size:
  standalone exe: 201 MB
 
 
